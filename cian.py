@@ -4,6 +4,7 @@ import re
 import math
 import logging
 import collections
+import csv
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger('wb')
@@ -22,6 +23,18 @@ ParseResults = collections.namedtuple(
         'link'
     }
 )
+
+HEADERS = {
+    'How_many_rooms',
+    'Price_per_month',
+    'Address',
+    'Floor',
+    'All_floors',
+    'Square_meters',
+    'Commissions',
+    'Author',
+    'Link'
+}
 
 class Client:
     def __init__(self):
@@ -110,7 +123,11 @@ class Client:
             all_floors = all_floors
         ))
 
-
+    def save_results:
+        path = "C:\\Users\\Lenar\\PycharmProjects\\python-parser-cian"
+        with open(path, "w") as f:
+            writer = csv.writer(f, quoting = csv.QUOTE_MINIMAL)
+            writer.writerow(HEADERS)
 
     def run(self):
         html = self.load_page()
@@ -119,6 +136,8 @@ class Client:
 if __name__ == '__main__':
     parser = Client()
     parser.run()
+
+    parser.save_results()
 
 #
 # def get_html(url):

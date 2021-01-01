@@ -1,14 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-import re
-import math
-import logging
 import collections
 import csv
 import transliterate
-
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger('wb')
 
 ParseResults = collections.namedtuple(
     'ParseResults',
@@ -25,29 +19,31 @@ ParseResults = collections.namedtuple(
     }
 )
 
-HEADERS = {
-    'How_many_rooms',
-    'Price_per_month',
-    'Street',
-    'Floor',
-    'All_floors',
-    'Square_meters',
-    'Commissions',
-    'Author',
-    'Link'
-}
+PAGE_START = 1
+PAGE_END = 40
 
 class Client:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers = {
             'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.60 YaBrowser/20.12.0.963 Yowser/2.5 Safari/537.36',
-            'Accept-Language': 'ru'
+                'Accept-Language': 'ru'
         }
         self.result = []
+        self.result.append(ParseResults(
+            how_many_rooms='How_many_rooms',
+            price_per_month='Price_per_month',
+            street='Street',
+            floor='Floor',
+            all_floors='All_floors',
+            square_meters='Square_meters',
+            commissions='Commissions %',
+            author = 'Author',
+            link = 'Link'
+        ))
 
-    def load_page(self):
-        url = "https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p=2&region=4777&type=4"
+    def load_page(self, i = 1):
+        url = f"https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
         res = self.session.get(url = url)
         res.raise_for_status()
         return res.text
@@ -55,27 +51,20 @@ class Client:
     def parse_page(self, html: str):
         soup = BeautifulSoup(html, 'lxml')
         offers = soup.select("div[data-name='Offers'] > article[data-name='CardComponent']")
-
+        print("=="*20)
         for block in offers:
             self.parse_block(block=block)
 
     def parse_block(self, block):
         title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='TitleComponent']")[0].text
-        if not title:
-            logger.error("no title")
-            return
 
         author = block.select("div[data-name='Agent'] div.title-text")[0].text
-        if not author:
-            logger.error("no author")
-            return
+        if "Опыт" in author:
+            author = author[:author.find("Опыт")]
 
         link = block.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
-        if not link:
-            logger.error("no link")
-            return
 
-        logger.info("%s", link)
+        print(link)
 
         meters = str(title[title.find("м²") - 4: title.find("м²")])
         if "этаж" in title:
@@ -113,12 +102,12 @@ class Client:
         else:
             commissions = str(0)
 
-        # street = transliterate.translit(street, reversed=True)
-        #
-        # try:
-        #     author = transliterate.translit(author, reversed=True)
-        # except:
-        #     pass
+        street = transliterate.translit(street, reversed=True)
+
+        try:
+            author = transliterate.translit(author, reversed=True)
+        except:
+            pass
 
         self.result.append(ParseResults(
             how_many_rooms=how_many_rooms,
@@ -136,13 +125,13 @@ class Client:
         path = "C:\\Users\\Lenar\\PycharmProjects\\python-parser-cian\\data.csv"
         with open(path, "w") as f:
             writer = csv.writer(f, quoting = csv.QUOTE_MINIMAL)
-            writer.writerow(HEADERS)
             for item in self.result:
                 writer.writerow(item)
 
     def run(self):
-        html = self.load_page()
-        self.parse_page(html=html)
+        for i in range(PAGE_START, PAGE_END):
+            html = self.load_page(i = i)
+            self.parse_page(html=html)
 
 if __name__ == '__main__':
     parser = Client()

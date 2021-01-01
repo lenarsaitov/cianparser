@@ -123,11 +123,13 @@ class Client:
             all_floors = all_floors
         ))
 
-    def save_results:
-        path = "C:\\Users\\Lenar\\PycharmProjects\\python-parser-cian"
+    def save_results(self):
+        path = "C:\\Users\\Lenar\\PycharmProjects\\python-parser-cian\\data.csv"
         with open(path, "w") as f:
             writer = csv.writer(f, quoting = csv.QUOTE_MINIMAL)
             writer.writerow(HEADERS)
+            for item in self.result:
+                writer.writerow(item)
 
     def run(self):
         html = self.load_page()
@@ -138,43 +140,3 @@ if __name__ == '__main__':
     parser.run()
 
     parser.save_results()
-
-#
-# def get_html(url):
-#     r = requests.get(url)
-#     return r.text
-#
-# def get_total_pages(html):
-#     soup = BeautifulSoup(html, 'lxml')
-#     pages = soup.select("div[data-name='SummarySection'] > div > div > h5")[0].text
-#     pages = re.findall(r'\d+', pages)
-#     total_pages = math.ceil((int(''.join(pages))/28))
-#     return total_pages
-#
-# def get_pages(html):
-#     soup = BeautifulSoup(html, 'lxml')
-#     pages = soup.select("div[data-name='Pagination'] > div > ul > li")
-#
-# def get_page_data(html):
-#     soup = BeautifulSoup(html, 'lxml')
-#     offers = soup.select("div[data-name='Offers'] > article[data-name='CardComponent']")
-#     flat = offers.select(" > div > div:nth-child(2) > div:nth-child(1) > div[data-name='LinkArea']")
-#     person = offers.select("div[data-name='Agent'] a[data-name='AgentTitle']")
-#
-#
-# def main():
-#     print("start..")
-#     url = 'https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p=4&region=4777&type=4'
-#     base_url = 'https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&region=4777&type=4'
-#     page_part = '&p='
-#
-#     total_pages = get_total_pages(get_html(url))
-#
-#     for i in range(1,2):
-#         url_gen = base_url + page_part + str(i)
-#         print(url_gen)
-#         html = get_html(url_gen)
-#         get_page_data(html)
-#
-# if __name__ == '__main__':
-#     main()

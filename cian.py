@@ -5,6 +5,7 @@ import math
 import logging
 import collections
 import csv
+import transliterate
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger('wb')
@@ -14,7 +15,7 @@ ParseResults = collections.namedtuple(
     {
         'how_many_rooms',
         'price_per_month',
-        'address',
+        'street',
         'floor',
         'all_floors',
         'square_meters',
@@ -27,7 +28,7 @@ ParseResults = collections.namedtuple(
 HEADERS = {
     'How_many_rooms',
     'Price_per_month',
-    'Address',
+    'Street',
     'Floor',
     'All_floors',
     'Square_meters',
@@ -76,14 +77,14 @@ class Client:
 
         logger.info("%s", link)
 
-        meters = int(title[title.find("м²") - 4: title.find("м²")])
+        meters = str(title[title.find("м²") - 4: title.find("м²")])
         if "этаж" in title:
             floor_per = title[title.find("м²") + 3: title.find("м²") + 9]
             floor_per = floor_per.replace(' ', '')
             floor_per = floor_per.replace('э', '')
             floor_per = floor_per.split("/")
-            all_floors = int(floor_per[1])
-            floor = int(floor_per[0])
+            all_floors = str(floor_per[1])
+            floor = str(floor_per[0])
         else:
             all_floors = -1
             floor = -1
@@ -101,26 +102,34 @@ class Client:
 
         address_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[0].text
         address = address_long[address_long.find("Казань") + 8:]
+        street = address_long.split(",")[-2]
+        street = street.replace("улица", "")
 
         price_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[1].text
         price_per_month = "".join(price_long[:price_long.find("₽/мес") - 1].split())
 
         if "%" in price_long:
-            commissions = int(price_long[price_long.find("%") - 3:price_long.find("%")].replace(" ", ""))
+            commissions = str(price_long[price_long.find("%") - 3:price_long.find("%")].replace(" ", ""))
         else:
-            commissions = 0
+            commissions = str(0)
 
+        # street = transliterate.translit(street, reversed=True)
+        #
+        # try:
+        #     author = transliterate.translit(author, reversed=True)
+        # except:
+        #     pass
 
         self.result.append(ParseResults(
+            how_many_rooms=how_many_rooms,
+            price_per_month=price_per_month,
+            street=street,
+            floor=floor,
+            all_floors=all_floors,
+            square_meters=meters,
+            commissions=commissions,
             author = author,
-            link = link,
-            address = address,
-            price_per_month = price_per_month,
-            commissions = commissions,
-            square_meters = meters,
-            how_many_rooms = how_many_rooms,
-            floor = floor,
-            all_floors = all_floors
+            link = link
         ))
 
     def save_results(self):

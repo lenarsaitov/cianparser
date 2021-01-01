@@ -15,9 +15,11 @@ ParseResults = collections.namedtuple(
         'price_per_month',
         'address',
         'floor',
+        'all_floors',
         'square_meters',
         'commissions',
-        'author'
+        'author',
+        'link'
     }
 )
 
@@ -44,9 +46,6 @@ class Client:
             self.parse_block(block=block)
 
     def parse_block(self, block):
-        # logger.info(block)
-        # logger.info("="*50)
-
         title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='TitleComponent']")[0].text
         if not title:
             logger.error("no title")
@@ -63,6 +62,55 @@ class Client:
             return
 
         logger.info("%s", link)
+
+        meters = int(title[title.find("м²") - 4: title.find("м²")])
+        if "этаж" in title:
+            floor_per = title[title.find("м²") + 3: title.find("м²") + 9]
+            floor_per = floor_per.replace(' ', '')
+            floor_per = floor_per.replace('э', '')
+            floor_per = floor_per.split("/")
+            all_floors = int(floor_per[1])
+            floor = int(floor_per[0])
+        else:
+            all_floors = -1
+            floor = -1
+
+        if "1-комн" in title:
+            how_many_rooms = 1
+        elif "2-комн" in title:
+            how_many_rooms = 2
+        elif "3-комн" in title:
+            how_many_rooms = 3
+        elif "4-комн" in title:
+            how_many_rooms = 4
+        else:
+            how_many_rooms = -1
+
+        address_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[0].text
+        address = address_long[address_long.find("Казань") + 8:]
+
+        price_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[1].text
+        price_per_month = "".join(price_long[:price_long.find("₽/мес") - 1].split())
+
+        if "%" in price_long:
+            commissions = int(price_long[price_long.find("%") - 3:price_long.find("%")].replace(" ", ""))
+        else:
+            commissions = 0
+
+
+        self.result.append(ParseResults(
+            author = author,
+            link = link,
+            address = address,
+            price_per_month = price_per_month,
+            commissions = commissions,
+            square_meters = meters,
+            how_many_rooms = how_many_rooms,
+            floor = floor,
+            all_floors = all_floors
+        ))
+
+
 
     def run(self):
         html = self.load_page()

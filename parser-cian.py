@@ -10,6 +10,7 @@ ParseResults = collections.namedtuple(
         'how_many_rooms',
         'price_per_month',
         'street',
+        'district',
         'floor',
         'all_floors',
         'square_meters',
@@ -34,6 +35,7 @@ class Client:
             how_many_rooms='How_many_rooms',
             price_per_month='Price_per_month',
             street='Street',
+            district = 'District',
             floor='Floor',
             all_floors='All_floors',
             square_meters='Square_meters',
@@ -93,6 +95,7 @@ class Client:
 
         address_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[0].text
         address = address_long[address_long.find(self.city) + 8:]
+        district = address_long[address_long.find("р-н") + 4:].split(",")[0]
         street = address_long.split(",")[-2]
         street = street.replace("улица", "")
 
@@ -105,6 +108,7 @@ class Client:
         else:
             commissions = 0
 
+        district = transliterate.translit(district, reversed=True)
         street = transliterate.translit(street, reversed=True)
 
         try:
@@ -116,6 +120,7 @@ class Client:
             how_many_rooms=how_many_rooms,
             price_per_month=price_per_month,
             street=street,
+            district = district,
             floor=floor,
             all_floors=all_floors,
             square_meters=meters,

@@ -1,0 +1,953 @@
+How_many_rooms,All_floors,Floor,Link,Square_meters,Street,Price_per_month,Author,Commissions %
+4,16,9,https://kazan.cian.ru/rent/flat/237818882/,186,  Sibgata Hakima,100000,ID 305100,50
+2,18,12,https://kazan.cian.ru/rent/flat/244424052/,62,  Sibgata Hakima,30000,ID 305100,50
+2,12,5,https://kazan.cian.ru/rent/flat/243318735/,75,  Dostoevskogo,30000,ID 305100,50
+3,9,5,https://kazan.cian.ru/rent/flat/236848944/,110, Tovarischeskaja ,50000,ID 305100,50
+2,5,2,https://kazan.cian.ru/rent/flat/246525819/,65, Bol'shaja Krasnaja ,30000,ID 305100,50
+4,4,3,https://kazan.cian.ru/rent/flat/246866292/,180,  Karla Fuksa,100000,ID 305100,50
+3,9,8,https://kazan.cian.ru/rent/flat/244453665/,100, Chistopol'skaja ,35000,ID 305100,50
+3,20,15,https://kazan.cian.ru/rent/flat/247820412/,85, Peterburgskaja ,70000,ID 305100,50
+4,12,9,https://kazan.cian.ru/rent/flat/243010354/,220,  Tolstogo,130000,ID 305100,50
+1,9,4,https://kazan.cian.ru/rent/flat/247758605/,37,  Safiullina,15000,RamazanNa rynke s 2009 g.,50
+1,5,5,https://kazan.cian.ru/rent/flat/248016324/,33,  Shamilja Usmanova,16000,Tandem-Nedvizhimost',0
+2,5,4,https://kazan.cian.ru/rent/flat/248016326/,45,  Kosmonavtov,18000,Tandem-Nedvizhimost',50
+2,5,4,https://kazan.cian.ru/rent/flat/248016327/,45,  Kosmonavtov,18000,Tandem-Nedvizhimost',50
+1,9,7,https://kazan.cian.ru/rent/flat/248016325/,27,  Dement'eva,13000,Tandem-Nedvizhimost',50
+2,5,2,https://kazan.cian.ru/rent/flat/246498965/,45, Tverskaja ,14000,Tandem-Nedvizhimost',50
+1,5,4,https://kazan.cian.ru/rent/flat/247376670/,32,  Vorovskogo,11000,ID 13111077,50
+3,10,5,https://kazan.cian.ru/rent/flat/248015175/,100,  Vosstanija,15000,ID 28840355,50
+1,9,8,https://kazan.cian.ru/rent/flat/246853411/,37,  Juliusa Fuchika,16000,Tsentral'noe agentstvo nedvizhimosti,50
+1,5,1,https://kazan.cian.ru/rent/flat/247515273/,35, Shossejnaja ,13000,Tsentral'noe agentstvo nedvizhimosti,50
+1,10,6,https://kazan.cian.ru/rent/flat/246671937/,45,  Baki Urmanche,18500,Tsentral'noe agentstvo nedvizhimosti,50
+2,12,7,https://kazan.cian.ru/rent/flat/247815002/,65,  Dostoevskogo,24999,ID 15636838,49
+1,19,13,https://kazan.cian.ru/rent/flat/247220609/,34, Professora Kamaja ,19999,ID 15636838,49
+1,8,8,https://kazan.cian.ru/rent/flat/247627348/,45,  Vishnevskogo,24999,ID 15636838,49
+2,18,7,https://kazan.cian.ru/rent/flat/242636710/,65,  Nailja Jusupova,12000,Ramazan,50
+3,5,2,https://kazan.cian.ru/rent/flat/243064785/,62,  Shamilja Usmanova,20000,Stanislav Novikov,50
+2,6,2,https://kazan.cian.ru/rent/flat/220713684/,62, Chistopol'skaja ,45000,ID 13259610,50
+3,18,12,https://kazan.cian.ru/rent/flat/248044877/,82,  Tansyk,23000,ID 28840355,40
+3,18,5,https://kazan.cian.ru/rent/flat/248015400/,82,  Ajrata Arslanova,13000,ID 28840355,50
+3,9,5,https://kazan.cian.ru/rent/flat/248016588/,65, Karagandinskaja ,30000,ID 28840355,50
+3,7,7,https://kazan.cian.ru/rent/flat/244929971/,120,  Tatarstan,80000,Stanislav Novikov,0
+1,3,2,https://kazan.cian.ru/rent/flat/228471346/,25, Enisejskaja ,13000,ID 10967599,0
+2,17,10,https://kazan.cian.ru/rent/flat/247886731/,80,  Dubravnaja,20000,Stanislav Novikov,50
+2,23,6,https://kazan.cian.ru/rent/flat/231666975/,55, Peterburgskaja ,45000,Stanislav Novikov,50
+1,9,3,https://kazan.cian.ru/rent/flat/238567631/,40, Tverskaja ,16000,Tat'jana Kazanskaja,50
+2,12,10,https://kazan.cian.ru/rent/flat/247907569/,72,  Nigmatullina,25000,ID 4193548,0
+1,6,3,https://kazan.cian.ru/rent/flat/246722612/,42,  2-ja Staro-Arakchinskaja,18000,ID 14443648,50
+1,6,2,https://kazan.cian.ru/rent/flat/247816728/,42,  Fatyha Karima,25000,ID 46855213,50
+2,5,1,https://kazan.cian.ru/rent/flat/247945557/,46,  Olega Koshevogo,18000,TsN1,50
+1,10,9,https://kazan.cian.ru/rent/flat/247909295/,37, prospekt Jamasheva,18000,TsN1,50
+2,9,5,https://kazan.cian.ru/rent/flat/246591101/,45, Jutazinskaja ,17000,TsN1,50
+2,5,2,https://kazan.cian.ru/rent/flat/246809882/,47,  Komarova,25000,TsN1,50
+1,9,7,https://kazan.cian.ru/rent/flat/246845789/,40,  Musina,15000,ID 40289207,50
+2,10,5,https://kazan.cian.ru/rent/flat/246802999/,60,  Chetaeva,22000,TsN1,50
+3,5,1,https://kazan.cian.ru/rent/flat/245053183/,60,  Mozhajskogo,17000,ID 14443648,50
+1,14,3,https://kazan.cian.ru/rent/flat/247903407/,36, prospekt Pobedy,11000,ID 14443648,50
+1,5,1,https://kazan.cian.ru/rent/flat/246141194/,36, Volgogradskaja ,16000,ID 14443648,50
+1,5,2,https://kazan.cian.ru/rent/flat/247756992/,30,  Adelja Kutuja,14000,ID 14443648,50
+1,19,7,https://kazan.cian.ru/rent/flat/247626412/,42, prospekt Pobedy,12000,Julija Bil'danova,30
+2,3,2,https://kazan.cian.ru/rent/flat/229230040/,35, Kirpichnaja ,15000,ID 12958547,50
+1,10,1,https://kazan.cian.ru/rent/flat/245526600/,25, Meridiannaja ,9000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/246575468/,34, Spartakovskaja ,10000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/244325225/,35,  2-ja Jugo-Zapadnaja,10000,Julija Bil'danova,30
+1,19,2,https://kazan.cian.ru/rent/flat/244964488/,38,  Pavljuhina,11000,Denis Gubko,30
+1,17,8,https://kazan.cian.ru/rent/flat/245972798/,39, Minskaja ,11000,Julija Bil'danova,30
+1,18,8,https://kazan.cian.ru/rent/flat/246856358/,27,  Hadi Taktasha,11000,Julija Bil'danova,30
+1,10,4,https://kazan.cian.ru/rent/flat/244964685/,36,  Vishnevskogo,11000,Denis Gubko,30
+1,10,5,https://kazan.cian.ru/rent/flat/246043901/,39,  Razvedchika Ahmerova,11000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/245183854/,45,  Kurashova,12000,Julija Bil'danova,30
+1,10,7,https://kazan.cian.ru/rent/flat/243431215/,39,  Nikolaja Ershova,12000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/245900513/,37,  Akademika Lavrent'eva,12000,Dmitrij Mokeev,30
+1,10,5,https://kazan.cian.ru/rent/flat/245032723/,37, prospekt Jamasheva,11000,Dmitrij Mokeev,30
+1,8,4,https://kazan.cian.ru/rent/flat/246443705/,40, Meridiannaja ,12000,Julija Bil'danova,30
+1,4,1,https://kazan.cian.ru/rent/flat/243288331/,29, Delovaja ,10000,Tretij Rim,50
+1,17,3,https://kazan.cian.ru/rent/flat/243435342/,41,  Akademika Lavrent'eva,12000,Julija Bil'danova,30
+1,26,9,https://kazan.cian.ru/rent/flat/245817205/,37, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/243217390/,20,  Mazita Gafuri,10000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/245111378/,34,  Vosstanija,10000,Julija Bil'danova,30
+1,6,3,https://kazan.cian.ru/rent/flat/244869567/,39,  Mullanura Vahitova,11000,Denis Gubko,30
+1,17,4,https://kazan.cian.ru/rent/flat/243651418/,28, Protochnaja ,11000,Julija Bil'danova,30
+1,10,7,https://kazan.cian.ru/rent/flat/247078393/,38,  Husaina Mavljutova,11000,Dmitrij Mokeev,30
+1,12,6,https://kazan.cian.ru/rent/flat/245726128/,40, Meridiannaja ,13000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/245033305/,39, Agronomicheskaja ,11000,Dmitrij Mokeev,30
+2,5,2,https://kazan.cian.ru/rent/flat/245326703/,62,  Chetaeva,14000,Julija Bil'danova,0
+1,10,1,https://kazan.cian.ru/rent/flat/243723137/,20,  Absaljamova,10000,Julija Bil'danova,30
+1,16,7,https://kazan.cian.ru/rent/flat/245658047/,37, Meridiannaja ,11000,Denis Gubko,30
+1,18,7,https://kazan.cian.ru/rent/flat/243649593/,39,  Sibgata Hakima,12000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/243894506/,33,  Korolenko,10000,Dmitrij Mokeev,30
+1,16,7,https://kazan.cian.ru/rent/flat/243216950/,30,  Akademika Lavrent'eva,11000,Julija Bil'danova,30
+1,20,8,https://kazan.cian.ru/rent/flat/246781701/,41, Sibirskij trakt,12000,Dmitrij Mokeev,30
+1,9,7,https://kazan.cian.ru/rent/flat/243729262/,35,  Karbysheva,14000,Tretij Rim,0
+1,9,4,https://kazan.cian.ru/rent/flat/242862853/,36,  Akademika Zavojskogo,12000,Tretij Rim,0
+1,5,3,https://kazan.cian.ru/rent/flat/247625993/,34,  Voshod,11000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/244365230/,36,  Gagarina,12000,Marat Burganov,50
+1,5,4,https://kazan.cian.ru/rent/flat/246792147/,36,  Gudovantseva,10000,HAWAII,50
+1,9,2,https://kazan.cian.ru/rent/flat/243794310/,19,  Marshala Chujkova,10000,Dmitrij Mokeev,30
+1,5,4,https://kazan.cian.ru/rent/flat/247821654/,40, Chistopol'skaja ,12000,Julija Bil'danova,30
+1,10,3,https://kazan.cian.ru/rent/flat/245413356/,34,  Adoratskogo,9000,Denis Gubko,30
+1,10,1,https://kazan.cian.ru/rent/flat/245032385/,30,  Absaljamova,10000,Dmitrij Mokeev,30
+1,10,3,https://kazan.cian.ru/rent/flat/244252072/,36,  Nikolaja Ershova,10000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/245726166/,36,  Marselja Salimzhanova,10000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/243137740/,37,  Butlerova,11000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/245109593/,38,  Razvedchika Ahmerova,11000,Julija Bil'danova,30
+1,9,2,https://kazan.cian.ru/rent/flat/245658916/,38,  Sibgata Hakima,11000,Julija Bil'danova,30
+1,9,6,https://kazan.cian.ru/rent/flat/245255891/,38,  Bondarenko,11000,Julija Bil'danova,30
+1,15,7,https://kazan.cian.ru/rent/flat/245525654/,41, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,4,2,https://kazan.cian.ru/rent/flat/244814155/,33,  Karla Marksa,11000,Julija Bil'danova,30
+1,10,5,https://kazan.cian.ru/rent/flat/243955946/,39,  Bondarenko,12000,Dmitrij Mokeev,30
+1,9,8,https://kazan.cian.ru/rent/flat/243229500/,34, Malaja Krasnaja ,12000,Tretij Rim,50
+2,15,7,https://kazan.cian.ru/rent/flat/244195011/,62, Daurskaja ,14000,Denis Gubko,30
+2,16,7,https://kazan.cian.ru/rent/flat/246044730/,68,  Sibgata Hakima,15000,Julija Bil'danova,30
+1,17,4,https://kazan.cian.ru/rent/flat/246575354/,25, Protochnaja ,10000,Julija Bil'danova,30
+3,9,9,https://kazan.cian.ru/rent/flat/227240257/,75,  Zaslonova,45000,Sobstvennik,0
+1,5,5,https://kazan.cian.ru/rent/flat/230440362/,33,  Gudovantseva,10000,ID 16138475,40
+1,5,4,https://kazan.cian.ru/rent/flat/243159695/,30,  Mazita Gafuri,14000,Tretij Rim,50
+1,5,2,https://kazan.cian.ru/rent/flat/247438595/,18,  Sedova,8000,Julija Bil'danova,30
+1,9,3,https://kazan.cian.ru/rent/flat/243494324/,36,  Gavrilova,11000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/206788225/,30,  Gudovantseva,10000,ID 16138475,40
+1,5,4,https://kazan.cian.ru/rent/flat/247042436/,31,  Gudovantseva,11000,ID 44478404,50
+1,5,3,https://kazan.cian.ru/rent/flat/245470128/,34,  Volkova,10000,Dmitrij Mokeev,30
+1,5,2,https://kazan.cian.ru/rent/flat/246781904/,33,  Nursultana Nazarbaeva,10000,Dmitrij Mokeev,30
+1,5,2,https://kazan.cian.ru/rent/flat/247746101/,32,  Lejtenanta Shmidta,10000,Julija Bil'danova,30
+1,6,5,https://kazan.cian.ru/rent/flat/243009434/,37,  Dostoevskogo,14000,Tretij Rim,50
+1,5,2,https://kazan.cian.ru/rent/flat/247746101/,32,  Lejtenanta Shmidta,10000,Julija Bil'danova,30
+1,6,5,https://kazan.cian.ru/rent/flat/243009434/,37,  Dostoevskogo,14000,Tretij Rim,50
+1,9,3,https://kazan.cian.ru/rent/flat/247438303/,18,  Nursultana Nazarbaeva,8000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/243361048/,32,  Akademika Gubkina,11000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/211153805/,14,  Gudovantseva,10000,ID 16138475,40
+1,19,8,https://kazan.cian.ru/rent/flat/245257826/,44,  Adoratskogo,12000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/243813834/,42,  Gavrilova,14000,Tretij Rim,50
+1,10,10,https://kazan.cian.ru/rent/flat/243379588/,44, Gvardejskaja ,15000,Tretij Rim,50
+2,5,5,https://kazan.cian.ru/rent/flat/245112284/,45,  Musina,16000,Tat'jana Kazanskaja,50
+1,10,1,https://kazan.cian.ru/rent/flat/246024305/,36,  Dubravnaja,13000,ID 12865930,50
+1,5,5,https://kazan.cian.ru/rent/flat/246658409/,48,  Gudovantseva,11000,HAWAII,50
+1,19,4,https://kazan.cian.ru/rent/flat/227734902/,42,  Nailja Jusupova,9000,Ruslan Galiev,50
+1,14,2,https://kazan.cian.ru/rent/flat/244194844/,30,  Marshala Chujkova,10000,Denis Gubko,30
+1,16,5,https://kazan.cian.ru/rent/flat/243494080/,38, Druzhinnaja ,11000,Julija Bil'danova,30
+1,10,10,https://kazan.cian.ru/rent/flat/243813848/,32, Meridiannaja ,14000,Tretij Rim,50
+1,22,7,https://kazan.cian.ru/rent/flat/243736014/,36,  Baki Urmanche,15000,Tretij Rim,0
+1,9,4,https://kazan.cian.ru/rent/flat/247599664/,28, Okol'naja ,11000,ID 15256713,40
+2,5,3,https://kazan.cian.ru/rent/flat/244869036/,44,  Lejtenanta Shmidta,13000,Dmitrij Mokeev,30
+1,12,5,https://kazan.cian.ru/rent/flat/244869203/,23,  Musina,10000,Denis Gubko,30
+1,10,4,https://kazan.cian.ru/rent/flat/246857640/,38, prospekt Jamasheva,11000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/244594184/,22, Botanicheskaja ,9000,Julija Bil'danova,30
+1,9,2,https://kazan.cian.ru/rent/flat/245658179/,20,  Nursultana Nazarbaeva,9000,Denis Gubko,30
+1,9,6,https://kazan.cian.ru/rent/flat/243430855/,37,  Bondarenko,11000,Julija Bil'danova,30
+1,10,7,https://kazan.cian.ru/rent/flat/245816244/,38, Daurskaja ,11000,Julija Bil'danova,30
+1,19,10,https://kazan.cian.ru/rent/flat/244807917/,39,  Adoratskogo,11000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/246649864/,37,  Dekabristov,11000,Denis Gubko,30
+1,12,7,https://kazan.cian.ru/rent/flat/245659130/,42,  Nigmatullina,12000,Julija Bil'danova,30
+2,10,5,https://kazan.cian.ru/rent/flat/245183471/,54,  Fatyha Amirhana,13000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/247215283/,36, prospekt Pobedy,10000,Julija Bil'danova,30
+1,14,6,https://kazan.cian.ru/rent/flat/244964894/,40, Chistopol'skaja ,11000,Denis Gubko,30
+1,9,5,https://kazan.cian.ru/rent/flat/243136950/,38,  Adoratskogo,11000,Julija Bil'danova,30
+1,18,9,https://kazan.cian.ru/rent/flat/245257268/,38, prospekt Jamasheva,11000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/243137110/,37,  Kosmonavtov,11000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/243893675/,37, Chistopol'skaja ,11000,Dmitrij Mokeev,30
+1,10,6,https://kazan.cian.ru/rent/flat/243358189/,36,  Chetaeva,11000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/243360155/,37,  Chetaeva,11000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/244324313/,36,  Gavrilova,11000,Julija Bil'danova,30
+1,5,1,https://kazan.cian.ru/rent/flat/208713888/,20, Gvardejskaja ,11000,Artur Garifullin,50
+1,5,5,https://kazan.cian.ru/rent/flat/223554906/,25,  Himikov,10000,Ramazan,50
+1,14,3,https://kazan.cian.ru/rent/flat/243894090/,40,  Adoratskogo,12000,Dmitrij Mokeev,30
+1,7,3,https://kazan.cian.ru/rent/flat/245035990/,29,  Duslyk,10000,Poisk,50
+1,5,3,https://kazan.cian.ru/rent/flat/210128089/,19, Molodezhnaja ,9000,ID 16413953,50
+1,10,6,https://kazan.cian.ru/rent/flat/245469809/,45, prospekt Pobedy,12000,Dmitrij Mokeev,30
+1,9,5,https://kazan.cian.ru/rent/flat/243787601/,25,  Mazita Gafuri,12000,Marat Burganov,50
+1,16,3,https://kazan.cian.ru/rent/flat/247565051/,42,  Adoratskogo,12000,Denis Gubko,30
+1,9,1,https://kazan.cian.ru/rent/flat/244341461/,25, Lomzhinskaja ,10000,ID 19482669,50
+1,9,6,https://kazan.cian.ru/rent/flat/243288317/,24,  Juliusa Fuchika,12000,Tretij Rim,50
+1,9,5,https://kazan.cian.ru/rent/flat/243159750/,36,  Zakieva,12000,Tretij Rim,50
+1,10,5,https://kazan.cian.ru/rent/flat/244362849/,50,  Akademika Pavlova,12000,Marat Burganov,50
+1,9,9,https://kazan.cian.ru/rent/flat/243373684/,32,  Hajdara Bigicheva,12000,Tretij Rim,0
+1,5,4,https://kazan.cian.ru/rent/flat/241804953/,18, Belomorskaja ,10000,MEGALIT,50
+2,10,5,https://kazan.cian.ru/rent/flat/243431625/,58,  Akademika Gubkina,13000,Julija Bil'danova,30
+2,15,7,https://kazan.cian.ru/rent/flat/247746004/,54,  Kachalova,13000,Julija Bil'danova,30
+2,5,3,https://kazan.cian.ru/rent/flat/243357558/,47, Sibirskij trakt,13000,Julija Bil'danova,30
+1,5,1,https://kazan.cian.ru/rent/flat/243294632/,23, Oktjabr'skaja ,13000,Tretij Rim,50
+1,9,2,https://kazan.cian.ru/rent/flat/245006000/,30,  Akademika Glushko,10000,Oleg Kir'janov,50
+2,15,7,https://kazan.cian.ru/rent/flat/247746004/,54,  Kachalova,13000,Julija Bil'danova,30
+2,10,5,https://kazan.cian.ru/rent/flat/243431625/,58,  Akademika Gubkina,13000,Julija Bil'danova,30
+1,5,1,https://kazan.cian.ru/rent/flat/243294632/,23, Oktjabr'skaja ,13000,Tretij Rim,50
+1,9,2,https://kazan.cian.ru/rent/flat/245006000/,30,  Akademika Glushko,10000,Oleg Kir'janov,50
+2,6,4,https://kazan.cian.ru/rent/flat/243894798/,68, Meridiannaja ,14000,Dmitrij Mokeev,30
+2,10,8,https://kazan.cian.ru/rent/flat/243721624/,68,  Akademika Glushko,14000,Julija Bil'danova,30
+2,9,5,https://kazan.cian.ru/rent/flat/244195652/,68,  Akademika Lavrent'eva,14000,Julija Bil'danova,30
+2,10,6,https://kazan.cian.ru/rent/flat/244127063/,60,  Fatyha Amirhana,14000,Julija Bil'danova,30
+1,9,3,https://kazan.cian.ru/rent/flat/243357097/,32,  Safiullina,14000,Tretij Rim,0
+1,9,6,https://kazan.cian.ru/rent/flat/243242419/,20,  Nursultana Nazarbaeva,14000,Tretij Rim,50
+2,17,7,https://kazan.cian.ru/rent/flat/243304884/,34,  Abubekira Teregulova,14000,Tretij Rim,50
+1,10,1,https://kazan.cian.ru/rent/flat/227433655/,40,  Cheljuskina,12000,ID 16413953,50
+1,5,2,https://kazan.cian.ru/rent/flat/234139923/,35,  Dekabristov,14000,ID 15551923,49
+1,5,2,https://kazan.cian.ru/rent/flat/244923125/,34,  Gudovantseva,11000,ID 47522234,50
+1,5,1,https://kazan.cian.ru/rent/flat/243919620/,30,  Haleva,12000,Poisk,50
+1,5,4,https://kazan.cian.ru/rent/flat/242994994/,36,  Brat'ev Kasimovyh,14000,Tretij Rim,50
+1,10,2,https://kazan.cian.ru/rent/flat/243239909/,26,  Midhata Bulatova,14000,Tretij Rim,50
+1,9,2,https://kazan.cian.ru/rent/flat/222888919/,38,  Komissara Gabisheva,14000,ID 9934072,50
+1,14,2,https://kazan.cian.ru/rent/flat/243239876/,37,  Juliusa Fuchika,14000,Tretij Rim,50
+1,10,5,https://kazan.cian.ru/rent/flat/222967377/,40,  Chetaeva,12000,ID 16413953,50
+1,9,3,https://kazan.cian.ru/rent/flat/243495575/,32,  Zakieva,12000,Poisk,50
+1,10,5,https://kazan.cian.ru/rent/flat/244887638/,36,  Saban,12000,Adelina Mironova,50
+1,9,9,https://kazan.cian.ru/rent/flat/243735985/,32,  Adoratskogo,15000,Tretij Rim,0
+1,10,7,https://kazan.cian.ru/rent/flat/243357087/,39,  Kul Gali,15000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/243735941/,34,  Akademika Saharova,15000,Tretij Rim,0
+1,5,1,https://kazan.cian.ru/rent/flat/242646354/,33, Gvardejskaja ,15000,ID 9934072,50
+1,9,3,https://kazan.cian.ru/rent/flat/247689155/,35,  Riharda Zorge,9000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/247744136/,15,  Karbysheva,12000,Artur Garifullin,50
+1,9,1,https://kazan.cian.ru/rent/flat/247720102/,12,  Kul Gali,11000,ID 19720152,50
+1,9,3,https://kazan.cian.ru/rent/flat/247449526/,48,  Safiullina,13000,ID 62197636,0
+1,5,3,https://kazan.cian.ru/rent/flat/246856848/,30,  Gudovantseva,13000,HAWAII,50
+1,9,3,https://kazan.cian.ru/rent/flat/247626055/,35,  Tatarstan,10000,Julija Bil'danova,30
+1,5,5,https://kazan.cian.ru/rent/flat/245552306/,38, Zalesnaja ,9000,HAWAII,50
+1,10,2,https://kazan.cian.ru/rent/flat/243674670/,37,  Azata Abbasova,12000,Tretij Rim,0
+1,9,3,https://kazan.cian.ru/rent/flat/242862844/,37,  Akademika Saharova,12000,Tretij Rim,0
+1,9,6,https://kazan.cian.ru/rent/flat/246152677/,36,  Akademika Saharova,12000,Tretij Rim,0
+1,10,5,https://kazan.cian.ru/rent/flat/246152680/,37,  Chetaeva,13000,Tretij Rim,0
+1,14,3,https://kazan.cian.ru/rent/flat/243452574/,54,  Noksinskij Spusk,14000,Tretij Rim,50
+1,9,4,https://kazan.cian.ru/rent/flat/243444545/,37,  Chetaeva,14000,Tretij Rim,50
+2,10,5,https://kazan.cian.ru/rent/flat/243239927/,42,  Hadi Taktasha,14000,Tretij Rim,50
+1,15,5,https://kazan.cian.ru/rent/flat/243146751/,38, prospekt Pobedy,14000,Tretij Rim,50
+1,18,13,https://kazan.cian.ru/rent/flat/243645472/,29, prospekt Al'berta Kamaleeva,14000,Tretij Rim,50
+2,29,23,https://kazan.cian.ru/rent/flat/224360799/,55, Scherbakovskij pereulok,40000,Il'nar Avers,50
+1,18,9,https://kazan.cian.ru/rent/flat/247688944/,39,  Bondarenko,11000,Julija Bil'danova,30
+1,5,1,https://kazan.cian.ru/rent/flat/247345780/,32,  Gagarina,10000,Poisk,50
+1,5,5,https://kazan.cian.ru/rent/flat/246649000/,33,  Abzhalilova,9000,Denis Gubko,30
+1,5,2,https://kazan.cian.ru/rent/flat/247144432/,34,  Dekabristov,10000,Julija Bil'danova,30
+1,9,3,https://kazan.cian.ru/rent/flat/244252918/,35, prospekt Jamasheva,10000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/243649262/,36,  Dekabristov,10000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/243435649/,36,  Musina,10000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/243650169/,36, Chistopol'skaja ,10000,Julija Bil'danova,30
+1,10,4,https://kazan.cian.ru/rent/flat/245034418/,35, prospekt Jamasheva,10000,Julija Bil'danova,30
+1,12,6,https://kazan.cian.ru/rent/flat/244806709/,36, prospekt Jamasheva,10000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/246129528/,28,  Riharda Zorge,10000,ID 11085747,50
+1,10,4,https://kazan.cian.ru/rent/flat/243956310/,35, Meridiannaja ,10000,Denis Gubko,30
+1,9,3,https://kazan.cian.ru/rent/flat/244496693/,36, prospekt Ibragimova,10000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/246129528/,28,  Riharda Zorge,10000,ID 11085747,50
+1,5,3,https://kazan.cian.ru/rent/flat/228330535/,25,  Adelja Kutuja,10000,ID 48684137,50
+1,10,4,https://kazan.cian.ru/rent/flat/245470517/,38,  Absaljamova,11000,Dmitrij Mokeev,30
+1,9,5,https://kazan.cian.ru/rent/flat/245110421/,36, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,6,3,https://kazan.cian.ru/rent/flat/245971845/,38,  Sibgata Hakima,11000,Denis Gubko,30
+1,9,4,https://kazan.cian.ru/rent/flat/244324905/,35, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/243285172/,37, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/246118367/,37,  2-ja Jugo-Zapadnaja,11000,Julija Bil'danova,30
+1,5,1,https://kazan.cian.ru/rent/flat/198074786/,18, Botanicheskaja ,9000,ID 16413953,50
+1,20,9,https://kazan.cian.ru/rent/flat/244251769/,39,  Absaljamova,12000,Julija Bil'danova,30
+1,6,3,https://kazan.cian.ru/rent/flat/244869817/,40, Meridiannaja ,12000,Denis Gubko,30
+2,10,6,https://kazan.cian.ru/rent/flat/245527061/,54,  Nikolaja Ershova,12000,Julija Bil'danova,30
+1,12,8,https://kazan.cian.ru/rent/flat/243139212/,37,  Nigmatullina,12000,Julija Bil'danova,30
+1,16,8,https://kazan.cian.ru/rent/flat/244405588/,40,  Alekseja Kozina,12000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/245896168/,25,  Adelja Kutuja,10000,HAWAII,50
+2,7,4,https://kazan.cian.ru/rent/flat/245181639/,46,  Vosstanija,12000,Denis Gubko,30
+1,5,4,https://kazan.cian.ru/rent/flat/207919879/,33,  Haleva,12000,ID 16413953,50
+2,10,4,https://kazan.cian.ru/rent/flat/245256195/,56, Lenskaja ,14000,Julija Bil'danova,30
+2,14,8,https://kazan.cian.ru/rent/flat/245256443/,58,  Vishnevskogo,14000,Julija Bil'danova,30
+2,14,8,https://kazan.cian.ru/rent/flat/247215440/,54,  Vishnevskogo,14000,Julija Bil'danova,30
+2,15,8,https://kazan.cian.ru/rent/flat/246119440/,56,  Kachalova,14000,Julija Bil'danova,30
+1,24,5,https://kazan.cian.ru/rent/flat/244324623/,39, proezd Jaratkan,15000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/247282125/,37,  Bondarenko,10000,Denis Gubko,30
+1,3,2,https://kazan.cian.ru/rent/flat/223380506/,20,  Furmanova,9000,ID 16413953,50
+2,18,7,https://kazan.cian.ru/rent/flat/244963148/,60, prospekt Al'berta Kamaleeva,14000,Denis Gubko,30
+1,9,4,https://kazan.cian.ru/rent/flat/246575651/,37,  Bondarenko,11000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/246650516/,38,  Volkova,15000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/237222879/,36, Krasnokokshajskaja ,10000,ID 48684137,50
+1,9,5,https://kazan.cian.ru/rent/flat/244963625/,37, Druzhinnaja ,10000,Denis Gubko,30
+1,19,7,https://kazan.cian.ru/rent/flat/243494036/,38, prospekt Pobedy,10000,Julija Bil'danova,30
+1,16,7,https://kazan.cian.ru/rent/flat/244810647/,38,  Marshala Chujkova,12000,Julija Bil'danova,30
+2,9,6,https://kazan.cian.ru/rent/flat/245033598/,72,  Adoratskogo,14000,Dmitrij Mokeev,30
+2,8,4,https://kazan.cian.ru/rent/flat/216497828/,80,  Tulpar,45000,Il'nar Avers,45
+1,9,3,https://kazan.cian.ru/rent/flat/247437450/,19,  Marshala Chujkova,8000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/247625872/,22,  Energetikov,8000,Julija Bil'danova,30
+2,5,4,https://kazan.cian.ru/rent/flat/244060349/,39,  Krasnoj Pozitsii,10000,Tretij Rim,50
+1,19,7,https://kazan.cian.ru/rent/flat/247282010/,40, prospekt Pobedy,11000,Denis Gubko,30
+1,5,2,https://kazan.cian.ru/rent/flat/243159717/,25, Bazarnaja ,11000,Tretij Rim,50
+1,18,7,https://kazan.cian.ru/rent/flat/245119193/,35,  Nurihana Fattaha,9500,HAWAII,50
+1,10,8,https://kazan.cian.ru/rent/flat/243220017/,35,  Juliusa Fuchika,12000,Tretij Rim,0
+1,18,6,https://kazan.cian.ru/rent/flat/244948560/,40,  Zilantovskaja,11000,ID 16413953,50
+2,5,4,https://kazan.cian.ru/rent/flat/245522642/,52,  Gudovantseva,10000,HAWAII,50
+1,10,6,https://kazan.cian.ru/rent/flat/247216541/,35,  Azata Abbasova,14000,Tretij Rim,50
+1,5,4,https://kazan.cian.ru/rent/flat/243813839/,42,  Druzhby,14000,Tretij Rim,50
+1,16,6,https://kazan.cian.ru/rent/flat/243239881/,34, prospekt Al'berta Kamaleeva,15000,Tretij Rim,50
+1,22,15,https://kazan.cian.ru/rent/flat/243736003/,32,  Baki Urmanche,15000,Tretij Rim,0
+1,17,11,https://kazan.cian.ru/rent/flat/243792520/,32,  Abubekira Teregulova,15000,Tretij Rim,50
+1,18,7,https://kazan.cian.ru/rent/flat/245726038/,38, prospekt Al'berta Kamaleeva,11000,Julija Bil'danova,30
+1,9,6,https://kazan.cian.ru/rent/flat/246782051/,37, Chistopol'skaja ,11000,Dmitrij Mokeev,30
+1,11,4,https://kazan.cian.ru/rent/flat/244868646/,38,  Pavljuhina,11000,Dmitrij Mokeev,30
+1,5,3,https://kazan.cian.ru/rent/flat/222558038/,24,  Dezhneva,9000,ID 16413953,50
+1,5,3,https://kazan.cian.ru/rent/flat/244405693/,34,  Hadi Taktasha,11000,Julija Bil'danova,30
+1,10,5,https://kazan.cian.ru/rent/flat/247282860/,38,  Hadi Taktasha,11000,Julija Bil'danova,30
+1,18,2,https://kazan.cian.ru/rent/flat/243440577/,45,  Juliusa Fuchika,14000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/245255479/,33, Chernomorskaja ,10000,Julija Bil'danova,30
+1,10,4,https://kazan.cian.ru/rent/flat/246717729/,39,  Bondarenko,11000,Julija Bil'danova,30
+1,10,4,https://kazan.cian.ru/rent/flat/246717729/,39,  Bondarenko,11000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/245525933/,38,  Hadi Taktasha,12000,Julija Bil'danova,30
+1,10,2,https://kazan.cian.ru/rent/flat/244868524/,20,  Absaljamova,10000,Dmitrij Mokeev,30
+1,9,3,https://kazan.cian.ru/rent/flat/247503959/,36,  Adelja Kutuja,10000,Dmitrij Mokeev,30
+1,9,4,https://kazan.cian.ru/rent/flat/247144503/,37, prospekt Ibragimova,10000,Julija Bil'danova,30
+1,17,6,https://kazan.cian.ru/rent/flat/247144752/,27, prospekt Jamasheva,11000,Julija Bil'danova,30
+1,10,4,https://kazan.cian.ru/rent/flat/247437872/,38,  Nikolaja Ershova,11000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/247438962/,37, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,10,5,https://kazan.cian.ru/rent/flat/245973015/,38, prospekt Jamasheva,11000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/247170218/,31,  Tatarstan,15000,Las Vegas,100
+1,18,9,https://kazan.cian.ru/rent/flat/245900968/,37,  Adoratskogo,11000,Dmitrij Mokeev,30
+1,10,7,https://kazan.cian.ru/rent/flat/247500962/,32, Tetsevskaja ,13000,HAWAII,50
+1,5,2,https://kazan.cian.ru/rent/flat/247626310/,18,  Akademika Kirpichnikova,9000,Julija Bil'danova,30
+2,16,7,https://kazan.cian.ru/rent/flat/247689089/,58, Meridiannaja ,13000,Julija Bil'danova,30
+1,9,6,https://kazan.cian.ru/rent/flat/246538644/,36,  Adoratskogo,12000,ID 20886504,50
+2,6,5,https://kazan.cian.ru/rent/flat/243159707/,47,  Pushkina,14000,Tretij Rim,50
+1,9,7,https://kazan.cian.ru/rent/flat/246781008/,38, Gorsovetskaja ,11000,Dmitrij Mokeev,30
+2,9,5,https://kazan.cian.ru/rent/flat/247496215/,49, Birjuzovaja ,12000,IZUMRUD,100
+3,5,1,https://kazan.cian.ru/rent/flat/245987102/,58,  Kurashova,25000,MEGALIT,50
+2,8,7,https://kazan.cian.ru/rent/flat/241593775/,78,  Nikolaja Ershova,25000,MEGALIT,50
+1,5,3,https://kazan.cian.ru/rent/flat/247895354/,33,  Dekabristov,9000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/247504461/,34,  Fatyha Amirhana,10000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/245911223/,13, Gvardejskaja ,10000,Marat Burganov,50
+1,9,4,https://kazan.cian.ru/rent/flat/247564890/,36, prospekt Jamasheva,10000,Denis Gubko,30
+1,9,7,https://kazan.cian.ru/rent/flat/247821866/,37,  Akademika Gubkina,10000,Julija Bil'danova,30
+1,11,5,https://kazan.cian.ru/rent/flat/247745925/,37, Spartakovskaja ,11000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/247829035/,23,  2-ja Daurskaja,11000,HAWAII,50
+1,12,5,https://kazan.cian.ru/rent/flat/247438071/,37,  Nigmatullina,11000,Julija Bil'danova,30
+1,6,2,https://kazan.cian.ru/rent/flat/247745888/,33,  Vosstanija,10000,ID 16121519,50
+1,5,2,https://kazan.cian.ru/rent/flat/246650515/,35,  2-ja Gazovaja,12000,Tretij Rim,50
+2,5,4,https://kazan.cian.ru/rent/flat/247436339/,49,  Kosmonavtov,12000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/245256074/,15,  Himikov,10000,Poisk,50
+2,2,2,https://kazan.cian.ru/rent/flat/247691096/,50,  Chapaeva,10000,ID 62573152,50
+1,18,6,https://kazan.cian.ru/rent/flat/247437602/,38, prospekt Jamasheva,12000,Julija Bil'danova,30
+1,10,5,https://kazan.cian.ru/rent/flat/243242423/,26, prospekt Pobedy,12000,Tretij Rim,50
+1,10,5,https://kazan.cian.ru/rent/flat/247640744/,40,  Husaina Mavljutova,12000,Tretij Rim,50
+1,5,4,https://kazan.cian.ru/rent/flat/247265459/,35,  Mazita Gafuri,12000,ID 12865930,50
+1,9,1,https://kazan.cian.ru/rent/flat/247073862/,34,  Marshala Chujkova,10000,Oleg Kir'janov,50
+1,5,3,https://kazan.cian.ru/rent/flat/245960000/,23,  Latyshskih Strelkov,11000,HAWAII,50
+1,9,4,https://kazan.cian.ru/rent/flat/245820562/,31, prospekt Jamasheva,10000,ID 11560618,50
+1,2,1,https://kazan.cian.ru/rent/flat/247386499/,20,  Akademika Gubkina,11000,ID 14072608,50
+1,5,4,https://kazan.cian.ru/rent/flat/246584660/,35,  Vorovskogo,12000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/241600382/,30, Gvardejskaja ,11000,Oleg Kir'janov,50
+1,9,8,https://kazan.cian.ru/rent/flat/247650486/,18,  Korolenko,11000,Artur Garifullin,50
+1,9,1,https://kazan.cian.ru/rent/flat/247771304/,20,  Nursultana Nazarbaeva,13500,ID 12865930,50
+1,5,3,https://kazan.cian.ru/rent/flat/247388325/,30,  Hadi Taktasha,11000,Landysh Nasibullina,50
+1,10,8,https://kazan.cian.ru/rent/flat/246579331/,48, Daurskaja ,14000,Las Vegas,100
+2,9,5,https://kazan.cian.ru/rent/flat/247896309/,54, Sibirskij trakt,14000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/244040510/,30, Tehnicheskaja ,14000,Tretij Rim,50
+2,9,6,https://kazan.cian.ru/rent/flat/247821764/,54, prospekt Jamasheva,14000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/243742831/,32,  Nursultana Nazarbaeva,14000,Tretij Rim,50
+1,9,5,https://kazan.cian.ru/rent/flat/243897747/,34,  Brat'ev Kasimovyh,14000,Tretij Rim,0
+1,9,2,https://kazan.cian.ru/rent/flat/246813274/,30,  Dement'eva,14000,Marat Burganov,50
+1,5,2,https://kazan.cian.ru/rent/flat/247333072/,31,  Vosstanija,12000,ID 12865930,50
+1,5,3,https://kazan.cian.ru/rent/flat/247888254/,30,  Adelja Kutuja,12000,HAWAII,50
+1,9,5,https://kazan.cian.ru/rent/flat/247771299/,30,  Serova,12500,ID 12865930,50
+1,10,1,https://kazan.cian.ru/rent/flat/247620737/,17,  Chetaeva,15000,ID 16121519,50
+1,5,3,https://kazan.cian.ru/rent/flat/247746564/,28,  8 Marta,13000,Poisk,50
+1,10,8,https://kazan.cian.ru/rent/flat/247097393/,23,  Chetaeva,13000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/247519457/,32,  Latyshskih Strelkov,15000,Artur Garifullin,50
+2,5,4,https://kazan.cian.ru/rent/flat/247459721/,50, mkr. Oktjabr'skij gorodok,15000,Tretij Rim,50
+1,10,5,https://kazan.cian.ru/rent/flat/247459723/,36,  Akademika Zavojskogo,15000,Tretij Rim,50
+1,10,8,https://kazan.cian.ru/rent/flat/238516035/,35,  Magistral'naja,16000,Julija Babanova,50
+1,10,7,https://kazan.cian.ru/rent/flat/243796652/,36,  Fatyha Amirhana,14000,Tretij Rim,50
+1,20,16,https://kazan.cian.ru/rent/flat/243793145/,32,  Noksinskij Spusk,14000,Tretij Rim,50
+2,10,9,https://kazan.cian.ru/rent/flat/243385001/,42, Minskaja ,14000,Tretij Rim,0
+1,10,8,https://kazan.cian.ru/rent/flat/241113890/,42, Birjuzovaja ,14000,ID 12865930,50
+1,9,6,https://kazan.cian.ru/rent/flat/243215462/,38, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/208272157/,18,  Gudovantseva,10000,ID 16138475,45
+1,5,5,https://kazan.cian.ru/rent/flat/231592412/,30,  Himikov,11000,ID 16138475,45
+1,10,10,https://kazan.cian.ru/rent/flat/247560009/,31,  Aleksandra Kurynova,12000,Julija Barbashova,0
+1,16,15,https://kazan.cian.ru/rent/flat/247152851/,44,  Dubravnaja,12000,Domino,0
+2,20,12,https://kazan.cian.ru/rent/flat/247907876/,60,  Zilantovskaja,11000,Oleg Kir'janov,50
+2,18,11,https://kazan.cian.ru/rent/flat/246117539/,52,  Viktora Sazhinova,12000,HAWAII,50
+1,10,7,https://kazan.cian.ru/rent/flat/242980549/,32,  Akademika Glushko,12000,Tretij Rim,50
+1,10,9,https://kazan.cian.ru/rent/flat/243159737/,24,  Rauisa Gareeva,12000,Tretij Rim,50
+1,10,9,https://kazan.cian.ru/rent/flat/243167021/,32,  Latyshskih Strelkov,14000,Tretij Rim,50
+2,10,7,https://kazan.cian.ru/rent/flat/243949989/,42,  Azata Abbasova,14000,Tretij Rim,50
+1,9,3,https://kazan.cian.ru/rent/flat/247216015/,36,  Fatyha Amirhana,10000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/247282237/,38, Chistopol'skaja ,11000,Denis Gubko,30
+1,10,5,https://kazan.cian.ru/rent/flat/246454352/,39,  Fatyha Amirhana,11000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/246458935/,37, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/247424940/,22,  Nursultana Nazarbaeva,11000,HAWAII,50
+1,9,6,https://kazan.cian.ru/rent/flat/205564562/,36, prospekt Pobedy,15000,MEGALIT,50
+1,9,4,https://kazan.cian.ru/rent/flat/247282237/,38, Chistopol'skaja ,11000,Denis Gubko,30
+1,9,4,https://kazan.cian.ru/rent/flat/246458935/,37, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/247424940/,22,  Nursultana Nazarbaeva,11000,HAWAII,50
+1,5,5,https://kazan.cian.ru/rent/flat/231312823/,16, Belomorskaja ,10000,ID 16138475,45
+1,9,5,https://kazan.cian.ru/rent/flat/244363830/,36,  Komissara Gabisheva,11000,Marat Burganov,50
+1,5,3,https://kazan.cian.ru/rent/flat/244020469/,22,  Himikov,11000,Oleg Kir'janov,50
+1,2,1,https://kazan.cian.ru/rent/flat/227858238/,32,  Zur Uram,12000,ID 11425264,50
+1,5,4,https://kazan.cian.ru/rent/flat/240138567/,37,  Kulahmetova,14000,ID 19482669,50
+1,10,6,https://kazan.cian.ru/rent/flat/243239853/,23, Minskaja ,14000,Tretij Rim,50
+2,5,2,https://kazan.cian.ru/rent/flat/244382112/,30,  Gudovantseva,14000,Marat Burganov,50
+1,5,4,https://kazan.cian.ru/rent/flat/243373677/,21, Aktajskaja ,15000,Tretij Rim,50
+3,10,7,https://kazan.cian.ru/rent/flat/195397207/,110, Gvardejskaja ,25000,Rajhana Geront'eva,50
+1,9,7,https://kazan.cian.ru/rent/flat/242862794/,36,  Gavrilova,11000,Tretij Rim,0
+1,14,14,https://kazan.cian.ru/rent/flat/243222963/,44,  Latyshskih Strelkov,13000,Tretij Rim,50
+1,15,8,https://kazan.cian.ru/rent/flat/243657615/,48,  Akademika Zavojskogo,14000,Tretij Rim,50
+1,9,3,https://kazan.cian.ru/rent/flat/242862832/,36,  Magistral'naja,12000,Tretij Rim,0
+1,5,3,https://kazan.cian.ru/rent/flat/243288314/,26,  Latyshskih Strelkov,12000,Tretij Rim,50
+1,7,5,https://kazan.cian.ru/rent/flat/242985037/,36,  Kul Gali,12000,Tretij Rim,0
+1,5,4,https://kazan.cian.ru/rent/flat/243159727/,20,  Dement'eva,12000,Tretij Rim,50
+1,17,5,https://kazan.cian.ru/rent/flat/243435847/,29,  Sedova,12000,Tretij Rim,50
+2,5,3,https://kazan.cian.ru/rent/flat/243796661/,42, Volgogradskaja ,13000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/242940904/,32,  Tolbuhina,13000,Tretij Rim,0
+1,9,4,https://kazan.cian.ru/rent/flat/242862845/,36,  Nursultana Nazarbaeva,13000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/243384977/,30,  Riharda Zorge,13000,Tretij Rim,0
+2,10,5,https://kazan.cian.ru/rent/flat/242938229/,42,  Brat'ev Kasimovyh,14000,Tretij Rim,50
+1,10,2,https://kazan.cian.ru/rent/flat/243657617/,36,  Saliha Batyeva,15000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/243658795/,32,  Nursultana Nazarbaeva,15000,Tretij Rim,50
+1,8,3,https://kazan.cian.ru/rent/flat/243239932/,34,  Gabdully Karieva,15000,Tretij Rim,0
+2,10,5,https://kazan.cian.ru/rent/flat/242938229/,42,  Brat'ev Kasimovyh,14000,Tretij Rim,50
+1,10,2,https://kazan.cian.ru/rent/flat/243657617/,36,  Saliha Batyeva,15000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/243658795/,32,  Nursultana Nazarbaeva,15000,Tretij Rim,50
+1,8,3,https://kazan.cian.ru/rent/flat/243239932/,34,  Gabdully Karieva,15000,Tretij Rim,0
+1,17,6,https://kazan.cian.ru/rent/flat/247503553/,38,  Chetaeva,11000,Dmitrij Mokeev,30
+1,10,6,https://kazan.cian.ru/rent/flat/247565463/,37,  Juliusa Fuchika,11000,Denis Gubko,30
+1,5,5,https://kazan.cian.ru/rent/flat/247749951/,22,  Halezova,11000,ID 16138475,45
+2,9,7,https://kazan.cian.ru/rent/flat/247078206/,52, prospekt Jamasheva,14000,Dmitrij Mokeev,30
+1,9,4,https://kazan.cian.ru/rent/flat/227651008/,39,  Fatyha Amirhana,12000,Artur Garifullin,50
+1,18,7,https://kazan.cian.ru/rent/flat/244049531/,39,  Chetaeva,12000,Denis Gubko,30
+1,17,8,https://kazan.cian.ru/rent/flat/243137327/,39,  Fatyha Amirhana,12000,Julija Bil'danova,30
+1,19,12,https://kazan.cian.ru/rent/flat/243645475/,31,  Rauisa Gareeva,14000,Tretij Rim,50
+2,19,8,https://kazan.cian.ru/rent/flat/244495977/,74,  Marshala Chujkova,14000,Julija Bil'danova,30
+2,17,9,https://kazan.cian.ru/rent/flat/244124831/,67,  Fatyha Amirhana,14000,Denis Gubko,30
+2,16,8,https://kazan.cian.ru/rent/flat/245032980/,72,  Akademika Lavrent'eva,14000,Dmitrij Mokeev,30
+1,10,9,https://kazan.cian.ru/rent/flat/235831405/,45,  Kommunarov,15000,ID 11194009,50
+1,10,9,https://kazan.cian.ru/rent/flat/243593441/,36,  Chishmjale,14000,Tretij Rim,50
+1,14,14,https://kazan.cian.ru/rent/flat/243167019/,32,  Latyshskih Strelkov,14000,Tretij Rim,50
+1,5,4,https://kazan.cian.ru/rent/flat/210130840/,19,  Gudovantseva,10000,ID 16138475,40
+2,5,3,https://kazan.cian.ru/rent/flat/163501593/,54,  Kosmonavtov,18000,MEGALIT,50
+1,5,1,https://kazan.cian.ru/rent/flat/243452568/,31, Dal'njaja ,13000,Tretij Rim,50
+2,5,5,https://kazan.cian.ru/rent/flat/243440605/,43,  Pavljuhina,14000,Tretij Rim,50
+1,5,5,https://kazan.cian.ru/rent/flat/229925741/,20,  Gudovantseva,11000,ID 16138475,40
+2,9,7,https://kazan.cian.ru/rent/flat/222531332/,54, Lomzhinskaja ,17000,MEGALIT,50
+1,10,8,https://kazan.cian.ru/rent/flat/244728011/,40,  Juliusa Fuchika,12000,ID 46993370,50
+1,10,1,https://kazan.cian.ru/rent/flat/243286319/,19,  Absaljamova,10000,Julija Bil'danova,30
+1,9,7,https://kazan.cian.ru/rent/flat/243239866/,32,  Safiullina,13000,Tretij Rim,50
+1,10,7,https://kazan.cian.ru/rent/flat/243366276/,35,  Juliusa Fuchika,14000,Tretij Rim,0
+1,5,3,https://kazan.cian.ru/rent/flat/243288309/,23,  Latyshskih Strelkov,10000,Tretij Rim,50
+1,5,2,https://kazan.cian.ru/rent/flat/242780043/,18, Belomorskaja ,9000,ID 16138475,50
+1,5,1,https://kazan.cian.ru/rent/flat/245461638/,18,  Himikov,9000,ID 47522234,50
+1,9,6,https://kazan.cian.ru/rent/flat/244868590/,36,  Marshala Chujkova,11000,Dmitrij Mokeev,30
+1,9,6,https://kazan.cian.ru/rent/flat/243359747/,37,  Fatyha Amirhana,11000,Julija Bil'danova,30
+1,16,6,https://kazan.cian.ru/rent/flat/245815783/,38,  Adoratskogo,11000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/242862856/,22,  Adelja Kutuja,11000,Tretij Rim,0
+1,2,2,https://kazan.cian.ru/rent/flat/234149787/,36, Oktjabr'skaja ,10000,ID 15551923,49
+1,3,1,https://kazan.cian.ru/rent/flat/241972695/,34, Belomorskaja ,10000,ID 16138475,40
+2,5,3,https://kazan.cian.ru/rent/flat/244126680/,44,  Vosstanija,12000,Denis Gubko,30
+1,5,3,https://kazan.cian.ru/rent/flat/245608467/,32,  Gudovantseva,10000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/245365148/,36, Revoljutsionnaja ,10000,ID 21879480,50
+2,5,3,https://kazan.cian.ru/rent/flat/243794080/,48,  Garif'janova,13000,Dmitrij Mokeev,30
+2,10,6,https://kazan.cian.ru/rent/flat/244251207/,51,  Kosmonavtov,13000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/226280177/,46,  Akademika Glushko,12000,ID 16413953,50
+1,5,4,https://kazan.cian.ru/rent/flat/237834455/,32,  Shamilja Usmanova,12000,ID 48629108,50
+2,12,6,https://kazan.cian.ru/rent/flat/245110824/,68,  Juliusa Fuchika,14000,Julija Bil'danova,30
+1,10,1,https://kazan.cian.ru/rent/flat/245267227/,28,  Chetaeva,11000,Marat Burganov,50
+2,10,2,https://kazan.cian.ru/rent/flat/246119005/,66,  Kosmonavtov,14000,Julija Bil'danova,30
+1,10,5,https://kazan.cian.ru/rent/flat/227191097/,38,  Noksinskij Spusk,13000,ID 9934072,50
+2,10,4,https://kazan.cian.ru/rent/flat/243793636/,55, prospekt Jamasheva,15000,Dmitrij Mokeev,30
+1,9,6,https://kazan.cian.ru/rent/flat/197795057/,39,  Musina,12000,ID 16413953,50
+2,16,7,https://kazan.cian.ru/rent/flat/245111808/,76, Chistopol'skaja ,15000,Julija Bil'danova,30
+1,5,5,https://kazan.cian.ru/rent/flat/225985420/,36, Gor'kovskoe shosse,11000,ID 48426705,50
+1,5,2,https://kazan.cian.ru/rent/flat/247923013/,33, Svetlaja ,11000,IZUMRUD,50
+1,5,3,https://kazan.cian.ru/rent/flat/247924370/,45,  2-ja Staro-Arakchinskaja,17500,IZUMRUD,30
+2,9,2,https://kazan.cian.ru/rent/flat/244161367/,52, prospekt Jamasheva,21000,MEGALIT,50
+3,5,4,https://kazan.cian.ru/rent/flat/243531541/,85, Tovarischeskaja ,25000,Julija Babanova,50
+1,5,3,https://kazan.cian.ru/rent/flat/247924370/,45,  2-ja Staro-Arakchinskaja,17500,IZUMRUD,30
+2,9,2,https://kazan.cian.ru/rent/flat/244161367/,52, prospekt Jamasheva,21000,MEGALIT,50
+3,5,4,https://kazan.cian.ru/rent/flat/243531541/,85, Tovarischeskaja ,25000,Julija Babanova,50
+3,9,5,https://kazan.cian.ru/rent/flat/240947777/,65,  Syrtlanovoj,22000,MEGALIT,50
+1,5,3,https://kazan.cian.ru/rent/flat/231590064/,24, Belomorskaja ,11000,ID 16138475,45
+1,10,4,https://kazan.cian.ru/rent/flat/247688562/,41,  Fatyha Amirhana,11000,Julija Bil'danova,30
+1,9,5,https://kazan.cian.ru/rent/flat/247894984/,40,  Sibgata Hakima,12000,Julija Bil'danova,30
+1,9,3,https://kazan.cian.ru/rent/flat/243892344/,32, Poperechno-Bazarnaja ,12000,Tretij Rim,50
+1,5,5,https://kazan.cian.ru/rent/flat/243742841/,32,  Novatorov,12000,Tretij Rim,50
+1,5,1,https://kazan.cian.ru/rent/flat/246906098/,12, Molodezhnaja ,12000,ID 12865930,50
+1,9,8,https://kazan.cian.ru/rent/flat/247909728/,26,  Mira,10000,ID 16138475,40
+1,10,4,https://kazan.cian.ru/rent/flat/247818794/,36, Tetsevskaja ,13000,Tretij Rim,50
+2,9,5,https://kazan.cian.ru/rent/flat/247578071/,56,  Kul Gali,13000,Tretij Rim,50
+1,14,8,https://kazan.cian.ru/rent/flat/247957375/,38,  Rauisa Gareeva,13000,Tretij Rim,50
+1,18,7,https://kazan.cian.ru/rent/flat/243819062/,32,  Sedova,13000,Tretij Rim,50
+1,18,4,https://kazan.cian.ru/rent/flat/247840158/,46,  Noksinskij Spusk,13000,MEGALIT,50
+1,19,5,https://kazan.cian.ru/rent/flat/243239870/,32, Ujutnaja ,13000,Tretij Rim,50
+1,9,4,https://kazan.cian.ru/rent/flat/237489997/,30,  Ajdarova,12000,ID 16138475,42
+1,5,4,https://kazan.cian.ru/rent/flat/247888907/,28, Tehnicheskaja ,11500,HAWAII,50
+1,8,6,https://kazan.cian.ru/rent/flat/244556918/,36,  Chetaeva,10000,ID 28840355,50
+1,5,2,https://kazan.cian.ru/rent/flat/245462132/,34,  Olega Koshevogo,14000,ID 47522234,50
+1,9,5,https://kazan.cian.ru/rent/flat/247430088/,40,  Akademika Zavojskogo,14000,Tretij Rim,50
+1,8,6,https://kazan.cian.ru/rent/flat/247825631/,44,  Zur Uram,14000,Las Vegas,50
+1,9,6,https://kazan.cian.ru/rent/flat/243357092/,59, prospekt Pobedy,14000,Tretij Rim,0
+1,6,3,https://kazan.cian.ru/rent/flat/244364609/,38,  Kulahmetova,14000,Marat Burganov,50
+1,10,6,https://kazan.cian.ru/rent/flat/243742882/,32,  Chetaeva,14000,Tretij Rim,50
+1,9,1,https://kazan.cian.ru/rent/flat/245960073/,40,  Adoratskogo,14000,Marat Burganov,50
+1,5,3,https://kazan.cian.ru/rent/flat/245997204/,33,  Olega Koshevogo,14000,Marat Burganov,50
+1,5,3,https://kazan.cian.ru/rent/flat/243550193/,33, Jagodinskaja ,13000,Artur Garifullin,50
+1,5,3,https://kazan.cian.ru/rent/flat/245518604/,32,  Riharda Zorge,12000,HAWAII,50
+1,9,5,https://kazan.cian.ru/rent/flat/247755112/,30,  Mira,12000,ID 16138475,42
+1,17,8,https://kazan.cian.ru/rent/flat/247553895/,44, Professora Kamaja ,15000,Las Vegas,100
+2,5,2,https://kazan.cian.ru/rent/flat/247683632/,52,  Riharda Zorge,15000,Tretij Rim,50
+1,5,1,https://kazan.cian.ru/rent/flat/236223850/,33,  Mira,12000,ID 16138475,42
+1,5,3,https://kazan.cian.ru/rent/flat/246646410/,45,  Golubjatnikova,13000,HAWAII,50
+1,10,5,https://kazan.cian.ru/rent/flat/247899469/,36,  Juliusa Fuchika,15000,Tretij Rim,50
+1,3,2,https://kazan.cian.ru/rent/flat/247746189/,15, Enisejskaja ,13000,Poisk,50
+1,15,2,https://kazan.cian.ru/rent/flat/243645471/,19, Oktjabr'skaja ,15000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/246780145/,33,  Husaina Mavljutova,15000,ID 46097728,50
+1,9,7,https://kazan.cian.ru/rent/flat/244586602/,35,  Gavrilova,12000,Poisk,50
+2,16,4,https://kazan.cian.ru/rent/flat/247582254/,55,  Noksinskij Spusk,15000,Tretij Rim,50
+2,11,6,https://kazan.cian.ru/rent/flat/247636896/,60, prospekt Pobedy,15000,Tretij Rim,50
+1,10,5,https://kazan.cian.ru/rent/flat/232204449/,45,  Pobezhimova,15000,Artur Garifullin,50
+1,10,5,https://kazan.cian.ru/rent/flat/243735901/,36, prospekt Pobedy,15000,Tretij Rim,50
+1,5,1,https://kazan.cian.ru/rent/flat/243440580/,33, prospekt Jamasheva,15000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/244515014/,30, Kollektivnaja ,11000,Oleg Kir'janov,50
+1,5,4,https://kazan.cian.ru/rent/flat/243897757/,32, Daurskaja ,14000,Tretij Rim,50
+1,9,3,https://kazan.cian.ru/rent/flat/243452580/,32, prospekt Pobedy,14000,Tretij Rim,50
+1,9,2,https://kazan.cian.ru/rent/flat/242538187/,40,  Marshala Chujkova,14000,ID 12865930,50
+1,19,9,https://kazan.cian.ru/rent/flat/247002793/,35,  Aleksandra Kurynova,13000,ID 10510774,50
+3,3,1,https://kazan.cian.ru/rent/flat/241513318/,46,  Il'icha,12000,ID 12555916,0
+2,5,3,https://kazan.cian.ru/rent/flat/223087524/,46, Volgogradskaja ,10000,ID 16413953,50
+2,10,9,https://kazan.cian.ru/rent/flat/247885639/,50,  Akademika Zavojskogo,17000,Tsentral'noe agentstvo nedvizhimosti,50
+1,9,9,https://kazan.cian.ru/rent/flat/247748894/,39,  Safiullina,12000,ID 16138475,40
+1,18,17,https://kazan.cian.ru/rent/flat/247916559/,35,  Nailja Jusupova,11000,HAWAII,50
+1,10,9,https://kazan.cian.ru/rent/flat/243452571/,41, Minskaja ,14000,Tretij Rim,50
+1,9,9,https://kazan.cian.ru/rent/flat/247748894/,39,  Safiullina,12000,ID 16138475,40
+1,18,17,https://kazan.cian.ru/rent/flat/247916559/,35,  Nailja Jusupova,11000,HAWAII,50
+1,10,9,https://kazan.cian.ru/rent/flat/243452571/,41, Minskaja ,14000,Tretij Rim,50
+1,11,10,https://kazan.cian.ru/rent/flat/243593456/,35,  Juliusa Fuchika,14000,Tretij Rim,50
+1,18,12,https://kazan.cian.ru/rent/flat/244647136/,35,  Tansyk,12000,ID 12865930,50
+1,15,10,https://kazan.cian.ru/rent/flat/247828969/,35, prospekt Pobedy,12000,HAWAII,50
+1,16,10,https://kazan.cian.ru/rent/flat/247500330/,32, Belomorskaja ,12000,HAWAII,50
+1,10,5,https://kazan.cian.ru/rent/flat/244701844/,40,  Saliha Batyeva,14000,ID 46993370,50
+1,10,4,https://kazan.cian.ru/rent/flat/247821705/,37, prospekt Ibragimova,10000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/247688157/,44, Chistopol'skaja ,11000,Julija Bil'danova,30
+1,2,2,https://kazan.cian.ru/rent/flat/247447340/,33,  Krasnoj Pozitsii,11000,Tretij Rim,50
+1,9,2,https://kazan.cian.ru/rent/flat/247170246/,33,  Akademika Glushko,12000,Las Vegas,100
+1,5,4,https://kazan.cian.ru/rent/flat/243742849/,29,  Patrisa Lumumby,13000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/243220009/,32,  Rauisa Gareeva,13000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/245511208/,34,  Lazareva,13000,ID 12865930,50
+1,5,2,https://kazan.cian.ru/rent/flat/246129320/,31, Okol'naja ,11000,ID 11560618,50
+1,5,2,https://kazan.cian.ru/rent/flat/246568353/,35,  Batyrshina,11000,Poisk,50
+2,5,2,https://kazan.cian.ru/rent/flat/247459230/,45,  Dekabristov,14000,MEGALIT,50
+1,5,3,https://kazan.cian.ru/rent/flat/246564136/,32,  Batyrshina,12000,HAWAII,50
+1,23,3,https://kazan.cian.ru/rent/flat/243645474/,31,  Rauisa Gareeva,14000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/243742873/,32,  Serova,14000,Tretij Rim,50
+1,10,6,https://kazan.cian.ru/rent/flat/243645570/,37, Soldatskaja ,15000,Tretij Rim,50
+1,5,2,https://kazan.cian.ru/rent/flat/247386603/,36,  Gagarina,15000,Las Vegas,100
+1,9,6,https://kazan.cian.ru/rent/flat/245519720/,42,  Safiullina,12000,HAWAII,50
+1,5,5,https://kazan.cian.ru/rent/flat/244406466/,20,  Sedova,12000,Poisk,50
+1,4,2,https://kazan.cian.ru/rent/flat/245180113/,38, Militsejskaja ,13000,HAWAII,0
+1,9,5,https://kazan.cian.ru/rent/flat/244802697/,34,  Akademika Saharova,13000,Oleg Kir'janov,50
+1,10,3,https://kazan.cian.ru/rent/flat/203599294/,40, Minskaja ,13000,ID 9934072,50
+1,10,5,https://kazan.cian.ru/rent/flat/245101921/,37,  Juliusa Fuchika,13000,HAWAII,50
+1,10,8,https://kazan.cian.ru/rent/flat/245946171/,34,  Akademika Parina,12500,Oleg Kir'janov,50
+1,9,8,https://kazan.cian.ru/rent/flat/244828676/,23, Okrainnaja ,9000,ID 10510774,50
+1,10,6,https://kazan.cian.ru/rent/flat/243285877/,36,  Musina,10000,Julija Bil'danova,30
+1,5,2,https://kazan.cian.ru/rent/flat/244125472/,33,  Shamilja Usmanova,10000,Denis Gubko,30
+1,10,4,https://kazan.cian.ru/rent/flat/244194743/,35,  Musina,10000,Denis Gubko,30
+1,10,5,https://kazan.cian.ru/rent/flat/245526423/,36,  Kosmonavtov,10000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/246045044/,33,  Pavljuhina,11000,Julija Bil'danova,30
+1,10,5,https://kazan.cian.ru/rent/flat/244963879/,40,  Amet'evskaja magistral',11000,Denis Gubko,30
+1,9,4,https://kazan.cian.ru/rent/flat/244593302/,38, Druzhinnaja ,11000,Dmitrij Mokeev,30
+1,9,3,https://kazan.cian.ru/rent/flat/245031950/,38, Chistopol'skaja ,11000,Dmitrij Mokeev,30
+1,5,3,https://kazan.cian.ru/rent/flat/235567080/,39,  Latyshskih Strelkov,12000,ID 19482669,50
+1,9,4,https://kazan.cian.ru/rent/flat/244050104/,43,  Sibgata Hakima,12000,Denis Gubko,30
+1,7,5,https://kazan.cian.ru/rent/flat/243215704/,39,  Sibgata Hakima,12000,Julija Bil'danova,30
+2,6,2,https://kazan.cian.ru/rent/flat/244253091/,46,  Dekabristov,13000,Julija Bil'danova,30
+3,10,7,https://kazan.cian.ru/rent/flat/243284960/,73,  Akademika Zavojskogo,14000,Julija Bil'danova,30
+1,10,8,https://kazan.cian.ru/rent/flat/246857081/,35,  Akademika Parina,12000,HAWAII,50
+1,9,2,https://kazan.cian.ru/rent/flat/247707263/,35,  Akademika Zavojskogo,13000,Arslan,100
+1,18,7,https://kazan.cian.ru/rent/flat/246598725/,44,  Fatyha Amirhana,20000,MEGALIT,50
+1,5,3,https://kazan.cian.ru/rent/flat/238187029/,25, Belomorskaja ,10000,ID 16138475,40
+1,5,3,https://kazan.cian.ru/rent/flat/247491613/,20,  Gudovantseva,10000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/241398460/,15,  Gudovantseva,10000,ID 16138475,40
+1,9,6,https://kazan.cian.ru/rent/flat/238187598/,36,  Pobezhimova,13000,ID 16138475,40
+1,5,3,https://kazan.cian.ru/rent/flat/234143278/,39, Kolomenskaja ,15000,ID 15551923,49
+1,9,5,https://kazan.cian.ru/rent/flat/247957409/,35,  Serova,13000,ID 16121519,50
+1,10,9,https://kazan.cian.ru/rent/flat/243584170/,36,  Zur Uram,15000,ID 55398960,0
+1,18,10,https://kazan.cian.ru/rent/flat/240981502/,37,  Arhitektora Gajnutdinova,13000,Oleg Kir'janov,50
+2,10,8,https://kazan.cian.ru/rent/flat/247687384/,75, prospekt Jamasheva,25000,IZUMRUD,100
+1,9,2,https://kazan.cian.ru/rent/flat/246126019/,35, Soldatskaja ,13000,ID 11085747,50
+1,9,8,https://kazan.cian.ru/rent/flat/245984955/,48,  Hadi Taktasha,14000,HAWAII,50
+1,7,3,https://kazan.cian.ru/rent/flat/225912384/,38,  Hajdara Bigicheva,12000,ID 46993370,50
+1,9,3,https://kazan.cian.ru/rent/flat/247007039/,30,  Akademika Saharova,15000,Derzhava,50
+2,5,1,https://kazan.cian.ru/rent/flat/246597219/,43,  Krasnoj Pozitsii,17000,MEGALIT,50
+1,10,4,https://kazan.cian.ru/rent/flat/247745879/,37, prospekt Jamasheva,10000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/247626166/,45,  Galimdzhana Barudi,11000,Julija Bil'danova,30
+1,5,5,https://kazan.cian.ru/rent/flat/245938905/,15,  Adelja Kutuja,11000,Marat Burganov,50
+1,5,5,https://kazan.cian.ru/rent/flat/246790952/,22,  Gudovantseva,9000,ID 47522234,50
+2,9,5,https://kazan.cian.ru/rent/flat/245526312/,52,  Fatyha Amirhana,12000,Julija Bil'danova,30
+2,5,3,https://kazan.cian.ru/rent/flat/247504160/,44, prospekt Ibragimova,12000,Dmitrij Mokeev,30
+1,9,5,https://kazan.cian.ru/rent/flat/246038607/,30, Magadanskaja ,10000,HAWAII,50
+1,5,2,https://kazan.cian.ru/rent/flat/247386679/,30, Gvardejskaja ,10000,Oleg Kir'janov,50
+1,5,4,https://kazan.cian.ru/rent/flat/246058410/,25,  Gagarina,10000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/247012731/,25,  Energetikov,11000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/246653064/,46,  Korolenko,11000,HAWAII,50
+1,9,5,https://kazan.cian.ru/rent/flat/247248523/,40, prospekt Jamasheva,13000,Artur Garifullin,50
+1,5,3,https://kazan.cian.ru/rent/flat/245977406/,27, Botanicheskaja ,12000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/246659749/,36,  Cheljuskina,12000,HAWAII,50
+1,2,2,https://kazan.cian.ru/rent/flat/246491837/,23,  Vosstanija,12000,HAWAII,50
+1,10,5,https://kazan.cian.ru/rent/flat/246779632/,38,  Bondarenko,12000,ID 46097728,50
+1,9,3,https://kazan.cian.ru/rent/flat/246779848/,35,  Dekabristov,15000,ID 46097728,50
+1,9,5,https://kazan.cian.ru/rent/flat/246788981/,38,  Serova,13000,Poisk,50
+1,5,3,https://kazan.cian.ru/rent/flat/245828673/,27,  Riharda Zorge,13000,HAWAII,50
+1,17,7,https://kazan.cian.ru/rent/flat/240569178/,30,  Arhitektora Gajnutdinova,14000,Rajhana Geront'eva,50
+1,20,7,https://kazan.cian.ru/rent/flat/247781227/,44,  Alekseja Kozina,24000,Il'nar Avers,49
+1,10,2,https://kazan.cian.ru/rent/flat/231143868/,38,  Kalinina,32000,Il'nar Avers,48
+1,5,3,https://kazan.cian.ru/rent/flat/247921116/,13,  Gudovantseva,10000,ID 16138475,50
+1,17,7,https://kazan.cian.ru/rent/flat/240569178/,30,  Arhitektora Gajnutdinova,14000,Rajhana Geront'eva,50
+1,20,7,https://kazan.cian.ru/rent/flat/247781227/,44,  Alekseja Kozina,24000,Il'nar Avers,49
+1,10,2,https://kazan.cian.ru/rent/flat/231143868/,38,  Kalinina,32000,Il'nar Avers,48
+1,5,3,https://kazan.cian.ru/rent/flat/247921116/,13,  Gudovantseva,10000,ID 16138475,50
+1,5,4,https://kazan.cian.ru/rent/flat/247955944/,14,  Kachalova,12500,ID 16138475,40
+1,5,3,https://kazan.cian.ru/rent/flat/247402548/,35,  40 let Oktjabrja,11000,ID 12958547,50
+1,9,1,https://kazan.cian.ru/rent/flat/245062427/,39,  Akademika Glushko,14000,Las Vegas,100
+1,19,2,https://kazan.cian.ru/rent/flat/247941546/,40, Professora Kamaja ,14000,Las Vegas,50
+1,9,5,https://kazan.cian.ru/rent/flat/247883820/,35,  Serova,13000,ID 16121519,50
+1,5,4,https://kazan.cian.ru/rent/flat/242182620/,13,  Gudovantseva,9000,ID 16138475,50
+1,9,5,https://kazan.cian.ru/rent/flat/246852066/,32,  Solidarnosti,9000,HAWAII,50
+1,10,5,https://kazan.cian.ru/rent/flat/245469995/,36, Chistopol'skaja ,11000,Dmitrij Mokeev,30
+1,16,5,https://kazan.cian.ru/rent/flat/247002163/,38,  Adoratskogo,11000,Julija Bil'danova,30
+2,9,5,https://kazan.cian.ru/rent/flat/246858030/,52,  Riharda Zorge,12000,Julija Bil'danova,30
+1,2,2,https://kazan.cian.ru/rent/flat/245973129/,48, Avangardnaja ,12000,HAWAII,50
+1,16,7,https://kazan.cian.ru/rent/flat/244405524/,38, Meridiannaja ,11000,Julija Bil'danova,30
+1,5,3,https://kazan.cian.ru/rent/flat/245469000/,35,  Garif'janova,12000,ID 10510774,50
+1,14,7,https://kazan.cian.ru/rent/flat/217929232/,40,  Nigmatullina,22000,MEGALIT,50
+1,9,8,https://kazan.cian.ru/rent/flat/247092747/,33,  Tatarstan,16000,Portal,0
+1,16,7,https://kazan.cian.ru/rent/flat/247077057/,37, Meridiannaja ,11000,Denis Gubko,30
+1,3,2,https://kazan.cian.ru/rent/flat/245528617/,20,  Vatutina,10000,HAWAII,50
+2,9,2,https://kazan.cian.ru/rent/flat/247002568/,49, Chistopol'skaja ,13000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/244424920/,19,  2-ja Gazovaja,14500,ID 48629108,50
+1,5,4,https://kazan.cian.ru/rent/flat/246652750/,28,  2-ja Gazovaja,11000,HAWAII,50
+1,9,2,https://kazan.cian.ru/rent/flat/244688619/,35,  Akademika Zavojskogo,13000,Arslan,50
+1,10,6,https://kazan.cian.ru/rent/flat/247815359/,45, prospekt Pobedy,13000,Tsentral'noe agentstvo nedvizhimosti,50
+1,10,8,https://kazan.cian.ru/rent/flat/245531651/,37,  Riharda Zorge,14000,Portal,0
+1,10,7,https://kazan.cian.ru/rent/flat/245031147/,44,  Kul Gali,18000,MEGALIT,50
+2,10,6,https://kazan.cian.ru/rent/flat/247751593/,55,  Adelja Kutuja,18000,Tsentral'noe agentstvo nedvizhimosti,50
+1,3,3,https://kazan.cian.ru/rent/flat/245726205/,37,  Korotchenko,11000,Julija Bil'danova,30
+1,18,9,https://kazan.cian.ru/rent/flat/246118532/,37,  Chetaeva,11000,Julija Bil'danova,30
+1,10,10,https://kazan.cian.ru/rent/flat/247424780/,35,  Saban,15000,AN Partnery,0
+2,5,2,https://kazan.cian.ru/rent/flat/245545109/,42,  Krasnoj Pozitsii,14000,Portal,0
+1,5,3,https://kazan.cian.ru/rent/flat/247647539/,30, prospekt Ibragimova,10000,ID 16121519,50
+1,9,3,https://kazan.cian.ru/rent/flat/246647797/,18,  Marshala Chujkova,8000,Denis Gubko,30
+1,5,3,https://kazan.cian.ru/rent/flat/245110019/,33,  Tatarstan,9000,Julija Bil'danova,30
+1,5,4,https://kazan.cian.ru/rent/flat/233790150/,18,  Gudovantseva,9000,ID 19482669,50
+1,9,7,https://kazan.cian.ru/rent/flat/245525558/,36,  Akademika Saharova,10000,Julija Bil'danova,30
+1,14,5,https://kazan.cian.ru/rent/flat/246650415/,36, prospekt Pobedy,10000,Denis Gubko,30
+1,9,5,https://kazan.cian.ru/rent/flat/245183107/,38, Chistopol'skaja ,11000,Denis Gubko,30
+1,9,4,https://kazan.cian.ru/rent/flat/245182751/,37,  2-ja Jugo-Zapadnaja,11000,Denis Gubko,30
+1,11,5,https://kazan.cian.ru/rent/flat/247076644/,37,  Pavljuhina,11000,Denis Gubko,30
+1,9,3,https://kazan.cian.ru/rent/flat/247282470/,37,  Chetaeva,11000,Julija Bil'danova,30
+1,10,6,https://kazan.cian.ru/rent/flat/171121783/,45, Birjuzovaja ,9000,ID 12907077,0
+1,10,6,https://kazan.cian.ru/rent/flat/246720653/,38,  Nikolaja Ershova,12000,Julija Bil'danova,30
+1,9,7,https://kazan.cian.ru/rent/flat/244351346/,35,  Korolenko,12000,ID 11072497,50
+1,9,5,https://kazan.cian.ru/rent/flat/245972235/,40, Chistopol'skaja ,12000,Denis Gubko,30
+1,24,9,https://kazan.cian.ru/rent/flat/244807322/,42, Komsomol'skaja ,12000,Julija Bil'danova,30
+1,9,4,https://kazan.cian.ru/rent/flat/243817383/,35,  Litvinova,11000,HAWAII,50
+2,5,3,https://kazan.cian.ru/rent/flat/245657216/,46,  Tatarstan,13000,Denis Gubko,30
+1,16,3,https://kazan.cian.ru/rent/flat/232927347/,42,  Simonova,11000,ID 19482669,30
+1,5,2,https://kazan.cian.ru/rent/flat/244193395/,12, Tehnicheskaja ,13500,ID 27605082,0
+2,9,6,https://kazan.cian.ru/rent/flat/245413180/,58,  Gavrilova,14000,Denis Gubko,30
+2,9,8,https://kazan.cian.ru/rent/flat/245182276/,55,  Safiullina,14000,Denis Gubko,30
+2,10,8,https://kazan.cian.ru/rent/flat/243053466/,60,  Saban,15000,ID 12334809,50
+1,24,8,https://kazan.cian.ru/rent/flat/205664596/,30,  Vosstanija,15000,ID 233266,50
+1,17,8,https://kazan.cian.ru/rent/flat/247553895/,44, Professora Kamaja ,15000,Las Vegas,100
+1,10,2,https://kazan.cian.ru/rent/flat/246271211/,30,  Magistral'naja,13000,ID 12865930,50
+1,9,6,https://kazan.cian.ru/rent/flat/197795057/,39,  Musina,12000,ID 16413953,50
+1,10,2,https://kazan.cian.ru/rent/flat/243657617/,36,  Saliha Batyeva,15000,Tretij Rim,50
+1,9,5,https://kazan.cian.ru/rent/flat/247957409/,35,  Serova,13000,ID 16121519,50
+1,5,1,https://kazan.cian.ru/rent/flat/236223850/,33,  Mira,12000,ID 16138475,42
+1,9,5,https://kazan.cian.ru/rent/flat/247883820/,35,  Serova,13000,ID 16121519,50
+1,3,2,https://kazan.cian.ru/rent/flat/247746189/,15, Enisejskaja ,13000,Poisk,50
+1,5,3,https://kazan.cian.ru/rent/flat/247746564/,28,  8 Marta,13000,Poisk,50
+1,9,5,https://kazan.cian.ru/rent/flat/246788981/,38,  Serova,13000,Poisk,50
+1,9,7,https://kazan.cian.ru/rent/flat/244586602/,35,  Gavrilova,12000,Poisk,50
+1,5,5,https://kazan.cian.ru/rent/flat/244406466/,20,  Sedova,12000,Poisk,50
+1,5,3,https://kazan.cian.ru/rent/flat/247519457/,32,  Latyshskih Strelkov,15000,Artur Garifullin,50
+2,3,2,https://kazan.cian.ru/rent/flat/229230040/,35, Kirpichnaja ,15000,ID 12958547,50
+1,10,5,https://kazan.cian.ru/rent/flat/232204449/,45,  Pobezhimova,15000,Artur Garifullin,50
+1,10,1,https://kazan.cian.ru/rent/flat/247620737/,17,  Chetaeva,15000,ID 16121519,50
+1,10,7,https://kazan.cian.ru/rent/flat/247500962/,32, Tetsevskaja ,13000,HAWAII,50
+1,10,10,https://kazan.cian.ru/rent/flat/247424780/,35,  Saban,15000,AN Partnery,0
+1,18,14,https://kazan.cian.ru/rent/flat/247403189/,40,  Hadi Taktasha,12000,ID 12958547,50
+2,5,4,https://kazan.cian.ru/rent/flat/247402443/,50,  Latyshskih Strelkov,15000,ID 12958547,50
+1,4,2,https://kazan.cian.ru/rent/flat/245180113/,38, Militsejskaja ,13000,HAWAII,0
+1,10,5,https://kazan.cian.ru/rent/flat/245101921/,37,  Juliusa Fuchika,13000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/245129899/,25,  2-ja Daurskaja,13000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/245828673/,27,  Riharda Zorge,13000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/245985634/,33,  Himikov,12500,HAWAII,50
+2,18,11,https://kazan.cian.ru/rent/flat/246117539/,52,  Viktora Sazhinova,12000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/246646410/,45,  Golubjatnikova,13000,HAWAII,50
+1,9,4,https://kazan.cian.ru/rent/flat/246887766/,32, Novo-Svetlaja ,15000,ID 4193548,0
+1,10,8,https://kazan.cian.ru/rent/flat/247097393/,23,  Chetaeva,13000,HAWAII,50
+1,18,10,https://kazan.cian.ru/rent/flat/240981502/,37,  Arhitektora Gajnutdinova,13000,Oleg Kir'janov,50
+2,10,8,https://kazan.cian.ru/rent/flat/243053466/,60,  Saban,15000,ID 12334809,50
+1,10,8,https://kazan.cian.ru/rent/flat/246857081/,35,  Akademika Parina,12000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/246856848/,30,  Gudovantseva,13000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/246780145/,33,  Husaina Mavljutova,15000,ID 46097728,50
+1,9,3,https://kazan.cian.ru/rent/flat/246779848/,35,  Dekabristov,15000,ID 46097728,50
+1,10,1,https://kazan.cian.ru/rent/flat/246756891/,36,  Lukina,12500,Marat Burganov,50
+1,5,2,https://kazan.cian.ru/rent/flat/246749273/,35,  Husaina Mavljutova,15000,Marat Burganov,50
+1,10,3,https://kazan.cian.ru/rent/flat/240261765/,30,  Tolbuhina,15000,Oleg Kir'janov,50
+2,16,7,https://kazan.cian.ru/rent/flat/246044730/,68,  Sibgata Hakima,15000,Julija Bil'danova,30
+1,5,5,https://kazan.cian.ru/rent/flat/217772723/,30,  Vorovskogo,15000,Oleg Kir'janov,50
+2,10,6,https://kazan.cian.ru/rent/flat/240550416/,54,  Vishnevskogo,15000,Oleg Kir'janov,50
+1,9,5,https://kazan.cian.ru/rent/flat/244802697/,34,  Akademika Saharova,13000,Oleg Kir'janov,50
+1,10,5,https://kazan.cian.ru/rent/flat/242870928/,40,  Juliusa Fuchika,13000,ID 19482669,50
+2,16,7,https://kazan.cian.ru/rent/flat/245111808/,76, Chistopol'skaja ,15000,Julija Bil'danova,30
+1,24,8,https://kazan.cian.ru/rent/flat/205664596/,30,  Vosstanija,15000,ID 233266,50
+1,24,5,https://kazan.cian.ru/rent/flat/244324623/,39, proezd Jaratkan,15000,Julija Bil'danova,30
+1,16,7,https://kazan.cian.ru/rent/flat/203993782/,47,  Akademika Zavojskogo,15000,ID 9934072,50
+1,5,3,https://kazan.cian.ru/rent/flat/244270337/,38,  Akademika Koroleva,12000,Marat Burganov,50
+2,10,4,https://kazan.cian.ru/rent/flat/243793636/,55, prospekt Jamasheva,15000,Dmitrij Mokeev,30
+1,5,5,https://kazan.cian.ru/rent/flat/243758243/,33, Novo-Azinskaja ,15000,ID 9934072,50
+1,5,1,https://kazan.cian.ru/rent/flat/242646354/,33, Gvardejskaja ,15000,ID 9934072,50
+1,10,5,https://kazan.cian.ru/rent/flat/227191097/,38,  Noksinskij Spusk,13000,ID 9934072,50
+1,10,3,https://kazan.cian.ru/rent/flat/203599294/,40, Minskaja ,13000,ID 9934072,50
+1,5,4,https://kazan.cian.ru/rent/flat/241316241/,33, Olonetskaja ,15000,ID 9882706,50
+1,5,2,https://kazan.cian.ru/rent/flat/240059532/,37, Spartakovskaja ,15000,ID 19482669,50
+1,5,3,https://kazan.cian.ru/rent/flat/233788748/,37,  Dekabristov,15000,ID 19482669,30
+1,10,7,https://kazan.cian.ru/rent/flat/247524772/,50,  Akademika Zavojskogo,15000,ID 62197636,0
+1,16,12,https://kazan.cian.ru/rent/flat/246881096/,51,  Ajdarova,15000,ID 62573152,0
+1,9,7,https://kazan.cian.ru/rent/flat/245488628/,36,  Il'icha,12000,ID 62832556,40
+1,14,8,https://kazan.cian.ru/rent/flat/245139104/,40,  Dubravnaja,15000,ID 46993370,50
+1,10,9,https://kazan.cian.ru/rent/flat/235831405/,45,  Kommunarov,15000,ID 11194009,50
+1,10,9,https://kazan.cian.ru/rent/flat/243584170/,36,  Zur Uram,15000,ID 55398960,0
+2,19,8,https://kazan.cian.ru/rent/flat/240508453/,72,  Riharda Zorge,11000,Sobstvennik,0
+1,5,3,https://kazan.cian.ru/rent/flat/234143278/,39, Kolomenskaja ,15000,ID 15551923,49
+1,9,8,https://kazan.cian.ru/rent/flat/247824100/,33,  Marshala Chujkova,15500,Tretij Rim,50
+1,9,3,https://kazan.cian.ru/rent/flat/243448410/,35,  Marshala Chujkova,13000,Poisk,50
+1,9,3,https://kazan.cian.ru/rent/flat/247529826/,36,  Riharda Zorge,13000,Poisk,50
+2,9,3,https://kazan.cian.ru/rent/flat/238315925/,53, Minskaja ,13000,Adelina Mironova,50
+1,9,1,https://kazan.cian.ru/rent/flat/247310413/,40,  Narimanova,15000,Artur Garifullin,50
+2,9,7,https://kazan.cian.ru/rent/flat/247698610/,50,  Dement'eva,15000,Artur Garifullin,50
+2,5,4,https://kazan.cian.ru/rent/flat/247347929/,49,  Kosmonavtov,12000,HAWAII,50
+1,18,11,https://kazan.cian.ru/rent/flat/245407558/,42,  Andreja Ado,13000,HAWAII,50
+1,9,4,https://kazan.cian.ru/rent/flat/245658250/,45, Krasnokokshajskaja ,13000,HAWAII,50
+1,3,2,https://kazan.cian.ru/rent/flat/245899279/,39,  Mira,13000,HAWAII,50
+2,9,6,https://kazan.cian.ru/rent/flat/245983130/,53,  Serova,13000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/247075822/,34,  Zarja,13000,HAWAII,50
+1,10,9,https://kazan.cian.ru/rent/flat/247145250/,36,  Kul Gali,13999,ID 15636838,49
+1,16,12,https://kazan.cian.ru/rent/flat/247214907/,36,  Hajdara Bigicheva,13000,HAWAII,50
+1,16,10,https://kazan.cian.ru/rent/flat/246868277/,36, Minskaja ,13000,HAWAII,50
+1,2,2,https://kazan.cian.ru/rent/flat/246739912/,32,  Riharda Zorge,13000,HAWAII,50
+2,5,1,https://kazan.cian.ru/rent/flat/246529872/,44,  Vorovskogo,11000,Poisk,50
+1,10,5,https://kazan.cian.ru/rent/flat/246161529/,37,  Juliusa Fuchika,13000,ID 19482669,50
+1,5,3,https://kazan.cian.ru/rent/flat/245916064/,38, Oktjabr'skaja ,13500,Marat Burganov,50
+1,16,14,https://kazan.cian.ru/rent/flat/244506617/,50,  Akademika Glushko,13000,ID 16138475,40
+1,5,2,https://kazan.cian.ru/rent/flat/239938598/,32,  Novatorov,13000,ID 233266,50
+1,25,4,https://kazan.cian.ru/rent/flat/242080921/,30,  Rauisa Gareeva,14000,ID 57298957,50
+1,5,5,https://kazan.cian.ru/rent/flat/241708162/,35, Botanicheskaja ,13000,Poisk,50
+1,18,2,https://kazan.cian.ru/rent/flat/247548276/,52,  Rashida Nezhmetdinova,14000,ID 12865930,50
+1,10,4,https://kazan.cian.ru/rent/flat/246152682/,37,  Absaljamova,16000,Tretij Rim,0
+1,10,7,https://kazan.cian.ru/rent/flat/247026872/,40, Daurskaja ,16000,Las Vegas,100
+2,11,10,https://kazan.cian.ru/rent/flat/243440608/,46, Chistopol'skaja ,16000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/243910479/,34,  Rauisa Gareeva,16000,Tretij Rim,50
+2,10,6,https://kazan.cian.ru/rent/flat/243317599/,43,  Juliusa Fuchika,16000,Tretij Rim,50
+3,8,2,https://kazan.cian.ru/rent/flat/243159711/,68,  Chetaeva,16000,Tretij Rim,50
+3,5,4,https://kazan.cian.ru/rent/flat/243313989/,46,  Dubravnaja,16000,Tretij Rim,50
+1,12,5,https://kazan.cian.ru/rent/flat/243444550/,32,  Adoratskogo,16000,Tretij Rim,50
+2,9,6,https://kazan.cian.ru/rent/flat/243604078/,58,  Rauisa Gareeva,16000,Tretij Rim,50
+1,19,11,https://kazan.cian.ru/rent/flat/243003353/,40,  Rodiny,16000,Tretij Rim,50
+2,5,3,https://kazan.cian.ru/rent/flat/243949991/,42,  Brat'ev Kasimovyh,16000,Tretij Rim,50
+1,5,5,https://kazan.cian.ru/rent/flat/243229492/,19,  Dekabristov,16000,Tretij Rim,50
+2,2,2,https://kazan.cian.ru/rent/flat/243901829/,42, Ippodromnaja ,16000,Tretij Rim,50
+1,10,3,https://kazan.cian.ru/rent/flat/243239900/,32,  Kul Gali,16000,Tretij Rim,50
+2,5,5,https://kazan.cian.ru/rent/flat/243729258/,59,  Zarja,16000,Tretij Rim,0
+2,8,5,https://kazan.cian.ru/rent/flat/243897723/,42,  Chetaeva,16000,Tretij Rim,50
+2,5,5,https://kazan.cian.ru/rent/flat/243239912/,43,  Nursultana Nazarbaeva,16000,Tretij Rim,50
+1,10,9,https://kazan.cian.ru/rent/flat/243593466/,41, prospekt Jamasheva,16000,Tretij Rim,50
+2,19,6,https://kazan.cian.ru/rent/flat/242985038/,40, Rotornaja ,16000,Tretij Rim,0
+1,14,7,https://kazan.cian.ru/rent/flat/242862884/,45, Krasnokokshajskaja ,16000,Tretij Rim,0
+1,3,2,https://kazan.cian.ru/rent/flat/243729272/,36,  Medovaja,14000,Tretij Rim,50
+2,5,2,https://kazan.cian.ru/rent/flat/243600470/,44, Novo-Azinskaja ,16000,Tretij Rim,50
+1,25,5,https://kazan.cian.ru/rent/flat/242866446/,37,  Brat'ev Battalovyh,16000,Tretij Rim,50
+3,5,4,https://kazan.cian.ru/rent/flat/243949986/,56,  Hadi Taktasha,16000,Tretij Rim,50
+1,10,7,https://kazan.cian.ru/rent/flat/242994990/,39, Meridiannaja ,16000,Tretij Rim,50
+2,9,6,https://kazan.cian.ru/rent/flat/243239924/,54,  Akademika Saharova,16000,Tretij Rim,50
+1,9,5,https://kazan.cian.ru/rent/flat/246795308/,42,  Nikolaja Ershova,16000,Tretij Rim,50
+1,9,4,https://kazan.cian.ru/rent/flat/247284586/,38, Lomzhinskaja ,16000,Tretij Rim,50
+2,5,4,https://kazan.cian.ru/rent/flat/247743097/,48, Agronomicheskaja ,16000,Tretij Rim,50
+1,5,5,https://kazan.cian.ru/rent/flat/244846786/,31, Shossejnaja ,13000,MEGALIT,50
+1,10,3,https://kazan.cian.ru/rent/flat/246906119/,34, Minskaja ,14000,ID 12865930,50
+1,10,9,https://kazan.cian.ru/rent/flat/247265446/,39,  Akademika Pavlova,14000,ID 12865930,50
+1,18,5,https://kazan.cian.ru/rent/flat/247935553/,58,  Akademika Glushko,16000,ID 12865930,50
+2,9,6,https://kazan.cian.ru/rent/flat/247935547/,52,  Safiullina,16000,ID 12865930,50
+1,19,4,https://kazan.cian.ru/rent/flat/246072861/,32,  Azata Abbasova,16000,Las Vegas,100
+1,10,3,https://kazan.cian.ru/rent/flat/246072830/,37,  Azata Abbasova,16000,Las Vegas,100
+1,9,8,https://kazan.cian.ru/rent/flat/247794012/,33, Magadanskaja ,16000,MEGALIT,50
+2,5,1,https://kazan.cian.ru/rent/flat/247459730/,54, Krasnokokshajskaja ,16000,Tretij Rim,50
+2,5,3,https://kazan.cian.ru/rent/flat/247460855/,44,  Chkalova,14000,MEGALIT,50
+1,10,3,https://kazan.cian.ru/rent/flat/247457912/,34,  Chishmjale,16000,ID 33289805,100
+1,24,22,https://kazan.cian.ru/rent/flat/246860558/,40,  Amet'evskaja magistral',16000,Las Vegas,100
+1,9,4,https://kazan.cian.ru/rent/flat/243645575/,37,  Nursultana Nazarbaeva,16000,Tretij Rim,50
+1,9,1,https://kazan.cian.ru/rent/flat/247994202/,35,  Riharda Zorge,16000,Las Vegas,100
+2,5,4,https://kazan.cian.ru/rent/flat/247565361/,54,  Brat'ev Kasimovyh,16000,Tretij Rim,50
+2,9,9,https://kazan.cian.ru/rent/flat/247430096/,60,  Zakieva,16000,Tretij Rim,50
+1,10,7,https://kazan.cian.ru/rent/flat/246708766/,30, Tetsevskaja ,16000,Las Vegas,100
+1,17,6,https://kazan.cian.ru/rent/flat/244671131/,45, Minskaja ,16000,Las Vegas,100
+1,10,10,https://kazan.cian.ru/rent/flat/246952462/,37,  Juliusa Fuchika,16000,Las Vegas,100
+2,9,1,https://kazan.cian.ru/rent/flat/244986642/,50,  Kul Gali,16000,Las Vegas,100
+1,9,1,https://kazan.cian.ru/rent/flat/244184982/,44, Agronomicheskaja ,16000,Las Vegas,100
+1,9,5,https://kazan.cian.ru/rent/flat/244276488/,40,  Rauisa Gareeva,16000,Las Vegas,100
+1,7,4,https://kazan.cian.ru/rent/flat/244521849/,35,  Hajdara Bigicheva,16000,Las Vegas,100
+1,10,6,https://kazan.cian.ru/rent/flat/247882184/,41,  Juliusa Fuchika,16000,Las Vegas,50
+1,10,1,https://kazan.cian.ru/rent/flat/247105254/,38,  Akademika Pavlova,13000,Poisk,50
+1,5,3,https://kazan.cian.ru/rent/flat/207910734/,35,  Cheljuskina,12000,ID 16413953,50
+2,5,2,https://kazan.cian.ru/rent/flat/226087991/,46, prospekt Ibragimova,12000,ID 16413953,50
+2,9,4,https://kazan.cian.ru/rent/flat/204875935/,55,  Lukina,12000,ID 16413953,50
+2,18,17,https://kazan.cian.ru/rent/flat/243600471/,57,  Novosel'ja,16000,Tretij Rim,50
+1,5,4,https://kazan.cian.ru/rent/flat/247890105/,28,  Energetikov,14000,HAWAII,50
+1,18,3,https://kazan.cian.ru/rent/flat/247843470/,40,  Natana Rahlina,16000,ID 17754089,50
+1,9,7,https://kazan.cian.ru/rent/flat/247829575/,34,  Batyrshina,13500,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/245034097/,31, Oktjabr'skaja ,14000,Poisk,50
+1,9,7,https://kazan.cian.ru/rent/flat/243442057/,18,  Kul Gali,16000,Poisk,50
+1,9,1,https://kazan.cian.ru/rent/flat/247825297/,36, Minskaja ,12000,ID 16138475,42
+1,14,3,https://kazan.cian.ru/rent/flat/247823744/,36,  Riharda Zorge,15000,ID 17754089,50
+1,16,7,https://kazan.cian.ru/rent/flat/246718456/,47,  Akademika Glushko,12500,ID 11560618,50
+1,9,4,https://kazan.cian.ru/rent/flat/246882075/,40, Lomzhinskaja ,16000,Artur Garifullin,50
+1,8,3,https://kazan.cian.ru/rent/flat/247747160/,38,  Zur Uram,13000,ID 11425264,50
+1,10,7,https://kazan.cian.ru/rent/flat/247742569/,40,  Chishmjale,14000,Artur Garifullin,50
+1,18,14,https://kazan.cian.ru/rent/flat/242610650/,38,  Chingiza Ajtmatova,13000,ID 22464212,50
+1,18,14,https://kazan.cian.ru/rent/flat/247239061/,21, prospekt Pobedy,14000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/244498055/,35, Polevaja ,14000,HAWAII,50
+1,9,5,https://kazan.cian.ru/rent/flat/245650590/,42,  Zhurnalistov,14000,HAWAII,50
+1,9,6,https://kazan.cian.ru/rent/flat/245653373/,35,  Syrtlanovoj,13500,HAWAII,50
+1,14,10,https://kazan.cian.ru/rent/flat/246039367/,33,  Juliusa Fuchika,14000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/246589902/,25,  Pavljuhina,14000,HAWAII,50
+1,9,6,https://kazan.cian.ru/rent/flat/247098983/,34,  Maksimova,14000,HAWAII,50
+1,10,7,https://kazan.cian.ru/rent/flat/246934124/,41, Gvardejskaja ,16000,ID 54988553,50
+2,5,3,https://kazan.cian.ru/rent/flat/246814391/,57,  Dement'eva,16000,Marat Burganov,50
+1,18,12,https://kazan.cian.ru/rent/flat/246528221/,41,  Chingiza Ajtmatova,14000,ID 11309396,50
+2,5,2,https://kazan.cian.ru/rent/flat/246602733/,56, Polevaja ,13000,Marat Burganov,50
+2,9,7,https://kazan.cian.ru/rent/flat/246075830/,52,  Dement'eva,11000,Poisk,50
+1,5,2,https://kazan.cian.ru/rent/flat/246039031/,31,  Korolenko,13000,ID 11425264,50
+1,18,7,https://kazan.cian.ru/rent/flat/246002774/,43,  Chingiza Ajtmatova,14000,Marat Burganov,50
+1,10,5,https://kazan.cian.ru/rent/flat/246001548/,42,  Chapaeva,16000,Marat Burganov,50
+1,10,8,https://kazan.cian.ru/rent/flat/245831212/,35,  Juliusa Fuchika,13000,Oleg Kir'janov,50
+1,5,5,https://kazan.cian.ru/rent/flat/234721266/,18,  2-ja Daurskaja,16000,ID 9882706,50
+1,16,13,https://kazan.cian.ru/rent/flat/244910849/,45, Bakalejnaja ,16000,ID 233266,50
+2,10,6,https://kazan.cian.ru/rent/flat/202996916/,55,  Gavrilova,16000,ID 21949778,30
+2,5,5,https://kazan.cian.ru/rent/flat/212798073/,42,  Dekabristov,16000,ID 21949778,30
+1,23,7,https://kazan.cian.ru/rent/flat/242178017/,30,  Brat'ev Battalovyh,14000,New-York,50
+2,9,6,https://kazan.cian.ru/rent/flat/227847280/,46, Okol'naja ,13000,ID 11425264,50
+1,5,1,https://kazan.cian.ru/rent/flat/236532952/,35,  Shamilja Usmanova,16000,Veronika Ermeeva,50
+1,9,8,https://kazan.cian.ru/rent/flat/232778795/,36,  Ajdarova,13000,ID 13149698,0
+1,10,5,https://kazan.cian.ru/rent/flat/247758057/,35,  Maksimova,16000,ID 62573152,50
+2,5,4,https://kazan.cian.ru/rent/flat/247566814/,47,  Shamilja Usmanova,16000,Sobstvennik,0
+1,10,2,https://kazan.cian.ru/rent/flat/247430427/,36,  Juliusa Fuchika,16000,ID 61464525,50
+1,10,2,https://kazan.cian.ru/rent/flat/244337899/,35, Meridiannaja ,16000,ID 59539085,50
+2,5,4,https://kazan.cian.ru/rent/flat/229035262/,54,  Shamilja Usmanova,16000,ID 50593812,50
+1,9,2,https://kazan.cian.ru/rent/flat/247527234/,36, Minskaja ,16500,Tretij Rim,50
+1,10,6,https://kazan.cian.ru/rent/flat/246638152/,38,  2-ja Azinskaja,16500,Las Vegas,100
+1,9,4,https://kazan.cian.ru/rent/flat/246965175/,39,  Lipatova,13000,Poisk,50
+1,5,3,https://kazan.cian.ru/rent/flat/243455899/,33,  Akademika Parina,14000,Poisk,50
+1,10,4,https://kazan.cian.ru/rent/flat/247233952/,37,  Noksinskij Spusk,13000,Poisk,50
+1,14,13,https://kazan.cian.ru/rent/flat/247242146/,37, Revoljutsionnaja ,13000,Poisk,50
+2,9,7,https://kazan.cian.ru/rent/flat/247955163/,55,  Riharda Zorge,14000,ID 16121519,50
+1,19,15,https://kazan.cian.ru/rent/flat/246780342/,31,  Azata Abbasova,13000,Poisk,50
+1,9,7,https://kazan.cian.ru/rent/flat/247699403/,40,  Marshala Chujkova,14000,Artur Garifullin,50
+1,9,2,https://kazan.cian.ru/rent/flat/247522536/,36, Minskaja ,14000,HAWAII,50
+2,10,5,https://kazan.cian.ru/rent/flat/247516946/,57,  Chapaeva,13000,ID 19482669,50
+1,16,10,https://kazan.cian.ru/rent/flat/245625998/,42, Aktajskaja ,14000,HAWAII,50
+1,6,4,https://kazan.cian.ru/rent/flat/245814998/,45,  Polzunova,14000,HAWAII,50
+1,9,6,https://kazan.cian.ru/rent/flat/245829670/,48,  Adoratskogo,14000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/245834318/,48, prospekt Ibragimova,14000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/245560862/,32,  Latyshskih Strelkov,14000,ID 12958547,50
+1,5,2,https://kazan.cian.ru/rent/flat/247074116/,30,  Nursultana Nazarbaeva,13000,Oleg Kir'janov,50
+2,9,7,https://kazan.cian.ru/rent/flat/246922070/,49, prospekt Pobedy,15000,HAWAII,50
+1,5,4,https://kazan.cian.ru/rent/flat/246872417/,40, Kolomenskaja ,15000,Poisk,50
+1,10,5,https://kazan.cian.ru/rent/flat/246864210/,32,  Chetaeva,14000,HAWAII,50
+1,10,4,https://kazan.cian.ru/rent/flat/246856608/,37,  Fikrjata Tabeeva,14000,HAWAII,50
+1,9,3,https://kazan.cian.ru/rent/flat/246855642/,35,  Adoratskogo,14000,HAWAII,50
+1,5,2,https://kazan.cian.ru/rent/flat/240921297/,30, Avangardnaja ,15000,AN Gavaji,50
+1,10,5,https://kazan.cian.ru/rent/flat/240887704/,33, Tetsevskaja ,15000,AN Gavaji,50
+2,18,9,https://kazan.cian.ru/rent/flat/241790745/,53,  Tynych,16500,AN Gavaji,50
+2,9,2,https://kazan.cian.ru/rent/flat/242459070/,54,  Juliusa Fuchika,14000,Oleg Kir'janov,50
+1,5,2,https://kazan.cian.ru/rent/flat/244326468/,29,  Dezhneva,16500,Marat Burganov,50
+1,5,1,https://kazan.cian.ru/rent/flat/242973194/,37,  Cheljuskina,14500,ID 48629108,50
+1,17,7,https://kazan.cian.ru/rent/flat/242765728/,38, Minskaja ,15000,ID 30609735,50
+1,10,5,https://kazan.cian.ru/rent/flat/240445158/,36,  Chetaeva,15000,ID 9882706,50
+1,14,4,https://kazan.cian.ru/rent/flat/239776656/,37, Gorsovetskaja ,16500,ID 48629108,50
+1,4,1,https://kazan.cian.ru/rent/flat/201702469/,40,  Kajuma Nasyri,15000,ID 11194009,50
+1,12,4,https://kazan.cian.ru/rent/flat/237083376/,29, Tetsevskaja ,15000,ID 11194009,50
+2,5,4,https://kazan.cian.ru/rent/flat/247333071/,48,  Korolenko,17000,ID 12865930,50
+1,10,8,https://kazan.cian.ru/rent/flat/247548285/,35,  Noksinskij Spusk,15000,ID 12865930,50
+2,5,4,https://kazan.cian.ru/rent/flat/247980230/,45,  Bondarenko,17000,ID 12865930,50
+2,14,7,https://kazan.cian.ru/rent/flat/243600459/,72, Minskaja ,17000,Tretij Rim,50
+2,3,3,https://kazan.cian.ru/rent/flat/243352734/,52, Voennyj gorodok-2 ter.,17000,Tretij Rim,0
+3,2,1,https://kazan.cian.ru/rent/flat/243641309/,80,  Akademika Gubkina,17000,Tretij Rim,50
+2,9,4,https://kazan.cian.ru/rent/flat/243819053/,42,  Rauisa Gareeva,17000,Tretij Rim,50
+2,10,5,https://kazan.cian.ru/rent/flat/243440584/,49,  Adelja Kutuja,17000,Tretij Rim,50
+2,5,3,https://kazan.cian.ru/rent/flat/246141526/,45, Volgogradskaja ,17000,Tretij Rim,50
+1,9,6,https://kazan.cian.ru/rent/flat/243808707/,32,  Marshala Chujkova,17000,Tretij Rim,50
+2,9,7,https://kazan.cian.ru/rent/flat/243949993/,42,  Zakieva,17000,Tretij Rim,50
+1,9,5,https://kazan.cian.ru/rent/flat/243910475/,32,  Rauisa Gareeva,17000,Tretij Rim,50
+1,24,12,https://kazan.cian.ru/rent/flat/247170261/,20, Komsomol'skaja ,17000,Las Vegas,100
+2,5,3,https://kazan.cian.ru/rent/flat/243949994/,43,  Zarja,17000,Tretij Rim,50
+1,12,7,https://kazan.cian.ru/rent/flat/247170253/,42, prospekt Jamasheva,17000,Las Vegas,100
+1,9,7,https://kazan.cian.ru/rent/flat/247170270/,44, Otradnaja ,17000,Las Vegas,100
+3,10,3,https://kazan.cian.ru/rent/flat/243444532/,60,  Chetaeva,17000,Tretij Rim,50
+1,5,3,https://kazan.cian.ru/rent/flat/242943908/,36, prospekt Jamasheva,17000,Tretij Rim,50
+1,10,4,https://kazan.cian.ru/rent/flat/247649811/,45,  Kul Gali,17000,ID 33289805,100
+2,9,6,https://kazan.cian.ru/rent/flat/243229483/,54,  Dubravnaja,17000,Tretij Rim,50
+3,5,3,https://kazan.cian.ru/rent/flat/243604091/,55,  Kurchatova,17000,Tretij Rim,50
+2,17,14,https://kazan.cian.ru/rent/flat/243239938/,64,  Andreja Ado,17000,Tretij Rim,50
+1,19,14,https://kazan.cian.ru/rent/flat/243819043/,43,  Pavljuhina,17000,Tretij Rim,50
+2,23,13,https://kazan.cian.ru/rent/flat/243736029/,42,  Baki Urmanche,17000,Tretij Rim,50
+2,4,3,https://kazan.cian.ru/rent/flat/247750579/,58,  Iskra,17000,Tretij Rim,50
+2,5,4,https://kazan.cian.ru/rent/flat/242862828/,56,  Akademika Koroleva,17000,Tretij Rim,50
+1,12,7,https://kazan.cian.ru/rent/flat/246657038/,50,  Dubravnaja,17000,Las Vegas,100
+1,9,6,https://kazan.cian.ru/rent/flat/244715938/,36,  Juliusa Fuchika,15000,ID 12865930,50
+1,15,14,https://kazan.cian.ru/rent/flat/247271241/,45, Professora Kamaja ,17000,Las Vegas,100
+1,18,16,https://kazan.cian.ru/rent/flat/247134274/,40, prospekt Pobedy,17000,Las Vegas,100
+1,24,2,https://kazan.cian.ru/rent/flat/247616604/,44, Verbnaja ,17000,Las Vegas,100
+1,10,9,https://kazan.cian.ru/rent/flat/239175798/,36,  Chetaeva,17000,MEGALIT,50
+1,9,6,https://kazan.cian.ru/rent/flat/247935556/,35,  Adoratskogo,17000,ID 12865930,50
+1,24,6,https://kazan.cian.ru/rent/flat/246072850/,46, Sibirskij trakt,17000,ID 33289805,100
+1,19,18,https://kazan.cian.ru/rent/flat/246881329/,27, proezd Junusa Ahmetzjanova,17000,Las Vegas,100
+1,14,7,https://kazan.cian.ru/rent/flat/247457940/,43,  Fatyha Amirhana,17000,Las Vegas,100
+1,16,3,https://kazan.cian.ru/rent/flat/245038925/,44,  Dubravnaja,17000,Las Vegas,100
+1,10,3,https://kazan.cian.ru/rent/flat/223581798/,45,  Akademika Glushko,14000,MEGALIT,50
+3,9,1,https://kazan.cian.ru/rent/flat/243444525/,63, Minskaja ,17000,Tretij Rim,50
+1,10,9,https://kazan.cian.ru/rent/flat/246053716/,40,  Nigmatullina,17000,Las Vegas,100
+1,14,13,https://kazan.cian.ru/rent/flat/246579335/,40,  Rauisa Gareeva,17000,Las Vegas,100
+1,10,3,https://kazan.cian.ru/rent/flat/247084002/,35,  Fatyha Amirhana,17000,Las Vegas,100
+2,9,6,https://kazan.cian.ru/rent/flat/240037026/,53,  Akademika Zavojskogo,17000,ID 12865930,50
+2,9,8,https://kazan.cian.ru/rent/flat/240413922/,59,  Vishnevskogo,14000,ID 12865930,50
+2,5,5,https://kazan.cian.ru/rent/flat/243479394/,51,  3-ja Klenovaja,14000,ID 12865930,50
+1,10,3,https://kazan.cian.ru/rent/flat/246708769/,42,  Fikrjata Tabeeva,17000,Las Vegas,100
+1,18,7,https://kazan.cian.ru/rent/flat/246952455/,32, prospekt Al'berta Kamaleeva,17000,Las Vegas,100
+2,9,4,https://kazan.cian.ru/rent/flat/244078653/,47,  Tatarstan,17000,Las Vegas,100
+1,10,7,https://kazan.cian.ru/rent/flat/244986621/,50,  2-ja Azinskaja,17000,Las Vegas,100
+1,18,5,https://kazan.cian.ru/rent/flat/244905905/,30,  Zur Uram,17000,Las Vegas,100
+1,16,8,https://kazan.cian.ru/rent/flat/244398594/,40, prospekt Pobedy,17000,Las Vegas,100
+1,24,13,https://kazan.cian.ru/rent/flat/247553891/,43, Verbnaja ,17000,Las Vegas,100
+1,16,8,https://kazan.cian.ru/rent/flat/247553893/,46,  Hajdara Bigicheva,17000,Las Vegas,100
+2,5,4,https://kazan.cian.ru/rent/flat/246702490/,44, Shossejnaja ,14000,ID 12865930,50
+1,10,8,https://kazan.cian.ru/rent/flat/243787047/,38,  Kul Gali,15000,Poisk,50
+1,10,8,https://kazan.cian.ru/rent/flat/232770050/,45,  Saliha Batyeva,17000,ID 16413953,50
+2,9,5,https://kazan.cian.ru/rent/flat/226087865/,56,  Akademika Saharova,15000,ID 16413953,50
+1,5,4,https://kazan.cian.ru/rent/flat/230225083/,33, Botanicheskaja ,17000,Ramazan,50
+1,9,6,https://kazan.cian.ru/rent/flat/222078375/,36,  Marshala Chujkova,15000,ID 16121519,50
+1,9,6,https://kazan.cian.ru/rent/flat/244677907/,44, Chistopol'skaja ,14000,Poisk,50
+1,19,2,https://kazan.cian.ru/rent/flat/244064017/,32,  Rauisa Gareeva,14500,Poisk,50
+1,14,14,https://kazan.cian.ru/rent/flat/243379037/,33,  Marshala Chujkova,15000,Poisk,50
+1,9,4,https://kazan.cian.ru/rent/flat/246596818/,35, prospekt Pobedy,17000,Poisk,50
+2,5,3,https://kazan.cian.ru/rent/flat/247762465/,50,  Syrtlanovoj,14000,ID 12966620,50
+1,23,18,https://kazan.cian.ru/rent/flat/247750545/,31,  Brat'ev Battalovyh,14000,Poisk,50
+1,10,7,https://kazan.cian.ru/rent/flat/247620612/,38,  Serova,17000,ID 11425264,50
+1,9,3,https://kazan.cian.ru/rent/flat/247604022/,36,  Adoratskogo,14000,Lilija Murtazina,50
+2,9,5,https://kazan.cian.ru/rent/flat/225254181/,58,  Karbysheva,15000,ID 12929921,50
+1,9,1,https://kazan.cian.ru/rent/flat/243162635/,34,  Adoratskogo,17000,HAWAII,50
+3,18,10,https://kazan.cian.ru/rent/flat/244502489/,70,  Nailja Jusupova,13000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/245324139/,39,  Maksimova,15000,HAWAII,50
+1,5,3,https://kazan.cian.ru/rent/flat/245522252/,42,  Latyshskih Strelkov,15000,HAWAII,50
+3,10,6,https://kazan.cian.ru/rent/flat/247026136/,65,  Cheljuskina,14500,HAWAII,50
+1,16,8,https://kazan.cian.ru/rent/flat/246967999/,36,  Akademika Saharova,14000,ID 17754089,50
+1,10,3,https://kazan.cian.ru/rent/flat/246779745/,45,  Akademika Zavojskogo,14000,ID 46097728,0
+1,9,2,https://kazan.cian.ru/rent/flat/246599329/,38,  Rauisa Gareeva,15000,New-York,50
+1,10,8,https://kazan.cian.ru/rent/flat/245998969/,42,  Saliha Batyeva,14000,Marat Burganov,50
+2,5,2,https://kazan.cian.ru/rent/flat/245998318/,38,  Nursultana Nazarbaeva,17000,Marat Burganov,50
+1,15,10,https://kazan.cian.ru/rent/flat/245936144/,40,  Arhitektora Gajnutdinova,15000,Marat Burganov,50
+1,9,7,https://kazan.cian.ru/rent/flat/245927496/,38,  Adoratskogo,15000,Marat Burganov,50
+1,16,8,https://kazan.cian.ru/rent/flat/245924719/,42, Minskaja ,14000,Marat Burganov,50
+1,9,1,https://kazan.cian.ru/rent/flat/245918279/,39,  Zakieva,15000,Marat Burganov,50
+1,10,6,https://kazan.cian.ru/rent/flat/245905184/,45,  Azata Abbasova,14000,Marat Burganov,50
+2,9,8,https://kazan.cian.ru/rent/flat/245801244/,52,  Akademika Lavrent'eva,17000,ID 12205145,50
+2,5,2,https://kazan.cian.ru/rent/flat/240175262/,45, prospekt Ibragimova,17000,Oleg Kir'janov,50
+2,5,3,https://kazan.cian.ru/rent/flat/240937419/,45,  Brat'ev Kasimovyh,15000,Oleg Kir'janov,50
+2,9,8,https://kazan.cian.ru/rent/flat/242326989/,54,  Juliusa Fuchika,14000,ID 27929275,50
+1,9,4,https://kazan.cian.ru/rent/flat/240446100/,38,  Brat'ev Battalovyh,15000,New-York,50

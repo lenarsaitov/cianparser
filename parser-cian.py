@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import collections
 import csv
 import transliterate
+import re
 
 ParseResults = collections.namedtuple(
     'ParseResults',
@@ -16,12 +17,15 @@ ParseResults = collections.namedtuple(
         'square_meters',
         'commissions',
         'author',
+        'year_of_construction',
+        'comm_meters',
+        'kitchen_meters',
         'link'
     }
 )
 
 PAGE_START = 1
-PAGE_END = 35
+PAGE_END = 30
 
 class Client:
     def __init__(self):
@@ -41,13 +45,16 @@ class Client:
             square_meters='Square_meters',
             commissions='Commissions %',
             author = 'Author',
+            year_of_construction = 'Year_of_construction',
+            comm_meters = 'Living_area',
+            kitchen_meters = 'kitchen_meters',
             link = 'Link'
         ))
 
     def load_page(self, i = 1):
         self.city = "Казань"
-        url = f"https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
-        res = self.session.get(url = url)
+        self.url = f"https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
+        res = self.session.get(url = self.url)
         res.raise_for_status()
         return res.text
 
@@ -56,6 +63,46 @@ class Client:
         offers = soup.select("div[data-name='Offers'] > article[data-name='CardComponent']")
         for block in offers:
             self.parse_block(block=block)
+
+    def parse_page_offer(self, html_offer):
+        soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+        try:
+            # text_offer = soup_offer_page.select("div[data-name='Description']")[0].text
+            # year = int(text_offer[text_offer.find("Построен")-4: text_offer.find("Построен")])
+
+            text_offer = soup_offer_page.select("div[data-name='BtiContainer'] > div[data-name='BtiHouseData']")[0].text
+            year = int(text_offer[text_offer.find("Год постройки")+13: text_offer.find("Год постройки") + 17])
+        except:
+            year = -1
+
+        try:
+            # text_offer = soup_offer_page.select("div[data-name='Description']")[0].text
+            text_offer = soup_offer_page.select("div[data-name='Description'] > div > div:nth-child(2)")[0].text
+            comm = (text_offer[: text_offer.find("Общая")])
+            comm_meters = int(re.findall(r'\d+', comm)[0])
+        except IndexError:
+            text_offer = soup_offer_page.select("div[data-name='Description'] > div")[0].text
+            comm = (text_offer[: text_offer.find("Общая")])
+            comm_meters = int(re.findall(r'\d+', comm)[0])
+        except:
+            comm_meters = -1
+
+        try:
+            # text_offer = soup_offer_page.select("div[data-name='Description']")[0].text
+            text_offer = soup_offer_page.select("div[data-name='Description'] > div > div:nth-child(2)")[0].text
+            kitchen = (text_offer[text_offer.find("Кухня")-6: text_offer.find("Кухня")])
+            kitchen_meters = int(re.findall(r'\d+', kitchen)[0])
+        except IndexError:
+            text_offer = soup_offer_page.select("div[data-name='Description'] > div")[0].text
+            if "Кухня" in text_offer:
+                kitchen = (text_offer[text_offer.find("Кухня")-6: text_offer.find("Кухня")])
+                kitchen_meters = int(re.findall(r'\d+', kitchen)[0])
+            else:
+                kitchen_meters = -1
+        except:
+            kitchen_meters = -1
+
+        return (year, comm_meters, kitchen_meters)
 
     def parse_block(self, block):
         title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='TitleComponent']")[0].text
@@ -116,6 +163,13 @@ class Client:
         except:
             pass
 
+        res = self.session.get(url = link)
+        res.raise_for_status()
+        html_offer_page = res.text
+
+        year_of_construction, comm_meters, kitchen_meters = self.parse_page_offer(html_offer = html_offer_page)
+        print(f"{comm_meters}, {kitchen_meters}")
+
         self.result.append(ParseResults(
             how_many_rooms=how_many_rooms,
             price_per_month=price_per_month,
@@ -126,6 +180,9 @@ class Client:
             square_meters=meters,
             commissions=commissions,
             author = author,
+            year_of_construction = year_of_construction,
+            comm_meters = comm_meters,
+            kitchen_meters = kitchen_meters,
             link = link
         ))
 

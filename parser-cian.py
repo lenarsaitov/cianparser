@@ -43,6 +43,7 @@ class Client:
         ))
 
     def load_page(self, i = 1):
+        self.city = "Казань"
         url = f"https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
         res = self.session.get(url = url)
         res.raise_for_status()
@@ -79,7 +80,7 @@ class Client:
             all_floors = -1
             floor = -1
 
-        if "1-комн" in title:
+        if "1-комн" in title or "Студия" in title:
             how_many_rooms = 1
         elif "2-комн" in title:
             how_many_rooms = 2
@@ -91,7 +92,7 @@ class Client:
             how_many_rooms = -1
 
         address_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[0].text
-        address = address_long[address_long.find("Казань") + 8:]
+        address = address_long[address_long.find(self.city) + 8:]
         street = address_long.split(",")[-2]
         street = street.replace("улица", "")
 

@@ -20,7 +20,7 @@ ParseResults = collections.namedtuple(
 )
 
 PAGE_START = 1
-PAGE_END = 40
+PAGE_END = 35
 
 class Client:
     def __init__(self):
@@ -51,7 +51,6 @@ class Client:
     def parse_page(self, html: str):
         soup = BeautifulSoup(html, 'lxml')
         offers = soup.select("div[data-name='Offers'] > article[data-name='CardComponent']")
-        print("=="*20)
         for block in offers:
             self.parse_block(block=block)
 
@@ -64,16 +63,18 @@ class Client:
 
         link = block.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
 
-        print(link)
+        try:
+            meters = int(title[title.find("м²") - 4: title.find("м²")])
+        except:
+            meters = int(title[title.find("м²") - 5: title.find("м²")].split(',')[0])
 
-        meters = str(title[title.find("м²") - 4: title.find("м²")])
         if "этаж" in title:
             floor_per = title[title.find("м²") + 3: title.find("м²") + 9]
             floor_per = floor_per.replace(' ', '')
             floor_per = floor_per.replace('э', '')
             floor_per = floor_per.split("/")
-            all_floors = str(floor_per[1])
-            floor = str(floor_per[0])
+            all_floors = int(floor_per[1])
+            floor = int(floor_per[0])
         else:
             all_floors = -1
             floor = -1
@@ -96,11 +97,12 @@ class Client:
 
         price_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[1].text
         price_per_month = "".join(price_long[:price_long.find("₽/мес") - 1].split())
+        price_per_month = int(price_per_month)
 
         if "%" in price_long:
-            commissions = str(price_long[price_long.find("%") - 3:price_long.find("%")].replace(" ", ""))
+            commissions = int(price_long[price_long.find("%") - 3:price_long.find("%")].replace(" ", ""))
         else:
-            commissions = str(0)
+            commissions = 0
 
         street = transliterate.translit(street, reversed=True)
 
@@ -130,6 +132,7 @@ class Client:
 
     def run(self):
         for i in range(PAGE_START, PAGE_END):
+            print(f"Parsing {i} page...")
             html = self.load_page(i = i)
             self.parse_page(html=html)
 

@@ -25,7 +25,7 @@ ParseResults = collections.namedtuple(
 )
 
 PAGE_START = 1
-PAGE_END = 30
+PAGE_END = 10
 
 class Client:
     def __init__(self):
@@ -151,7 +151,7 @@ class Client:
         price_per_month = int(price_per_month)
 
         if "%" in price_long:
-            commissions = int(price_long[price_long.find("%") - 3:price_long.find("%")].replace(" ", ""))
+            commissions = int(price_long[price_long.find("%") - 2:price_long.find("%")].replace(" ", ""))
         else:
             commissions = 0
 

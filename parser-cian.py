@@ -25,7 +25,7 @@ ParseResults = collections.namedtuple(
 )
 
 PAGE_START = 1
-PAGE_END = 10
+PAGE_END = 2
 
 class Client:
     def __init__(self):

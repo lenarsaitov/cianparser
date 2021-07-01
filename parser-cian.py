@@ -31,7 +31,7 @@ class Client:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers = {
-            'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.60 YaBrowser/20.12.0.963 Yowser/2.5 Safari/537.36',
+            # 'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.60 YaBrowser/20.12.0.963 Yowser/2.5 Safari/537.36',
                 'Accept-Language': 'ru'
         }
         self.result = []
@@ -53,7 +53,7 @@ class Client:
 
     def load_page(self, i = 1):
         self.city = "Казань"
-        self.url = f"https://kazan.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
+        self.url = f"https://cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
         res = self.session.get(url = self.url)
         res.raise_for_status()
         return res.text
@@ -67,16 +67,12 @@ class Client:
     def parse_page_offer(self, html_offer):
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
         try:
-            # text_offer = soup_offer_page.select("div[data-name='Description']")[0].text
-            # year = int(text_offer[text_offer.find("Построен")-4: text_offer.find("Построен")])
-
             text_offer = soup_offer_page.select("div[data-name='BtiContainer'] > div[data-name='BtiHouseData']")[0].text
             year = int(text_offer[text_offer.find("Год постройки")+13: text_offer.find("Год постройки") + 17])
         except:
             year = -1
 
         try:
-            # text_offer = soup_offer_page.select("div[data-name='Description']")[0].text
             text_offer = soup_offer_page.select("div[data-name='Description'] > div > div:nth-child(2)")[0].text
             comm = (text_offer[: text_offer.find("Общая")])
             comm_meters = int(re.findall(r'\d+', comm)[0])
@@ -88,7 +84,6 @@ class Client:
             comm_meters = -1
 
         try:
-            # text_offer = soup_offer_page.select("div[data-name='Description']")[0].text
             text_offer = soup_offer_page.select("div[data-name='Description'] > div > div:nth-child(2)")[0].text
             kitchen = (text_offer[text_offer.find("Кухня")-6: text_offer.find("Кухня")])
             kitchen_meters = int(re.findall(r'\d+', kitchen)[0])
@@ -107,7 +102,14 @@ class Client:
     def parse_block(self, block):
         title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='TitleComponent']")[0].text
 
-        author = block.select("div[data-name='Agent'] div.title-text")[0].text
+        try:
+            author = block.select("div[data-name='Agent']")[0].select("div[data-name='ContentRow']")[0].text
+        except:
+            try:
+                author = block.select("div[data-name='Agent']")[0].select("a[data-name='AgentTitle']")[0].text
+            except:
+                author = block.select("div[data-name='Agent']")[0].select("span[data-name='AgentTitle']")[0].text
+
         if "Опыт" in author:
             author = author[:author.find("Опыт")]
 
@@ -187,7 +189,7 @@ class Client:
         ))
 
     def save_results(self):
-        path = "C:\\Users\\Lenar\\PycharmProjects\\python-parser-cian\\data.csv"
+        path = "data.csv"
         with open(path, "w") as f:
             writer = csv.writer(f, quoting = csv.QUOTE_MINIMAL)
             for item in self.result:

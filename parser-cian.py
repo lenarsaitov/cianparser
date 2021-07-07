@@ -4,6 +4,8 @@ import collections
 import csv
 import transliterate
 import re
+import argparse
+import pymorphy2
 
 ParseResults = collections.namedtuple(
     'ParseResults',
@@ -24,14 +26,22 @@ ParseResults = collections.namedtuple(
     }
 )
 
-PAGE_START = 1
-PAGE_END = 53
+parser = argparse.ArgumentParser()
+parser.add_argument('--city_id', type=int, default=4777, help="City id")
+parser.add_argument('--page_start', type=int, default=1, help="Page where parser begin")
+parser.add_argument('--page_end', type=int, default=50, help="Page where parser begin")
+parser.add_argument('--file_name', type=str, default="data", help="Name of file where will save parsed results")
+
+args = parser.parse_args()
+print(f"\nCity id: {args.city_id}")
+print(f"Page start: {args.page_start}")
+print(f"Page end: {args.page_end}")
+print(f"File name: {args.file_name}.csv \n")
 
 class Client:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers = {
-            # 'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.60 YaBrowser/20.12.0.963 Yowser/2.5 Safari/537.36',
                 'Accept-Language': 'ru'
         }
         self.result = []
@@ -44,22 +54,33 @@ class Client:
             all_floors='All_floors',
             square_meters='Square_meters',
             commissions='Commissions %',
-            author = 'Author',
-            year_of_construction = 'Year_of_construction',
-            comm_meters = 'Living_area',
-            kitchen_meters = 'kitchen_meters',
-            link = 'Link'
+            author='Author',
+            year_of_construction='Year_of_construction',
+            comm_meters='Living_area',
+            kitchen_meters='kitchen_meters',
+            link='Link'
         ))
 
     def load_page(self, i = 1):
-        self.city = "Казань"
-        self.url = f"https://cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region=4777&type=4"
+        self.url = f"https://cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region={args.city_id}&type=4"
         res = self.session.get(url = self.url)
         res.raise_for_status()
         return res.text
 
     def parse_page(self, html: str):
-        soup = BeautifulSoup(html, 'lxml')
+        try:
+            soup = BeautifulSoup(html, 'lxml')
+        except:
+            soup = BeautifulSoup(html, 'html.parser')
+
+        offers = soup.select("div[data-name='HeaderDefault']")
+        title = offers[0].text
+        city = title[:title.find('Аренда')].split()[-1]
+        morph = pymorphy2.MorphAnalyzer()
+        city = morph.parse(city)[0].normal_form.title()
+
+        print(f"City name: {city}")
+
         offers = soup.select("div[data-name='Offers'] > article[data-name='CardComponent']")
         for block in offers:
             self.parse_block(block=block)
@@ -143,7 +164,6 @@ class Client:
             how_many_rooms = -1
 
         address_long = block.select("div[data-name='LinkArea']")[0].select("div[data-name='ContentRow']")[0].text
-        address = address_long[address_long.find(self.city) + 8:]
         district = address_long[address_long.find("р-н") + 4:].split(",")[0]
         street = address_long.split(",")[-2]
         street = street.replace("улица", "")
@@ -170,7 +190,7 @@ class Client:
         html_offer_page = res.text
 
         year_of_construction, comm_meters, kitchen_meters = self.parse_page_offer(html_offer = html_offer_page)
-        print(f"{comm_meters}, {kitchen_meters}")
+        print(f"Year of construction, common and kitchen meters: {year_of_construction}, {comm_meters}, {kitchen_meters}")
 
         self.result.append(ParseResults(
             how_many_rooms=how_many_rooms,
@@ -189,20 +209,28 @@ class Client:
         ))
 
     def save_results(self):
-        path = "data.csv"
+        path_file_name = args.file_name.split(".")[0]
+        path = f"{path_file_name}.csv"
+        print(f"Save results to {path} file..")
+
         with open(path, "w") as f:
             writer = csv.writer(f, quoting = csv.QUOTE_MINIMAL)
             for item in self.result:
                 writer.writerow(item)
 
-    def run(self):
-        for i in range(PAGE_START, PAGE_END):
+    def run(self, page_start, page_end):
+        print("Start parsing..")
+        for i in range(page_start, page_end):
             print(f"Parsing {i} page...")
-            html = self.load_page(i = i)
-            self.parse_page(html=html)
+            try:
+                html = self.load_page(i=i)
+                self.parse_page(html=html)
+            except:
+                print(f"Dont exist this {i} page..")
+                break
 
 if __name__ == '__main__':
     parser = Client()
-    parser.run()
+    parser.run(args.page_start, args.page_end)
 
     parser.save_results()

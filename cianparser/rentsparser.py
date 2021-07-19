@@ -1,73 +1,60 @@
 import requests
 from bs4 import BeautifulSoup
-import collections
-import csv
 import transliterate
 import re
-import argparse
 import pymorphy2
 
-ParseResults = collections.namedtuple(
-    'ParseResults',
-    {
-        'how_many_rooms',
-        'price_per_month',
-        'street',
-        'district',
-        'floor',
-        'all_floors',
-        'square_meters',
-        'commissions',
-        'author',
-        'year_of_construction',
-        'comm_meters',
-        'kitchen_meters',
-        'link'
-    }
-)
+from cianparser.constants import *
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--city_id', type=int, default=4777, help="City id")
-parser.add_argument('--page_start', type=int, default=1, help="Page where parser begin")
-parser.add_argument('--page_end', type=int, default=50, help="Page where parser begin")
-parser.add_argument('--file_name', type=str, default="data", help="Name of file where will save parsed results")
 
-args = parser.parse_args()
-print(f"\nCity id: {args.city_id}")
-print(f"Page start: {args.page_start}")
-print(f"Page end: {args.page_end}")
-print(f"File name: {args.file_name}.csv \n")
-
-class Client:
-    def __init__(self):
+class ParserRentOffers:
+    def __init__(self, type_offer: str, type_accommodation: str, location_id: str, rooms, start_page: int, end_page: int):
         self.session = requests.Session()
-        self.session.headers = {
-                'Accept-Language': 'ru'
-        }
-        self.result = []
-        self.result.append(ParseResults(
-            how_many_rooms='How_many_rooms',
-            price_per_month='Price_per_month',
-            street='Street',
-            district = 'District',
-            floor='Floor',
-            all_floors='All_floors',
-            square_meters='Square_meters',
-            commissions='Commissions %',
-            author='Author',
-            year_of_construction='Year_of_construction',
-            comm_meters='Living_area',
-            kitchen_meters='kitchen_meters',
-            link='Link'
-        ))
+        self.session.headers = {'Accept-Language': 'ru'}
 
-    def load_page(self, i = 1):
-        self.url = f"https://cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p={i}&region={args.city_id}&type=4"
-        res = self.session.get(url = self.url)
+        self.result = []
+        self.type_accommodation = type_accommodation
+        self.location_id = location_id
+        self.rooms = rooms
+        self.start_page = start_page
+        self.end_page = end_page
+
+        if type_offer == "rent_long":
+            self.type_offer = 4
+        elif type_offer == "rent_short":
+            self.type_offer = 2
+
+        self.url = None
+
+    def build_url(self):
+        rooms_path = ""
+        if type(self.rooms) is tuple:
+            for count_of_room in self.rooms:
+                if type(count_of_room) is int:
+                    if count_of_room > 0 and count_of_room < 6:
+                        rooms_path += ROOM.format(count_of_room)
+                elif type(count_of_room) is str:
+                    if count_of_room == "studio":
+                        rooms_path += STUDIO
+        elif type(self.rooms) is int:
+            if self.rooms > 0 and self.rooms < 6:
+                rooms_path += ROOM.format(self.rooms)
+        elif type(self.rooms) is str:
+            if self.rooms == "studio":
+                rooms_path += STUDIO
+            elif self.rooms == "all":
+                rooms_path = ""
+
+        return BASE_LINK + ACCOMMODATION_TYPE_PARAMETER.format(self.type_accommodation) + \
+            DURATION_TYPE_PARAMETER.format(self.type_offer) + rooms_path
+
+    def load_page(self, number_page=1):
+        self.url = self.build_url().format(number_page, self.location_id)
+        res = self.session.get(url=self.url)
         res.raise_for_status()
         return res.text
 
-    def parse_page(self, html: str):
+    def parse_page(self, html: str, number_page: int):
         try:
             soup = BeautifulSoup(html, 'lxml')
         except:
@@ -79,11 +66,18 @@ class Client:
         morph = pymorphy2.MorphAnalyzer()
         city = morph.parse(city)[0].normal_form.title()
 
-        print(f"City name: {city}")
-
         offers = soup.select("div[data-name='Offers'] > article[data-name='CardComponent']")
+
+        if number_page == self.start_page:
+            print("Setting [", end="")
+            print("=>"*len(offers), end="")
+            print("] 100%")
+
+        print(f"{number_page} page: ", end="")
+        print("[", end="")
         for block in offers:
             self.parse_block(block=block)
+        print("] 100%")
 
     def parse_page_offer(self, html_offer):
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
@@ -190,47 +184,35 @@ class Client:
         html_offer_page = res.text
 
         year_of_construction, comm_meters, kitchen_meters = self.parse_page_offer(html_offer = html_offer_page)
-        print(f"Year of construction, common and kitchen meters: {year_of_construction}, {comm_meters}, {kitchen_meters}")
+        print("=>", end="")
 
-        self.result.append(ParseResults(
-            how_many_rooms=how_many_rooms,
-            price_per_month=price_per_month,
-            street=street,
-            district = district,
-            floor=floor,
-            all_floors=all_floors,
-            square_meters=meters,
-            commissions=commissions,
-            author = author,
-            year_of_construction = year_of_construction,
-            comm_meters = comm_meters,
-            kitchen_meters = kitchen_meters,
-            link = link
-        ))
+        self.result.append({
+            "accommodation": self.type_accommodation,
+            "how_many_rooms": how_many_rooms,
+            "price_per_month": price_per_month,
+            "street": street,
+            "district": district,
+            "floor": floor,
+            "all_floors": all_floors,
+            "square_meters": meters,
+            "commissions": commissions,
+            "author": author,
+            "year_of_construction": year_of_construction,
+            "comm_meters": comm_meters,
+            "kitchen_meters": kitchen_meters,
+            "link": link
+        })
 
-    def save_results(self):
-        path_file_name = args.file_name.split(".")[0]
-        path = f"{path_file_name}.csv"
-        print(f"Save results to {path} file..")
+    def get_results(self):
+        return self.result
 
-        with open(path, "w") as f:
-            writer = csv.writer(f, quoting = csv.QUOTE_MINIMAL)
-            for item in self.result:
-                writer.writerow(item)
+    def run(self):
+        print(f"\n{' '*15}Start collecting information from pages..")
 
-    def run(self, page_start, page_end):
-        print("Start parsing..")
-        for i in range(page_start, page_end):
-            print(f"Parsing {i} page...")
+        for number_page in range(self.start_page, self.end_page+1):
             try:
-                html = self.load_page(i=i)
-                self.parse_page(html=html)
+                html = self.load_page(number_page=number_page)
+                self.parse_page(html=html, number_page=number_page)
             except:
-                print(f"Dont exist this {i} page..")
+                print(f"Dont exist this {number_page} page.. Ending parse\n")
                 break
-
-if __name__ == '__main__':
-    parser = Client()
-    parser.run(args.page_start, args.page_end)
-
-    parser.save_results()

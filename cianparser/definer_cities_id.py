@@ -17,7 +17,7 @@ class Client:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers = {
-                'Accept-Language': 'ru'
+                'Accept-Language': 'en'
         }
         self.cities = []
         self.cities_set = set()
@@ -64,7 +64,7 @@ class Client:
                 city_id=city_couple[1],
             ))
 
-        path = "cities.csv"
+        path = "cities_eng.csv"
         with open(path, "w") as f:
             writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             for item in self.cities:

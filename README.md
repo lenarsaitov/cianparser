@@ -11,11 +11,10 @@ pip install cianparser
 ### Использование
 ```python
 >>> import cianparser
->>> from pprint import pprint
     
 >>> data = cianparser.parse(offer="rent_long", accommodation="flat", location="Казань", rooms="all", start_page=1, end_page=2)
 
->>> pprint(data[0])
+>>> print(data[0])
 ```
 
 ```

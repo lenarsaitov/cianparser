@@ -88,22 +88,22 @@ class ParserRentOffers:
             year = -1
 
         try:
-            text_offer = soup_offer_page.select("div[data-name='Description'] > div > div:nth-child(2)")[0].text
+            text_offer = soup_offer_page.select("div[data-name='ObjectSummaryDescription'] > div > div:nth-child(1)")[0].text
             comm = (text_offer[: text_offer.find("Общая")])
             comm_meters = int(re.findall(r'\d+', comm)[0])
         except IndexError:
-            text_offer = soup_offer_page.select("div[data-name='Description'] > div")[0].text
+            text_offer = soup_offer_page.select("div[data-name='ObjectSummaryDescription'] > div")[0].text
             comm = (text_offer[: text_offer.find("Общая")])
             comm_meters = int(re.findall(r'\d+', comm)[0])
         except:
             comm_meters = -1
 
         try:
-            text_offer = soup_offer_page.select("div[data-name='Description'] > div > div:nth-child(2)")[0].text
+            text_offer = soup_offer_page.select("div[data-name='ObjectSummaryDescription'] > div > div:nth-child(3)")[0].text
             kitchen = (text_offer[text_offer.find("Кухня")-6: text_offer.find("Кухня")])
             kitchen_meters = int(re.findall(r'\d+', kitchen)[0])
         except IndexError:
-            text_offer = soup_offer_page.select("div[data-name='Description'] > div")[0].text
+            text_offer = soup_offer_page.select("div[data-name='ObjectSummaryDescription'] > div")[0].text
             if "Кухня" in text_offer:
                 kitchen = (text_offer[text_offer.find("Кухня")-6: text_offer.find("Кухня")])
                 kitchen_meters = int(re.findall(r'\d+', kitchen)[0])
@@ -179,13 +179,12 @@ class ParserRentOffers:
         except:
             pass
 
-        res = self.session.get(url = link)
+        res = self.session.get(url=link)
         res.raise_for_status()
         html_offer_page = res.text
 
-        year_of_construction, comm_meters, kitchen_meters = self.parse_page_offer(html_offer = html_offer_page)
+        year_of_construction, comm_meters, kitchen_meters = self.parse_page_offer(html_offer=html_offer_page)
         print("=>", end="")
-
         self.result.append({
             "accommodation": self.type_accommodation,
             "how_many_rooms": how_many_rooms,
@@ -213,6 +212,7 @@ class ParserRentOffers:
             try:
                 html = self.load_page(number_page=number_page)
                 self.parse_page(html=html, number_page=number_page)
-            except:
+            except Exception as e:
+                print(e)
                 print(f"Dont exist this {number_page} page.. Ending parse\n")
                 break

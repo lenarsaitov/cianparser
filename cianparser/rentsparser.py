@@ -7,6 +7,7 @@ import pymorphy2
 import cloudscraper
 import sys
 import csv
+import os
 from datetime import datetime
 
 from cianparser.constants import *
@@ -25,7 +26,10 @@ class ParserRentOffers:
         self.rooms = rooms
         self.start_page = start_page
         self.end_page = end_page
-        self.file_name = f'parsing_result_{self.start_page}_{self.end_page}_{self.location_id}_{datetime.now()}.csv'
+
+        file_name = f'parsing_result_{self.start_page}_{self.end_page}_{self.location_id}_{datetime.now()}.csv'
+        current_path = os.path.abspath(".")
+        self.file_path = os.path.join(current_path, file_name)
 
         if type_offer == "rent_long":
             self.type_offer = 4
@@ -98,7 +102,7 @@ class ParserRentOffers:
     def parse_page_offer(self, html_offer):
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
 
-        build_data = soup_offer_page.select("div[data-name='BtiContainer'] > div[data-name='BtiHouseData']")
+        build_data = soup_offer_page.select("div[data-name='BtiHouseData']")
         if len(build_data) == 0:
             year = -1
         else:
@@ -170,7 +174,7 @@ class ParserRentOffers:
 
                 return district, street
 
-        return None, None
+        return "", ""
 
     def define_price_data(self, block):
         elements = block.select("div[data-name='LinkArea']")[0]. \
@@ -238,8 +242,11 @@ class ParserRentOffers:
         district, street = self.define_location_data(block)
         price_per_month, commissions = self.define_price_data(block)
 
-        district = transliterate.translit(district, reversed=True)
-        street = transliterate.translit(street, reversed=True)
+        try:
+            district = transliterate.translit(district, reversed=True)
+            street = transliterate.translit(street, reversed=True)
+        except:
+            pass
 
         try:
             author = transliterate.translit(author, reversed=True)
@@ -277,7 +284,7 @@ class ParserRentOffers:
     def save_results(self):
         keys = self.result[0].keys()
 
-        with open(self.file_name, 'w', newline='') as output_file:
+        with open(self.file_path, 'w', newline='') as output_file:
             dict_writer = csv.DictWriter(output_file, keys)
             dict_writer.writeheader()
             dict_writer.writerows(self.result)
@@ -288,6 +295,7 @@ class ParserRentOffers:
 
     def run(self):
         print(f"\n{' ' * 18}Collecting information from pages..")
+        print(f"The absolute path to the file: \n", self.file_path)
 
         for number_page in range(self.start_page, self.end_page + 1):
             try:

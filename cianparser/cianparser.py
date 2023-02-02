@@ -1,5 +1,5 @@
-from cianparser.rentsparser import ParserRentOffers
 from cianparser.constants import *
+from cianparser.rentsparser import ParserRentOffers
 
 offer_types = {"rent_long", "rent_short", "sale"}
 offer_not_implemented_yet = {"rent_short", "sale"}
@@ -12,7 +12,7 @@ def list_cities():
     return CITIES
 
 
-def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=100):
+def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10, save_csv=False):
     """
     Parse information from cian website
     Examples:
@@ -25,6 +25,7 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
     :param rooms: how many rooms in accommodation, default "all". Example 1, (1,3, "studio"), "studio, "all"
     :param start_page: the page from which the parser starts, default 1
     :param end_page: the page from which the parser ends, default 100
+    :param save_csv: is it necessary to save data in csv
     """
 
     if offer not in offer_types:
@@ -37,7 +38,6 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
 
     if type(rooms) is tuple:
         for count_of_room in rooms:
-            print(count_of_room)
             if type(count_of_room) is int:
                 if count_of_room < 1 or count_of_room > 5:
                     raise ValueError(f'You entered {count_of_room} in {rooms}, which is not valid value. '
@@ -61,13 +61,15 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
         raise TypeError(f'In argument "rooms" not valid type of element. '
                         f'It is correct int, str and tuple types. Example 1, (1,3, "studio"), "studio, "all".')
 
+    location_id = None
+
     finded = False
     for city in CITIES:
         if city[0] == location:
             finded = True
             location_id = city[1]
 
-    if not finded:
+    if not finded or location_id is None:
         raise ValueError(f'You entered {location}, which is not exists in base.'
                          f' See all correct values of location in cianparser.list_cities()')
 
@@ -75,7 +77,16 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
         print("Sorry. This functionality has not yet been implemented, but it is planned...")
         return []
     else:
-        parser = ParserRentOffers(type_offer=offer, type_accommodation=accommodation, location_id=location_id, rooms=rooms, start_page=start_page, end_page=end_page)
+        parser = ParserRentOffers(
+            type_offer=offer,
+            type_accommodation=accommodation,
+            location_id=location_id,
+            rooms=rooms,
+            start_page=start_page,
+            end_page=end_page,
+            save_csv=save_csv,
+        )
+
         parser.run()
         print('\n')
 

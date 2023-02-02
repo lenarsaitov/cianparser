@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pymorphy2
 import collections
 import csv
+import cloudscraper
 
 ParseCityNames = collections.namedtuple(
     'ParseResults',
@@ -15,10 +16,9 @@ ParseCityNames = collections.namedtuple(
 
 class Client:
     def __init__(self):
-        self.session = requests.Session()
-        self.session.headers = {
-                'Accept-Language': 'en'
-        }
+        self.session = cloudscraper.create_scraper()
+        self.session.headers = {'Accept-Language': 'en'}
+
         self.cities = []
         self.cities_set = set()
 

@@ -1,6 +1,7 @@
 BASE_LINK = "https://cian.ru/cat.php?deal_type=rent&engine_version=2&p={}&region={}"
 ACCOMMODATION_TYPE_PARAMETER = "&offer_type={}"
 DURATION_TYPE_PARAMETER = "&type={}"
+FLOATS_NUMBERS_REG_EXPRESSION = r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 
 ROOM = "&room{}=1"
 STUDIO = "&room9=1"

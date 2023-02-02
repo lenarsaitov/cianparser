@@ -15,10 +15,11 @@ from cianparser.constants import *
 
 class ParserRentOffers:
     def __init__(self, type_offer: str, type_accommodation: str, location_id: str, rooms, start_page: int,
-                 end_page: int, save_csv=False):
+                 end_page: int, save_csv=False, is_latin=False):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
         self.save_csv = save_csv
+        self.is_latin = is_latin
 
         self.result = []
         self.type_accommodation = type_accommodation
@@ -27,7 +28,7 @@ class ParserRentOffers:
         self.start_page = start_page
         self.end_page = end_page
 
-        file_name = f'parsing_result_{self.start_page}_{self.end_page}_{self.location_id}_{datetime.now()}.csv'
+        file_name = f'cian_parsing_result_{self.start_page}_{self.end_page}_{self.location_id}_{datetime.now()}.csv'
         current_path = os.path.abspath(".")
         self.file_path = os.path.join(current_path, file_name)
 
@@ -74,7 +75,7 @@ class ParserRentOffers:
 
         header = soup.select("div[data-name='HeaderDefault']")
         if len(header) == 0:
-            return False, attempt_number+1
+            return False, attempt_number + 1
 
         title = header[0].text
         city = title[:title.find('Аренда')].split()[-1]
@@ -84,23 +85,38 @@ class ParserRentOffers:
         offers = soup.select("article[data-name='CardComponent']")
 
         if number_page == self.start_page:
-            print("Setting [", end="")
-            print("=>" * len(offers), end="")
-            print("] 100%")
+            print(f"The page from which the collection of information begins: \n {self.url} \n")
+            print("Setting [" + "=>" * len(offers) + "] 100%")
 
         print(f"{number_page} page: {len(offers)} offers")
 
         for ind, block in enumerate(offers):
-            self.parse_block(block=block)
+            self.parse_block(block=block, city=city)
             time.sleep(4)
             sys.stdout.write("\033[F")
-            print(f"{number_page} page: [" + "=>" * (ind+1) + "  " * (len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100/len(offers))}" + "%")
+            print(f"{number_page} page: [" + "=>" * (ind + 1) + "  " * (
+                        len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%")
             time.sleep(1)
 
         return True, 0
 
     def parse_page_offer(self, html_offer):
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+
+        offer_page = soup_offer_page.select("div[data-name='ObjectSummaryDescription']")
+        if len(offer_page) == 0:
+            return -1, -1
+
+        text_offer = offer_page[0].text
+
+        try:
+            if "Кухня" in text_offer:
+                kitchen = (text_offer[text_offer.find("Кухня") - 5: text_offer.find("Кухня")])
+                kitchen_meters = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, kitchen)[0])
+            else:
+                kitchen_meters = -1
+        except:
+            kitchen_meters = -1
 
         build_data = soup_offer_page.select("div[data-name='BtiHouseData']")
         if len(build_data) == 0:
@@ -114,31 +130,36 @@ class ParserRentOffers:
             else:
                 year = int(ints[0])
 
-        offer_page = soup_offer_page.select("div[data-name='ObjectSummaryDescription']")
-        if len(offer_page) == 0:
-            return year, -1, -1
+        return year, kitchen_meters
 
-        text_offer = offer_page[0].text
+    def parse_page_offer_json(self, html_offer):
+        soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+        year, kitchen_meters = -1, -1
 
-        try:
-            if "Общая" in text_offer:
-                comm = (text_offer[: text_offer.find("Общая")])
-                comm_meters = int(re.findall(r'\d+', comm)[0])
-            else:
-                comm_meters = -1
-        except:
-            comm_meters = -1
+        spans = soup_offer_page.select("span")
 
-        try:
-            if "Кухня" in text_offer:
-                kitchen = (text_offer[text_offer.find("Кухня") - 5: text_offer.find("Кухня")])
-                kitchen_meters = int(re.findall(r'\d+', kitchen)[0])
-            else:
-                kitchen_meters = -1
-        except:
-            kitchen_meters = -1
+        for index, span in enumerate(spans):
+            if "Год постройки" in span:
+                year = spans[index + 1].text
 
-        return year, comm_meters, kitchen_meters
+        if year == -1:
+            p_tags = soup_offer_page.select("p")
+
+            for index, p_tag in enumerate(p_tags):
+                if "Год постройки" in p_tag:
+                    year = p_tags[index + 1].text
+
+        for index, span in enumerate(spans):
+            if "Площадь кухни" in span:
+                kitchen_meters = spans[index + 1].text
+
+                floats = re.findall(FLOATS_NUMBERS_REG_EXPRESSION, kitchen_meters)
+                if len(floats) == 0:
+                    kitchen_meters = -1
+                else:
+                    kitchen_meters = float(floats[0])
+
+        return year, kitchen_meters
 
     def define_author(self, block):
         author = ""
@@ -159,6 +180,16 @@ class ParserRentOffers:
                 author = spans[index + 1].text
                 return author
 
+        for index, span in enumerate(spans):
+            if "Ук・оф.Представитель" in span:
+                author = spans[index + 1].text
+                return author
+
+        for index, span in enumerate(spans):
+            if "ID" in span.text:
+                author = span.text
+                return author
+
         return author
 
     def define_location_data(self, block):
@@ -168,9 +199,17 @@ class ParserRentOffers:
         for index, element in enumerate(elements):
             if "р-н" in element.text:
                 location = element.text
-                district = location[location.find("р-н") + 4:].split(",")[0]
-                street = location.split(",")[-2]
-                street = street.replace("улица", "")
+
+                if len(location[location.find("р-н") + 4:].split(",")) != 0:
+                    district = location[location.find("р-н") + 4:].split(",")[0].strip()
+                else:
+                    district = ""
+
+                if len(location.split(",")) >= 1:
+                    street = location.split(",")[-2]
+                    street = street.replace("улица", "").strip()
+                else:
+                    street = ""
 
                 return district, street
 
@@ -195,8 +234,10 @@ class ParserRentOffers:
 
         return None, None
 
-    def parse_block(self, block):
-        author = self.define_author(block=block)
+    def parse_block(self, block, city):
+        title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='GeneralInfoSectionRowComponent']")[
+            0].text
+        author = self.define_author(block=block).replace(",", ".").strip()
         link = block.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
 
         common_properties = block.select("div[data-name='LinkArea']")[0]. \
@@ -204,16 +245,18 @@ class ParserRentOffers:
 
         meters = None
         if common_properties.find("м²") is not None:
-            meters = common_properties[common_properties.find("м²") - 5: common_properties.find("м²")]
+            meters = title[common_properties.find("м²") - 5: common_properties.find("м²")]
+            if len(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, meters)) != 0:
+                meters = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, meters)[0])
+            else:
+                meters = -1
 
-            if "," in meters:
-                meters = meters.split(',')
-                if meters[0].isdigit():
-                    meters = int(meters[0])
-                elif meters[1].isdigit():
-                    meters = int(meters[1])
-                else:
-                    meters = 0
+        if title.find("м²") is not None and (meters is None or meters == -1):
+            meters = title[title.find("м²") - 5: title.find("м²")]
+            if len(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, meters)) != 0:
+                meters = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, meters)[0])
+            else:
+                meters = -1
 
         if "этаж" in common_properties:
             floor_per = common_properties[common_properties.find("м²") + 3: common_properties.find("м²") + 9]
@@ -242,36 +285,45 @@ class ParserRentOffers:
         district, street = self.define_location_data(block)
         price_per_month, commissions = self.define_price_data(block)
 
-        try:
-            district = transliterate.translit(district, reversed=True)
-            street = transliterate.translit(street, reversed=True)
-        except:
-            pass
+        if self.is_latin:
+            try:
+                district = transliterate.translit(district, reversed=True)
+                street = transliterate.translit(street, reversed=True)
+            except:
+                pass
 
-        try:
-            author = transliterate.translit(author, reversed=True)
-        except:
-            pass
+            try:
+                author = transliterate.translit(author, reversed=True)
+            except:
+                pass
+
+            try:
+                city = transliterate.translit(city, reversed=True)
+            except:
+                pass
 
         res = self.session.get(url=link)
         res.raise_for_status()
         html_offer_page = res.text
 
-        year_of_construction, comm_meters, kitchen_meters = self.parse_page_offer(html_offer=html_offer_page)
+        year_of_construction, kitchen_meters = self.parse_page_offer(html_offer=html_offer_page)
+        if year_of_construction == -1 and kitchen_meters == -1:
+            year_of_construction, kitchen_meters = self.parse_page_offer_json(html_offer=html_offer_page)
+
         self.result.append({
             "accommodation": self.type_accommodation,
-            "how_many_rooms": how_many_rooms,
-            "price_per_month": price_per_month,
-            "street": street,
+            "city": city,
             "district": district,
+            "street": street,
             "floor": floor,
             "all_floors": all_floors,
+            "how_many_rooms": how_many_rooms,
             "square_meters": meters,
+            "kitchen_meters": kitchen_meters,
+            "year_of_construction": year_of_construction,
+            "price_per_month": price_per_month,
             "commissions": commissions,
             "author": author,
-            "year_of_construction": year_of_construction,
-            "comm_meters": comm_meters,
-            "kitchen_meters": kitchen_meters,
             "link": link
         })
 
@@ -284,10 +336,17 @@ class ParserRentOffers:
     def save_results(self):
         keys = self.result[0].keys()
 
-        with open(self.file_path, 'w', newline='') as output_file:
-            dict_writer = csv.DictWriter(output_file, keys)
-            dict_writer.writeheader()
-            dict_writer.writerows(self.result)
+        try:
+            with open(self.file_path, 'w', newline='') as output_file:
+                dict_writer = csv.DictWriter(output_file, keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(self.result)
+        except:
+            self.file_path = self.file_path.replace("\\", "/")
+            with open(self.file_path, 'w', newline='') as output_file:
+                dict_writer = csv.DictWriter(output_file, keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(self.result)
 
     def load_and_parse_page(self, number_page, attempt_number):
         html = self.load_page(number_page=number_page)
@@ -301,7 +360,8 @@ class ParserRentOffers:
             try:
                 parsed, attempt_number = False, 0
                 while not parsed and attempt_number < 3:
-                    parsed, attempt_number = self.load_and_parse_page(number_page=number_page, attempt_number=attempt_number)
+                    parsed, attempt_number = self.load_and_parse_page(number_page=number_page,
+                                                                      attempt_number=attempt_number)
             except Exception as e:
                 print("Failed exception: ", e)
                 print(f"Ending parse on {number_page} page...\n")

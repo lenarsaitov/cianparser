@@ -12,7 +12,7 @@ def list_cities():
     return CITIES
 
 
-def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10, save_csv=False):
+def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10, save_csv=False, is_latin=False):
     """
     Parse information from cian website
     Examples:
@@ -26,6 +26,7 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
     :param start_page: the page from which the parser starts, default 1
     :param end_page: the page from which the parser ends, default 100
     :param save_csv: is it necessary to save data in csv
+    :param is_latin: is it necessary to save data in latin
     """
 
     if offer not in offer_types:
@@ -85,6 +86,7 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
             start_page=start_page,
             end_page=end_page,
             save_csv=save_csv,
+            is_latin=is_latin,
         )
 
         parser.run()

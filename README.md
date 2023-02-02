@@ -81,7 +81,7 @@ parsing_result_1_3_4618_2023-02-02 06:34:40.217322.csv
 ```
 
 ### Примечание
-Данный парсер не будет работать в таких инструментах как Google Colaboratory (бесплатный облачный сервис от Google). 
+Данный парсер не будет работать в таком инструменте как [Google Colaboratory](https://colab.research.google.com/). 
 См. [подробности](https://github.com/lenarsaitov/cianparser/issues/1)
 
 ### Пример исследования получаемых данных

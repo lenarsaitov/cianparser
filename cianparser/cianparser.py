@@ -1,5 +1,6 @@
 from cianparser.constants import *
 from cianparser.rentsparser import ParserRentOffers
+import transliterate
 
 offer_types = {"rent_long", "rent_short", "sale"}
 offer_not_implemented_yet = {"rent_short", "sale"}
@@ -12,7 +13,7 @@ def list_cities():
     return CITIES
 
 
-def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10, save_csv=False, is_latin=False):
+def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10, is_save_csv=False, is_latin=False, is_express=False):
     """
     Parse information from cian website
     Examples:
@@ -25,8 +26,9 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
     :param rooms: how many rooms in accommodation, default "all". Example 1, (1,3, "studio"), "studio, "all"
     :param start_page: the page from which the parser starts, default 1
     :param end_page: the page from which the parser ends, default 100
-    :param save_csv: is it necessary to save data in csv
+    :param is_save_csv: is it necessary to save data in csv
     :param is_latin: is it necessary to save data in latin
+    :param is_express:  is it necessary to speed up data collection (but without some fields)
     """
 
     if offer not in offer_types:
@@ -78,15 +80,22 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
         print("Sorry. This functionality has not yet been implemented, but it is planned...")
         return []
     else:
+        try:
+            city_name = transliterate.translit(location, reversed=True)
+        except:
+            city_name = "city"
+
         parser = ParserRentOffers(
             type_offer=offer,
             type_accommodation=accommodation,
+            city_name=city_name,
             location_id=location_id,
             rooms=rooms,
             start_page=start_page,
             end_page=end_page,
-            save_csv=save_csv,
+            is_save_csv=is_save_csv,
             is_latin=is_latin,
+            is_express=is_express,
         )
 
         parser.run()

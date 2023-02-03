@@ -14,21 +14,23 @@ from cianparser.constants import *
 
 
 class ParserRentOffers:
-    def __init__(self, type_offer: str, type_accommodation: str, location_id: str, rooms, start_page: int,
-                 end_page: int, save_csv=False, is_latin=False):
+    def __init__(self, type_offer: str, type_accommodation: str, city_name:str, location_id: str, rooms, start_page: int,
+                 end_page: int, is_save_csv=False, is_latin=False, is_express=False):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
-        self.save_csv = save_csv
+        self.is_save_csv = is_save_csv
         self.is_latin = is_latin
+        self.is_express = is_express
 
         self.result = []
         self.type_accommodation = type_accommodation
+        self.city_name = city_name.lower().strip().replace("'", "").replace(" ", "_")
         self.location_id = location_id
         self.rooms = rooms
         self.start_page = start_page
         self.end_page = end_page
 
-        file_name = f'cian_parsing_result_{self.start_page}_{self.end_page}_{self.location_id}_{datetime.now()}.csv'
+        file_name = f'cian_parsing_result_{self.start_page}_{self.end_page}_{self.city_name}_{datetime.now()}.csv'
         current_path = os.path.abspath(".")
         self.file_path = os.path.join(current_path, file_name)
 
@@ -92,11 +94,15 @@ class ParserRentOffers:
 
         for ind, block in enumerate(offers):
             self.parse_block(block=block, city=city)
-            time.sleep(4)
+
+            if not self.is_express:
+                time.sleep(4)
+
             sys.stdout.write("\033[F")
             print(f"{number_page} page: [" + "=>" * (ind + 1) + "  " * (
                         len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%")
-            time.sleep(1)
+
+        time.sleep(2)
 
         return True, 0
 
@@ -195,23 +201,37 @@ class ParserRentOffers:
     def define_location_data(self, block):
         elements = block.select("div[data-name='LinkArea']")[0]. \
             select("div[data-name='GeneralInfoSectionRowComponent']")
+        district, street = "", ""
 
         for index, element in enumerate(elements):
             if "р-н" in element.text:
-                location = element.text
+                address_elements = element.text.split(",")
+                if len(address_elements) < 2:
+                    return "", ""
 
-                if len(location[location.find("р-н") + 4:].split(",")) != 0:
-                    district = location[location.find("р-н") + 4:].split(",")[0].strip()
-                else:
-                    district = ""
+                for elem in address_elements:
+                    if "р-н" in elem:
+                        district = elem.replace("р-н", "").strip()
 
-                if len(location.split(",")) >= 1:
-                    street = location.split(",")[-2]
-                    street = street.replace("улица", "").strip()
-                else:
-                    street = ""
+                street = address_elements[-2].replace("улица", "").strip()
+
+                if district == "" or street == "":
+                    print(element.text)
 
                 return district, street
+
+        if district == "":
+            for index, element in enumerate(elements):
+                if "улица" in element.text:
+                        address_elements = element.text.split(",")
+                        if len(address_elements) == 0:
+                            return "", ""
+
+                        for elem in address_elements:
+                            if "улица" in elem:
+                                street = elem.replace("улица", "").strip()
+
+                        return district, street
 
         return "", ""
 
@@ -259,12 +279,26 @@ class ParserRentOffers:
                 meters = -1
 
         if "этаж" in common_properties:
-            floor_per = common_properties[common_properties.find("м²") + 3: common_properties.find("м²") + 9]
-            floor_per = floor_per.replace(' ', '')
-            floor_per = floor_per.replace('э', '')
+            floor_per = common_properties[common_properties.rfind("этаж") - 7: common_properties.rfind("этаж")]
+
             floor_per = floor_per.split("/")
-            all_floors = int(floor_per[1])
-            floor = int(floor_per[0])
+
+            if len(floor_per) == 0:
+                floor, all_floors = -1, -1
+            else:
+                floor, all_floors = floor_per[0], floor_per[1]
+
+            ints = re.findall(r'\d+', floor)
+            if len(ints) == 0:
+                floor = -1
+            else:
+                floor = int(ints[-1])
+
+            ints = re.findall(r'\d+', all_floors)
+            if len(ints) == 0:
+                all_floors = -1
+            else:
+                all_floors = int(ints[-1])
         else:
             all_floors = -1
             floor = -1
@@ -302,13 +336,15 @@ class ParserRentOffers:
             except:
                 pass
 
-        res = self.session.get(url=link)
-        res.raise_for_status()
-        html_offer_page = res.text
+        year_of_construction, kitchen_meters = -1, -1
+        if not self.is_express:
+            res = self.session.get(url=link)
+            res.raise_for_status()
+            html_offer_page = res.text
 
-        year_of_construction, kitchen_meters = self.parse_page_offer(html_offer=html_offer_page)
-        if year_of_construction == -1 and kitchen_meters == -1:
-            year_of_construction, kitchen_meters = self.parse_page_offer_json(html_offer=html_offer_page)
+            year_of_construction, kitchen_meters = self.parse_page_offer(html_offer=html_offer_page)
+            if year_of_construction == -1 and kitchen_meters == -1:
+                year_of_construction, kitchen_meters = self.parse_page_offer_json(html_offer=html_offer_page)
 
         self.result.append({
             "accommodation": self.type_accommodation,
@@ -327,7 +363,7 @@ class ParserRentOffers:
             "link": link
         })
 
-        if self.save_csv:
+        if self.is_save_csv:
             self.save_results()
 
     def get_results(self):
@@ -354,7 +390,7 @@ class ParserRentOffers:
 
     def run(self):
         print(f"\n{' ' * 18}Collecting information from pages..")
-        print(f"The absolute path to the file: \n", self.file_path)
+        print(f"The absolute path to the file: \n{self.file_path} \n")
 
         for number_page in range(self.start_page, self.end_page + 1):
             try:

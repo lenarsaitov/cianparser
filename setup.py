@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='cianparser',
-    version='0.4.2',
+    version='0.4.3',
     description='Parser information from Cian website',
     url='https://github.com/lenarsaitov/cianparser',
     author='Lenar Saitov',

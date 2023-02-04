@@ -10,28 +10,28 @@ pip install cianparser
 
 ### Использование
 ```python
->>> import cianparser
+import cianparser
     
->>> data = cianparser.parse(
-        deal_type="rent_long",
-        accommodation_type="flat",
-        location="Москва",
-        rooms=(2, 3),
-        start_page=1,
-        end_page=2,
-        is_saving_csv=True,
-        is_latin=False,
-        is_express_mode=False,
-    )
+data = cianparser.parse(
+    deal_type="rent_long",
+    accommodation_type="flat",
+    location="Москва",
+    rooms=(2, 3),
+    start_page=1,
+    end_page=2,
+    is_saving_csv=True,
+    is_latin=False,
+    is_express_mode=False,
+)
 
->>> print(data[0])
+print(data[0])
 ```
 
 ```
                               Preparing to collect information from pages..
 
 The absolute path to the file: 
- /Users/macbook/some_project/cian_parsing_result_rent_long_1_2_moskva_2023-02-04 06:58:21.765479.csv 
+ /Users/macbook/some_project/cian_parsing_result_rent_long_1_2_moskva_04_Feb_2023_06_58_21_765479.csv 
 
 The page from which the collection of information begins: 
  https://cian.ru/cat.php?engine_version=2&p=1&region=1&offer_type=flat&deal_type=rent&room2=1&room3=1&with_neighbors=0&type=4 
@@ -73,7 +73,7 @@ Collecting information from pages with list of announcements
 * __is_latin__ - необходимо ли преобразывание любой встрещающейся <ins>кириллицы</ins> в <ins>латиницу</ins>, по умолчанию _False_
 * __is_express_mode__ - необходимо ли <ins>ускорение</ins> (___в 5-10 раз___) сбор данных (<ins>__но без трех полей__</ins>, см примечание), по умолчанию _False_
 
-#### В настоящее время функционал доступен только по продажам (sale) и долгосрочном арендам (rent_long) квартир (flat) и студий.
+#### В настоящее время функционал доступен только по продажам (sale) и долгосрочном арендам (rent_long) квартир и студий (flat).
 
 ### Признаки, получаемые в ходе сбора данных с предложений по долгосрочной аренде недвижимости
 * __district__ - район
@@ -87,7 +87,7 @@ Collecting information from pages with list of announcements
 * __rooms_count__ - количество комнат
 * __year_construction__ - год постройки здания
 * __price_per_month__ - стоимость аренды в месяц
-* __commissions__ - комиссия, взымаемая в ходе заселения
+* __commissions__ - комиссия, взымаемая при заселении
 * __author__ - автор объявления
 * __phone__ - номер телефона в объявлении
 * __link__ - ссылка на объявление
@@ -107,7 +107,7 @@ __is_saving_csv__ значение ___True___.
 Пример получаемого файла:
 
 ```bash
-cian_parsing_result_rent_long_1_2_moskva_2023-02-04 06:58:21.765479.csv
+cian_parsing_result_rent_long_1_2_moskva_04_Feb_2023_06_58_21_765479.csv
 ```
 
 | author | link | city | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_month | commissions | year_of_construction | living_meters | kitchen_meters | phone | district | street | underground
@@ -120,12 +120,12 @@ cian_parsing_result_rent_long_1_2_moskva_2023-02-04 06:58:21.765479.csv
 1. В некоторых объявлениях отсутсвуют данные по некоторым признакам (_год постройки, жилые кв метры, кв метры кухни итп_).
 В этом случае проставляется значение ___-1___ либо ___пустая строка___ для числового и строкового типа поля соответственно.
 
-2. Для отсутствия блокировки по __IP__ в данном проекте задана пауза (___в размере 5 секунд___) после сбора информации с
+2. Для отсутствия блокировки по __IP__ в данном проекте задана пауза (___в размере 4-5 секунд___) после сбора информации с
 каждой отдельной взятой страницы.
 
 3. Имеется флаг __is_express_mode__, при помощи которого можно существенно (___в 5-10 раз___) ускорить сбор данных благодаря отсутствию необходимости 
 заходить на каждую страницу с предложением. 
-Однако в таком случае __не будут__ собираться данные о ___площади кухни___, ___годе постройки здания___ и __номере телефона__.
+Однако в таком случае <ins>__не будут__</ins> собираться данные о ___площади кухни___, ___годе постройки здания___ и ___номере телефона___.
 
 4. Данный парсер не будет работать в таком инструменте как [Google Colaboratory](https://colab.research.google.com/). 
 См. [подробности](https://github.com/lenarsaitov/cianparser/issues/1)

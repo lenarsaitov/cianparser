@@ -32,9 +32,10 @@ class ParserOffers:
         self.start_page = start_page
         self.end_page = end_page
 
-        file_name = f'cian_parsing_result_{deal_type}_{self.start_page}_{self.end_page}_{transliterate.translit(self.city_name.lower(), reversed=True)}_{datetime.now()}.csv'
+        now_time = datetime.now().strftime("%d_%b_%Y_%H_%M_%S_%f")
+        file_name = f'cian_parsing_result_{deal_type}_{self.start_page}_{self.end_page}_{transliterate.translit(self.city_name.lower(), reversed=True)}_{now_time}.csv'
         current_dir_path = pathlib.Path.cwd()
-        self.file_path = pathlib.Path(current_dir_path, file_name)
+        self.file_path = pathlib.Path(current_dir_path, file_name.replace("'", ""))
 
         self.rent_type = None
         if deal_type == "rent_long":
@@ -123,8 +124,8 @@ class ParserOffers:
 
             print(f"{number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
                     len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%", end="")
-            print(f" | Count of parsed: {parsed_announcements}."
-                  f" Progress ratio {round((parsed_announcements) * 100 / total_planed_announcements)} %")
+            print(f" | Count of all parsed: {parsed_announcements}."
+                  f" Progress ratio: {round((parsed_announcements) * 100 / total_planed_announcements)} %")
 
         time.sleep(2)
 
@@ -587,7 +588,9 @@ class ParserOffers:
 
     def run(self):
         print(f"\n{' ' * 30}Preparing to collect information from pages..")
-        print(f"The absolute path to the file: \n{self.file_path} \n")
+
+        if self.is_saving_csv:
+            print(f"The absolute path to the file: \n{self.file_path} \n")
 
         for number_page in range(self.start_page, self.end_page + 1):
             try:

@@ -110,7 +110,7 @@ class ParserOffers:
             print(f"Collecting information from pages with list of announcements", end="")
 
         print("")
-        print(f"{number_page} page: {len(offers)} offers", end="\r", flush=True)
+        print(f"\r {number_page} page: {len(offers)} offers", end="\r", flush=True)
 
         for ind, block in enumerate(offers):
             self.parse_block(block=block)

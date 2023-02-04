@@ -107,9 +107,10 @@ class ParserOffers:
 
         if number_page == self.start_page:
             print(f"The page from which the collection of information begins: \n {self.url} \n")
-            print(f"Collecting information from pages with list of announcements")
+            print(f"Collecting information from pages with list of announcements", end="")
 
-        print(f"{number_page} page: {len(offers)} offers")
+        print("")
+        print(f"{number_page} page: {len(offers)} offers", end="\r", flush=True)
 
         for ind, block in enumerate(offers):
             self.parse_block(block=block)
@@ -117,15 +118,13 @@ class ParserOffers:
             if not self.is_express_mode:
                 time.sleep(4)
 
-            sys.stdout.write("\033[F")
-
             parsed_announcements = len(offers) * (number_page-self.start_page) + ind
             total_planed_announcements = len(offers)*count_of_pages
 
-            print(f"{number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
-                    len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%", end="")
-            print(f" | Count of all parsed: {parsed_announcements}."
-                  f" Progress ratio: {round((parsed_announcements) * 100 / total_planed_announcements)} %")
+            print(f"\r {number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
+                    len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%" +
+                  f" | Count of all parsed: {parsed_announcements}."
+                  f" Progress ratio: {round((parsed_announcements) * 100 / total_planed_announcements)} %", end="\r", flush=True)
 
         time.sleep(2)
 

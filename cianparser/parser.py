@@ -7,7 +7,7 @@ import re
 import cloudscraper
 import sys
 import csv
-import os
+import pathlib
 from datetime import datetime
 
 from cianparser.constants import *
@@ -33,8 +33,8 @@ class ParserOffers:
         self.end_page = end_page
 
         file_name = f'cian_parsing_result_{deal_type}_{self.start_page}_{self.end_page}_{transliterate.translit(self.city_name.lower(), reversed=True)}_{datetime.now()}.csv'
-        current_path = os.path.abspath(".")
-        self.file_path = os.path.join(current_path, file_name)
+        current_dir_path = pathlib.Path.cwd()
+        self.file_path = pathlib.Path(current_dir_path, file_name)
 
         self.rent_type = None
         if deal_type == "rent_long":
@@ -576,17 +576,10 @@ class ParserOffers:
         self.correlate_fields_to_deal_type()
         keys = self.result[0].keys()
 
-        try:
-            with open(self.file_path, 'w', newline='') as output_file:
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(self.result)
-        except:
-            self.file_path = self.file_path.replace("\\", "/")
-            with open(self.file_path, 'w', newline='') as output_file:
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(self.result)
+        with open(self.file_path, 'w', newline='') as output_file:
+            dict_writer = csv.DictWriter(output_file, keys)
+            dict_writer.writeheader()
+            dict_writer.writerows(self.result)
 
     def load_and_parse_page(self, number_page, count_of_pages, attempt_number):
         html = self.load_page(number_page=number_page)

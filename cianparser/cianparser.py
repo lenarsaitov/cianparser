@@ -1,42 +1,41 @@
 from cianparser.constants import *
-from cianparser.rentsparser import ParserRentOffers
-import transliterate
+from cianparser.parser import ParserOffers
 
 offer_types = {"rent_long", "rent_short", "sale"}
-offer_not_implemented_yet = {"rent_short", "sale"}
+deal_types_not_implemented_yet = {"rent_short"}
 
 accommodation_types = {"flat", "room", "house", "house-part", "townhouse"}
-accommodation_not_implemented_yet = {"room", "house", "house-part", "townhouse"}
+accommodation_types_not_implemented_yet = {"room", "house", "house-part", "townhouse"}
 
 
 def list_cities():
     return CITIES
 
 
-def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10, is_save_csv=False, is_latin=False, is_express=False):
+def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, end_page=10, is_saving_csv=False, is_latin=False, is_express=False):
     """
     Parse information from cian website
     Examples:
         >>> data = cianparser.parse(offer="rent_long", accommodation="flat", location="Казань", rooms=1, start_page=1, end_page=1)
         >>> data = cianparser.parse(offer="rent_short", accommodation="flat", location="Москва", rooms=(1,3,"studio"))
         >>> data = cianparser.parse(offer="sale", accommodation="house", location="Санкт-Петербург", rooms="all")
-    :param str offer: type of offer, e.g. "rent_long", "rent_short", "sale"
-    :param str accommodation: type of accommodation, e.g. "flat", "room", "house", "house-part", "townhouse"
+    :param str deal_type: type of deal, e.g. "rent_long", "rent_short", "sale"
+    :param str accommodation_type: type of accommodation, e.g. "flat", "room", "house", "house-part", "townhouse"
     :param str location: location. e.g. "Казань", for see all correct values use cianparser.list_cities()
     :param rooms: how many rooms in accommodation, default "all". Example 1, (1,3, "studio"), "studio, "all"
     :param start_page: the page from which the parser starts, default 1
     :param end_page: the page from which the parser ends, default 100
-    :param is_save_csv: is it necessary to save data in csv
+    :param is_saving_csv: is it necessary to save data in csv
     :param is_latin: is it necessary to save data in latin
     :param is_express:  is it necessary to speed up data collection (but without some fields)
     """
 
-    if offer not in offer_types:
-        raise ValueError(f'You entered offer={offer}, which is not valid value. '
+    if deal_type not in offer_types:
+        raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
                          f'Try entering one of these values: "rent_long", "rent_short", "sale".')
 
-    if accommodation not in accommodation_types:
-        raise ValueError(f'You entered accommodation={accommodation}, which is not valid value. '
+    if accommodation_type not in accommodation_types:
+        raise ValueError(f'You entered accommodation={accommodation_type}, which is not valid value. '
                          f'Try entering one of these values: "flat", "room", "house", "house-part", "townhouse".')
 
     if type(rooms) is tuple:
@@ -76,24 +75,19 @@ def parse(offer, accommodation, location, rooms="all", start_page=1, end_page=10
         raise ValueError(f'You entered {location}, which is not exists in base.'
                          f' See all correct values of location in cianparser.list_cities()')
 
-    if offer in offer_not_implemented_yet or accommodation in accommodation_not_implemented_yet:
+    if deal_type in deal_types_not_implemented_yet or accommodation_type in accommodation_types_not_implemented_yet:
         print("Sorry. This functionality has not yet been implemented, but it is planned...")
         return []
     else:
-        try:
-            city_name = transliterate.translit(location, reversed=True)
-        except:
-            city_name = "city"
-
-        parser = ParserRentOffers(
-            type_offer=offer,
-            type_accommodation=accommodation,
-            city_name=city_name,
+        parser = ParserOffers(
+            deal_type=deal_type,
+            accommodation_type=accommodation_type,
+            city_name=location,
             location_id=location_id,
             rooms=rooms,
             start_page=start_page,
             end_page=end_page,
-            is_save_csv=is_save_csv,
+            is_saving_csv=is_saving_csv,
             is_latin=is_latin,
             is_express=is_express,
         )

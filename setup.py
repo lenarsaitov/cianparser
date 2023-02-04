@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='cianparser',
-    version='0.4.3',
+    version='0.4.4',
     description='Parser information from Cian website',
     url='https://github.com/lenarsaitov/cianparser',
     author='Lenar Saitov',
@@ -11,5 +11,5 @@ setup(
     packages=['cianparser'],
     classifiers=[],
     keywords='python parser requests cloudscraper beautifulsoup cian realstate',
-    install_requires=['cloudscraper', 'beautifulsoup4', 'transliterate', 'pymorphy2', 'lxml', 'datetime'],
+    install_requires=['cloudscraper', 'beautifulsoup4', 'transliterate', 'lxml', 'datetime'],
 )

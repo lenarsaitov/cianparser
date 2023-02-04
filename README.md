@@ -21,14 +21,14 @@ pip install cianparser
         end_page=2,
         is_saving_csv=True,
         is_latin=False,
-        is_express=False,
+        is_express_mode=False,
     )
 
 >>> print(data[0])
 ```
 
 ```
-                  Collecting information from pages..
+                              Preparing to collect information from pages..
 
 The absolute path to the file: 
  /Users/macbook/some_project/cian_parsing_result_rent_long_1_2_moskva_2023-02-04 06:58:21.765479.csv 
@@ -36,9 +36,9 @@ The absolute path to the file:
 The page from which the collection of information begins: 
  https://cian.ru/cat.php?engine_version=2&p=1&region=1&offer_type=flat&deal_type=rent&room2=1&room3=1&with_neighbors=0&type=4 
 
-Setting [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100%
-1 page: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100%
-2 page: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100%
+Collecting information from pages with list of announcements
+1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 27. Progress ratio  50 %
+2 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 55. Progress ratio 100 %
 
 {  'accommodation_type': 'flat',
    'deal_type': 'rent',
@@ -56,6 +56,7 @@ Setting [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100%
    'price_per_month': 93000,
    'commissions': 50,
    'author': 'Apple Real Estate',
+   'phone': '+79057145354',
    'link': 'https://www.cian.ru/rent/flat/282487326/',
 }
 ```
@@ -70,16 +71,16 @@ Setting [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100%
 * __end_page__ - страница, с которого заканчивается сбор данных, по умолчанию, _10_
 * __is_saving_csv__ - необходимо ли сохранять данные (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
 * __is_latin__ - необходимо ли преобразовывать встрещающиеся слова из кириллицы в латиницу, по умолчанию _False_
-* __is_express__ - необходимо ли ускорить (___в 5-10 раз___) сбор данных (__но без двух полей__, см примечание), по умолчанию _False_
+* __is_express_mode__ - необходимо ли ускорить (___в 5-10 раз___) сбор данных (__но без двух полей__, см примечание), по умолчанию _False_
 
-#### <ins> В настоящее время доступен только функционал продажи (sale) и долгосрочной аренды (rent_long) квартир (flat) и студий.
+#### В настоящее время функционал доступен только по продажам (sale) и долгосрочном арендам (rent_long) квартир (flat) и студий.
 
 ### Признаки, получаемые в ходе сбора данных с предложений по долгосрочной аренде недвижимости
 * __district__ - район
 * __underground__ - метро
 * __street__ - улица
 * __floor__ - этаж
-* __floors_count__ - количество этажей
+* __floors_count__ - общее количество этажей
 * __total_meters__ - общая площадь
 * __living_meters__ - жилая площади
 * __kitchen_meters__ - площадь кухни
@@ -88,7 +89,8 @@ Setting [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100%
 * __price_per_month__ - стоимость аренды в месяц
 * __commissions__ - комиссия, взымаемая в ходе заселения
 * __author__ - автор объявления
-* __link__ - ссылка на данное объявление
+* __phone__ - номер телефона в объявлении
+* __link__ - ссылка на объявление
 
 ### Признаки, получаемые в ходе сбора данных с предложений по продаже недвижимости
 
@@ -108,11 +110,11 @@ __is_saving_csv__ значение ___True___.
 cian_parsing_result_rent_long_1_2_moskva_2023-02-04 06:58:21.765479.csv
 ```
 
-| author | link | city | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_month | commissions | year_of_construction | living_meters | kitchen_meters | district | street | underground
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-| Intermark Real Estate | https://www.cian.ru/rent/flat/278903117/ | Москва | rent | flat | 4 | 6 | 3 | 50.0 | 180000 | 0 | 1911 | 32.0 | 8.0 | Пресненский | Малый Предтеченский переулок | Краснопресненская
-| Capital Mars | https://www.cian.ru/rent/flat/282506328/ | Москва | rent | flat | 5 | 9 | 2 | 89.0 | 180000 | 0 | 2006 | 53.0 | 15.0 | Хамовники | 3-я Фрунзенская | Спортивная
-| MERSI | https://www.cian.ru/rent/flat/281562376/ | Москва | rent | flat | 8 | 16 | 2 | 80.0 | 200000 | 0 | 2012 | -1 | -1 | Замоскворечье | Мытная | Октябрьская
+| author | link | city | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_month | commissions | year_of_construction | living_meters | kitchen_meters | phone | district | street | underground
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+| Intermark Real Estate | https://www.cian.ru/rent/flat/278903117/ | Москва | rent | flat | 4 | 6 | 3 | 50.0 | 180000 | 0 | 1911 | 32.0 | 8.0 | +79676513428 | Пресненский | Малый Предтеченский переулок | Краснопресненская
+| Capital Mars | https://www.cian.ru/rent/flat/282506328/ | Москва | rent | flat | 5 | 9 | 2 | 89.0 | 180000 | 0 | 2006 | 53.0 | 15.0 | +79660619653 | Хамовники | 3-я Фрунзенская | Спортивная
+| MERSI | https://www.cian.ru/rent/flat/281562376/ | Москва | rent | flat | 8 | 16 | 2 | 80.0 | 200000 | 0 | 2012 | -1 | -1 | +79652455850 | Замоскворечье | Мытная | Октябрьская
 
 
 ### Некоторые сведения
@@ -127,9 +129,9 @@ cian_parsing_result_rent_long_1_2_moskva_2023-02-04 06:58:21.765479.csv
 1. Для отсутствия блокировки по __IP__ в данном проекте задана пауза (___в размере 5 секунд___) после сбора информации с
 каждой отдельной взятой страницы.
 
-2. Имеется флаг __is_express__, при помощи которого можно существенно (___в 5-10 раз___) ускорить сбор данных благодаря отсутствию необходимости 
+2. Имеется флаг __is_express_mode__, при помощи которого можно существенно (___в 5-10 раз___) ускорить сбор данных благодаря отсутствию необходимости 
 заходить на каждую страницу с предложением. 
-Однако в таком случае __не будут__ собираться данные о ___площади кухни___ и ___годе постройки здания___.
+Однако в таком случае __не будут__ собираться данные о ___площади кухни___, ___годе постройки здания___ и __номере телефона___.
 
 3. Данный парсер не будет работать в таком инструменте как [Google Colaboratory](https://colab.research.google.com/). 
 См. [подробности](https://github.com/lenarsaitov/cianparser/issues/1)

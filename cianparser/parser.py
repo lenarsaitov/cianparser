@@ -15,13 +15,14 @@ from cianparser.helpers import define_rooms_count
 
 
 class ParserOffers:
-    def __init__(self, deal_type: str, accommodation_type: str, city_name:str, location_id: str, rooms, start_page: int,
-                 end_page: int, is_saving_csv=False, is_latin=False, is_express=False):
+    def __init__(self, deal_type: str, accommodation_type: str, city_name: str, location_id: str, rooms,
+                 start_page: int,
+                 end_page: int, is_saving_csv=False, is_latin=False, is_express_mode=False):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
         self.is_saving_csv = is_saving_csv
         self.is_latin = is_latin
-        self.is_express = is_express
+        self.is_express_mode = is_express_mode
 
         self.result = []
         self.accommodation_type = accommodation_type
@@ -78,7 +79,7 @@ class ParserOffers:
                 rooms_path = ""
 
         url = BASE_LINK + ACCOMMODATION_TYPE_PARAMETER.format(self.accommodation_type) + \
-                DEAL_TYPE.format(self.deal_type) + rooms_path + WITHOUT_NEIGHBORS_OF_CITY
+              DEAL_TYPE.format(self.deal_type) + rooms_path + WITHOUT_NEIGHBORS_OF_CITY
 
         if self.rent_type is not None:
             url += DURATION_TYPE_PARAMETER.format(self.rent_type)
@@ -91,7 +92,7 @@ class ParserOffers:
         res.raise_for_status()
         return res.text
 
-    def parse_page(self, html: str, number_page: int, attempt_number: int):
+    def parse_page(self, html: str, number_page: int, count_of_pages: int, attempt_number: int):
         try:
             soup = BeautifulSoup(html, 'lxml')
         except:
@@ -105,19 +106,25 @@ class ParserOffers:
 
         if number_page == self.start_page:
             print(f"The page from which the collection of information begins: \n {self.url} \n")
-            print("Setting [" + "=>" * len(offers) + "] 100%")
+            print(f"Collecting information from pages with list of announcements")
 
         print(f"{number_page} page: {len(offers)} offers")
 
         for ind, block in enumerate(offers):
             self.parse_block(block=block)
 
-            if not self.is_express:
+            if not self.is_express_mode:
                 time.sleep(4)
 
             sys.stdout.write("\033[F")
-            print(f"{number_page} page: [" + "=>" * (ind + 1) + "  " * (
-                        len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%")
+
+            parsed_announcements = len(offers) * (number_page-self.start_page) + ind
+            total_planed_announcements = len(offers)*count_of_pages
+
+            print(f"{number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
+                    len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%", end="")
+            print(f" | Count of parsed: {parsed_announcements}."
+                  f" Progress ratio {round((parsed_announcements) * 100 / total_planed_announcements)} %")
 
         time.sleep(2)
 
@@ -133,6 +140,7 @@ class ParserOffers:
             "floor": -1,
             "floors_count": -1,
             "rooms_count": -1,
+            "phone": "",
         }
 
         offer_page = soup_offer_page.select("div[data-name='ObjectSummaryDescription']")
@@ -143,7 +151,8 @@ class ParserOffers:
             text_offer = offer_page[0].text
             if "Кухня" in text_offer:
                 kitchen = (text_offer[:text_offer.find("Кухня")])
-                page_data["kitchen_meters"] = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, kitchen.replace(",", "."))[-1])
+                page_data["kitchen_meters"] = float(
+                    re.findall(FLOATS_NUMBERS_REG_EXPRESSION, kitchen.replace(",", "."))[-1])
             else:
                 page_data["kitchen_meters"] = -1
         except:
@@ -153,11 +162,21 @@ class ParserOffers:
             text_offer = offer_page[0].text
             if "Жилая" in text_offer:
                 lining = (text_offer[:text_offer.find("Жилая")])
-                page_data["living_meters"] = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, lining.replace(",", "."))[-1])
+                page_data["living_meters"] = float(
+                    re.findall(FLOATS_NUMBERS_REG_EXPRESSION, lining.replace(",", "."))[-1])
             else:
                 page_data["living_meters"] = -1
         except:
             page_data["living_meters"] = -1
+
+        try:
+            contact_data = soup_offer_page.select("div[data-name='OfferContactsAside']")[0].text
+            if "+7" in contact_data:
+                page_data["phone"] = (contact_data[contact_data.find("+7"):contact_data.find("+7") + 16]).\
+                    replace(" ", "").\
+                    replace("-", "")
+        except:
+            pass
 
         try:
             text_offer = offer_page[0].text
@@ -223,6 +242,7 @@ class ParserOffers:
             "kitchen_meters": -1,
             "floor": -1,
             "floors_count": -1,
+            "phone": "",
         }
 
         spans = soup_offer_page.select("span")
@@ -271,6 +291,11 @@ class ParserOffers:
                 else:
                     page_data["floor"] = int(ints[0])
                     page_data["floors_count"] = int(ints[1])
+
+        if "+7" in html_offer:
+            page_data["phone"] = html_offer[html_offer.find("+7"): html_offer.find("+7") + 16].split('"')[0].\
+                replace(" ", "").\
+                replace("-", "")
 
         return page_data
 
@@ -326,7 +351,7 @@ class ParserOffers:
             if "р-н" in element.text:
                 address_elements = element.text.split(",")
                 if len(address_elements) < 2:
-                    return location_data
+                    continue
 
                 if "ЖК" in address_elements[0] and "«" in address_elements[0] and "»" in address_elements[0]:
                     location_data["residential_complex"] = address_elements[0].split("«")[1].split("»")[0]
@@ -356,8 +381,9 @@ class ParserOffers:
                             location_data["street"] = address_elements[-2].replace("улица", "").strip()
                             return location_data
 
-                        for after_district_address_element in address_elements[ind+1:]:
-                            if len(list(set(after_district_address_element.split(" ")).intersection(NOT_STREET_ADDRESS_ELEMENTS))) != 0:
+                        for after_district_address_element in address_elements[ind + 1:]:
+                            if len(list(set(after_district_address_element.split(" ")).intersection(
+                                    NOT_STREET_ADDRESS_ELEMENTS))) != 0:
                                 continue
 
                             if len(after_district_address_element.strip().replace(" ", "")) < 4:
@@ -448,10 +474,10 @@ class ParserOffers:
             floor = -1
 
         return {
-                "floor": floor,
-                "floors_count": floors_count,
-                "rooms_count": define_rooms_count(common_properties),
-                "total_meters": total_meters,
+            "floor": floor,
+            "floors_count": floors_count,
+            "rooms_count": define_rooms_count(common_properties),
+            "total_meters": total_meters,
         }
 
     def parse_block(self, block):
@@ -489,18 +515,20 @@ class ParserOffers:
                 pass
 
             try:
-                location_data["residential_complex"] = transliterate.translit(location_data["residential_complex"], reversed=True)
+                location_data["residential_complex"] = transliterate.translit(location_data["residential_complex"],
+                                                                              reversed=True)
             except:
                 pass
 
         page_data = dict()
-        if not self.is_express:
+        if not self.is_express_mode:
             res = self.session.get(url=common_data["link"])
             res.raise_for_status()
             html_offer_page = res.text
 
             page_data = self.parse_page_offer(html_offer=html_offer_page)
-            if page_data["year_of_construction"] == -1 and page_data["kitchen_meters"] == -1 and page_data["floors_count"] == -1:
+            if page_data["year_of_construction"] == -1 and page_data["kitchen_meters"] == -1 and page_data[
+                "floors_count"] == -1:
                 page_data = self.parse_page_offer_json(html_offer=html_offer_page)
 
         self.result.append(self.union(common_data, specification_data, price_data, page_data, location_data))
@@ -560,12 +588,12 @@ class ParserOffers:
                 dict_writer.writeheader()
                 dict_writer.writerows(self.result)
 
-    def load_and_parse_page(self, number_page, attempt_number):
+    def load_and_parse_page(self, number_page, count_of_pages, attempt_number):
         html = self.load_page(number_page=number_page)
-        return self.parse_page(html=html, number_page=number_page, attempt_number=attempt_number)
+        return self.parse_page(html=html, number_page=number_page, count_of_pages=count_of_pages, attempt_number=attempt_number)
 
     def run(self):
-        print(f"\n{' ' * 18}Collecting information from pages..")
+        print(f"\n{' ' * 30}Preparing to collect information from pages..")
         print(f"The absolute path to the file: \n{self.file_path} \n")
 
         for number_page in range(self.start_page, self.end_page + 1):
@@ -573,6 +601,7 @@ class ParserOffers:
                 parsed, attempt_number = False, 0
                 while not parsed and attempt_number < 3:
                     parsed, attempt_number = self.load_and_parse_page(number_page=number_page,
+                                                                      count_of_pages=self.end_page+1-self.start_page,
                                                                       attempt_number=attempt_number)
             except Exception as e:
                 print("Failed exception: ", e)

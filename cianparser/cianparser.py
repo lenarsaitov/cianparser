@@ -93,7 +93,7 @@ def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, en
         )
 
         parser.run()
-        print('\n')
+        print("")
 
         return parser.get_results()
 

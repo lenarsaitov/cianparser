@@ -5,10 +5,10 @@ from bs4 import BeautifulSoup
 import transliterate
 import re
 import cloudscraper
-import sys
 import csv
 import pathlib
 from datetime import datetime
+import math
 
 from cianparser.constants import *
 from cianparser.helpers import define_rooms_count
@@ -48,6 +48,9 @@ class ParserOffers:
 
         if deal_type == "sale":
             self.deal_type = "sale"
+
+        self.average_price = 0
+        self.parsed_announcements_count = 0
 
         self.url = None
 
@@ -118,13 +121,13 @@ class ParserOffers:
             if not self.is_express_mode:
                 time.sleep(4)
 
-            parsed_announcements = len(offers) * (number_page-self.start_page) + ind
             total_planed_announcements = len(offers)*count_of_pages
 
             print(f"\r {number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
-                    len(offers) - ind - 1) + "]" + f" {round((ind + 1) * 100 / len(offers))}" + "%" +
-                  f" | Count of all parsed: {parsed_announcements}."
-                  f" Progress ratio: {round((parsed_announcements) * 100 / total_planed_announcements)} %", end="\r", flush=True)
+                    len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
+                  f" | Count of all parsed: {self.parsed_announcements_count}."
+                  f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / total_planed_announcements)} %."
+                  f" Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub", end="\r", flush=True)
 
         time.sleep(2)
 
@@ -533,6 +536,12 @@ class ParserOffers:
 
         self.result.append(self.union(common_data, specification_data, price_data, page_data, location_data))
 
+        if "price" in price_data:
+            self.average_price = (self.average_price*self.parsed_announcements_count + price_data["price"])/(self.parsed_announcements_count+1)
+        elif "price_per_month" in price_data:
+            self.average_price = (self.average_price*self.parsed_announcements_count + price_data["price_per_month"])/(self.parsed_announcements_count+1)
+        self.parsed_announcements_count += 1
+
         if self.is_saving_csv:
             self.save_results()
 
@@ -577,7 +586,7 @@ class ParserOffers:
         keys = self.result[0].keys()
 
         with open(self.file_path, 'w', newline='') as output_file:
-            dict_writer = csv.DictWriter(output_file, keys)
+            dict_writer = csv.DictWriter(output_file, keys, delimiter=';')
             dict_writer.writeheader()
             dict_writer.writerows(self.result)
 
@@ -602,3 +611,13 @@ class ParserOffers:
                 print("Failed exception: ", e)
                 print(f"Ending parse on {number_page} page...\n")
                 break
+
+        print(f"\n\nThe collection of information from the pages with list of announcements is completed")
+        print(f"Total number of parced announcements: {self.parsed_announcements_count}. ", end="")
+
+        if self.is_sale():
+            print(f"Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")
+        elif self.is_rent_long():
+            print(f"Average price per month: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")
+        elif self.is_rent_short():
+            print(f"Average price per day: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")

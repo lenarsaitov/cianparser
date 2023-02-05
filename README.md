@@ -37,8 +37,8 @@ The page from which the collection of information begins:
  https://cian.ru/cat.php?engine_version=2&p=1&region=1&offer_type=flat&deal_type=rent&room2=1&room3=1&with_neighbors=0&type=4 
 
 Collecting information from pages with list of announcements
-1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 27. Progress ratio  50 %
-2 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 55. Progress ratio 100 %
+1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 28. Progress ratio  50 %. Average price: 204 642 rub
+2 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 56. Progress ratio 100 %. Average price: 236 426 rub
 
 {  'accommodation_type': 'flat',
    'deal_type': 'rent',
@@ -59,6 +59,9 @@ Collecting information from pages with list of announcements
    'phone': '+79057145354',
    'link': 'https://www.cian.ru/rent/flat/282487326/',
 }
+
+The collection of information from the pages with list of announcements is completed
+Total number of parced announcements: 56. Average price per month: 236 426 rub
 ```
 
 ### Конфигурация
@@ -111,7 +114,7 @@ cian_parsing_result_rent_long_1_2_moskva_04_Feb_2023_06_58_21_765479.csv
 ```
 
 | author | link | city | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_month | commissions | year_of_construction | living_meters | kitchen_meters | phone | district | street | underground
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+| ------ | ---- | ---- | --------- | ------------------ | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---
 | Intermark Real Estate | https://www.cian.ru/rent/flat/278903117/ | Москва | rent | flat | 4 | 6 | 3 | 50.0 | 180000 | 0 | 1911 | 32.0 | 8.0 | +79676513428 | Пресненский | Малый Предтеченский переулок | Краснопресненская
 | Capital Mars | https://www.cian.ru/rent/flat/282506328/ | Москва | rent | flat | 5 | 9 | 2 | 89.0 | 180000 | 0 | 2006 | 53.0 | 15.0 | +79660619653 | Хамовники | 3-я Фрунзенская | Спортивная
 | MERSI | https://www.cian.ru/rent/flat/281562376/ | Москва | rent | flat | 8 | 16 | 2 | 80.0 | 200000 | 0 | 2012 | -1 | -1 | +79652455850 | Замоскворечье | Мытная | Октябрьская

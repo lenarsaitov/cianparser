@@ -11,19 +11,21 @@ from datetime import datetime
 import math
 
 from cianparser.constants import *
-from cianparser.helpers import define_rooms_count
+from cianparser.helpers import *
 
 
 class ParserOffers:
     def __init__(self, deal_type: str, accommodation_type: str, city_name: str, location_id: str, rooms,
-                 start_page: int,
-                 end_page: int, is_saving_csv=False, is_latin=False, is_express_mode=False):
+                 start_page: int, end_page: int, is_saving_csv=False, is_latin=False, is_express_mode=False,
+                 is_by_homeowner=False):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
         self.is_saving_csv = is_saving_csv
         self.is_latin = is_latin
         self.is_express_mode = is_express_mode
+        self.is_by_homeowner = is_by_homeowner
 
+        self.result_parsed = set()
         self.result = []
         self.accommodation_type = accommodation_type
         self.city_name = city_name.strip().replace("'", "").replace(" ", "_")
@@ -88,6 +90,10 @@ class ParserOffers:
         if self.rent_type is not None:
             url += DURATION_TYPE_PARAMETER.format(self.rent_type)
 
+        if self.is_by_homeowner:
+            url += IS_ONLY_HOMEOWNER
+
+
         return url
 
     def load_page(self, number_page=1):
@@ -104,9 +110,15 @@ class ParserOffers:
 
         header = soup.select("div[data-name='HeaderDefault']")
         if len(header) == 0:
-            return False, attempt_number + 1
+            return False, attempt_number + 1, True
 
         offers = soup.select("article[data-name='CardComponent']")
+        page_number_html = soup.select("button[data-name='PaginationButton']")
+        if len(page_number_html) == 0:
+            return False, attempt_number + 1, True
+
+        if page_number_html[0].text == "Назад" and (number_page != 1 and number_page != 0):
+            return True, 0, True
 
         if number_page == self.start_page:
             print(f"The page from which the collection of information begins: \n {self.url} \n")
@@ -123,15 +135,17 @@ class ParserOffers:
 
             total_planed_announcements = len(offers)*count_of_pages
 
-            print(f"\r {number_page-self.start_page+1} | {number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
-                    len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
+            print(f"\r {number_page - self.start_page + 1} | {number_page} page with list: [" + "=>" * (
+                        ind + 1) + "  " * (
+                          len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
                   f" | Count of all parsed: {self.parsed_announcements_count}."
                   f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / total_planed_announcements)} %."
-                  f" Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub", end="\r", flush=True)
+                  f" Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub", end="\r",
+                  flush=True)
 
         time.sleep(2)
 
-        return True, 0
+        return True, 0, True
 
     def parse_page_offer(self, html_offer):
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
@@ -303,40 +317,56 @@ class ParserOffers:
         return page_data
 
     def define_author(self, block):
-        author = ""
         spans = block.select("div")[0].select("span")
+
+        author_data = {
+            "author": "",
+            "author_type": "",
+        }
 
         for index, span in enumerate(spans):
             if "Агентство недвижимости" in span:
-                author = spans[index + 1].text
-                return author
+                author_data["author"] = spans[index + 1].text.replace(",", ".").strip()
+                author_data["author_type"] = "real_estate_agent"
+                return author_data
 
         for index, span in enumerate(spans):
             if "Собственник" in span:
-                author = spans[index + 1].text
-                return author
+                author_data["author"] = spans[index + 1].text
+                author_data["author_type"] = "homeowner"
+                return author_data
 
         for index, span in enumerate(spans):
             if "Риелтор" in span:
-                author = spans[index + 1].text
-                return author
+                author_data["author"] = spans[index + 1].text
+                author_data["author_type"] = "realtor"
+                return author_data
 
         for index, span in enumerate(spans):
             if "Ук・оф.Представитель" in span:
-                author = spans[index + 1].text
-                return author
+                author_data["author"] = spans[index + 1].text
+                author_data["author_type"] = "official_representative"
+                return author_data
+
+        for index, span in enumerate(spans):
+            if "Представитель застройщика" in span:
+                author_data["author"] = spans[index + 1].text
+                author_data["author_type"] = "representative_developer"
+                return author_data
 
         for index, span in enumerate(spans):
             if "Застройщик" in span:
-                author = spans[index + 1].text
-                return author
+                author_data["author"] = spans[index + 1].text
+                author_data["author_type"] = "developer"
+                return author_data
 
         for index, span in enumerate(spans):
             if "ID" in span.text:
-                author = span.text
-                return author
+                author_data["author"] = span.text
+                author_data["author_type"] = "unknown"
+                return author_data
 
-        return author
+        return author_data
 
     def define_location_data(self, block):
         elements = block.select("div[data-name='LinkArea']")[0]. \
@@ -415,26 +445,28 @@ class ParserOffers:
         elements = block.select("div[data-name='LinkArea']")[0]. \
             select("div[data-name='GeneralInfoSectionRowComponent']")
 
+        price_data = {
+            "price_per_month": -1,
+            "commissions": 0,
+        }
+
         for element in elements:
             if "₽/мес" in element.text:
                 price_description = element.text
-                price_per_month = int("".join(price_description[:price_description.find("₽/мес") - 1].split()))
+                price_data["price_per_month"] = int("".join(price_description[:price_description.find("₽/мес") - 1].split()))
 
                 if "%" in price_description:
-                    commissions = int(
-                        price_description[price_description.find("%") - 2:price_description.find("%")].replace(" ", ""))
-                else:
-                    commissions = 0
+                    price_data["commissions"] = int(price_description[price_description.find("%") - 2:price_description.find("%")].replace(" ", ""))
 
-                return dict({"price_per_month": price_per_month, "commissions": commissions})
+                return price_data
 
             if "₽" in element.text:
                 price_description = element.text
-                price = int("".join(price_description[:price_description.find("₽") - 1].split()))
+                price_data["price"] = int("".join(price_description[:price_description.find("₽") - 1].split()))
 
-                return dict({"price": price})
+                return price_data
 
-        return dict()
+        return price_data
 
     def define_specification_data(self, block):
         title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='GeneralInfoSectionRowComponent']")[
@@ -447,7 +479,7 @@ class ParserOffers:
         if common_properties.find("м²") is not None:
             total_meters = title[: common_properties.find("м²")].replace(",", ".")
             if len(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, total_meters)) != 0:
-                total_meters = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, total_meters)[-1])
+                total_meters = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, total_meters)[-1].replace(" ", "").replace("-", ""))
             else:
                 total_meters = -1
 
@@ -485,15 +517,18 @@ class ParserOffers:
 
     def parse_block(self, block):
         common_data = dict()
-        common_data["author"] = self.define_author(block=block).replace(",", ".").strip()
         common_data["link"] = block.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
         common_data["city"] = self.city_name
         common_data["deal_type"] = self.deal_type
         common_data["accommodation_type"] = self.accommodation_type
 
-        location_data = self.define_location_data(block)
-        price_data = self.define_price_data(block)
-        specification_data = self.define_specification_data(block)
+        author_data = self.define_author(block=block)
+        location_data = self.define_location_data(block=block)
+        price_data = self.define_price_data(block=block)
+        specification_data = self.define_specification_data(block=block)
+
+        if self.is_by_homeowner and (author_data["author_type"] != "unknown" and author_data["author_type"] != "homeowner"):
+            return
 
         if self.is_latin:
             try:
@@ -534,13 +569,21 @@ class ParserOffers:
                 "floors_count"] == -1:
                 page_data = self.parse_page_offer_json(html_offer=html_offer_page)
 
-        self.result.append(self.union(common_data, specification_data, price_data, page_data, location_data))
-
+        specification_data["price_per_m2"] = float(0)
         if "price" in price_data:
             self.average_price = (self.average_price*self.parsed_announcements_count + price_data["price"])/(self.parsed_announcements_count+1)
+            price_data["price_per_m2"] = int(float(price_data["price"])/specification_data["total_meters"])
         elif "price_per_month" in price_data:
             self.average_price = (self.average_price*self.parsed_announcements_count + price_data["price_per_month"])/(self.parsed_announcements_count+1)
+            price_data["price_per_m2"] = int(float(price_data["price_per_month"])/specification_data["total_meters"])
+
         self.parsed_announcements_count += 1
+
+        if define_id_url(common_data["link"]) in self.result_parsed:
+            return
+
+        self.result_parsed.add(define_id_url(common_data["link"]))
+        self.result.append(self.union(author_data, common_data, specification_data, price_data, page_data, location_data))
 
         if self.is_saving_csv:
             self.save_results()
@@ -600,16 +643,25 @@ class ParserOffers:
         if self.is_saving_csv:
             print(f"The absolute path to the file: \n{self.file_path} \n")
 
+        attempt_number_exception = 0
         for number_page in range(self.start_page, self.end_page + 1):
             try:
                 parsed, attempt_number = False, 0
                 while not parsed and attempt_number < 3:
-                    parsed, attempt_number = self.load_and_parse_page(number_page=number_page,
+                    parsed, attempt_number, end = self.load_and_parse_page(number_page=number_page,
                                                                       count_of_pages=self.end_page+1-self.start_page,
                                                                       attempt_number=attempt_number)
+                    attempt_number_exception = 0
+                    if end:
+                        break
+
             except Exception as e:
-                print("Failed exception: ", e)
-                print(f"Ending parse on {number_page} page...\n")
+                attempt_number_exception += 1
+                if attempt_number_exception < 3:
+                    continue
+                print(f"\n\nException: {e}")
+                print(f"The collection of information from the pages with ending parse on {number_page} page...\n")
+                print(f"Average price per day: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")
                 break
 
         print(f"\n\nThe collection of information from the pages with list of announcements is completed")

@@ -1,6 +1,6 @@
 ### Сбор данных с сайта объявлений об аренде и продаже недвижимости Циан
 
-Cianparser - это библиотека Python 3 (версии 3.9 и выше) для парсинга сайта  [Циан](http://cian.ru).
+Cianparser - это библиотека Python 3 (версии 3.8 и выше) для парсинга сайта  [Циан](http://cian.ru).
 С его помощью можно получить достаточно подробные и структурированные данные по краткосрочной и долгосрочной аренде, продаже квартир, домов, танхаусов итд.
 
 ### Установка
@@ -37,8 +37,8 @@ The page from which the collection of information begins:
  https://cian.ru/cat.php?engine_version=2&p=1&region=1&offer_type=flat&deal_type=rent&room2=1&room3=1&with_neighbors=0&type=4 
 
 Collecting information from pages with list of announcements
-1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 28. Progress ratio  50 %. Average price: 204 642 rub
-2 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 56. Progress ratio 100 %. Average price: 236 426 rub
+1 | 1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 28. Progress ratio  50 %. Average price: 204 642 rub
+2 | 2 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of parsed: 56. Progress ratio 100 %. Average price: 236 426 rub
 
 {  'accommodation_type': 'flat',
    'deal_type': 'rent',

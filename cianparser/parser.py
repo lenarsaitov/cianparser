@@ -123,7 +123,7 @@ class ParserOffers:
 
             total_planed_announcements = len(offers)*count_of_pages
 
-            print(f"\r {number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
+            print(f"\r {number_page-self.start_page+1} | {number_page} page with list: [" + "=>" * (ind + 1) + "  " * (
                     len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
                   f" | Count of all parsed: {self.parsed_announcements_count}."
                   f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / total_planed_announcements)} %."

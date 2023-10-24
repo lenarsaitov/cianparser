@@ -1,12 +1,12 @@
 from setuptools import setup
 
-with open("README.md") as file:
+with open("README.md", encoding="utf8") as file:
     read_me_description = file.read()
 
 
 setup(
     name='cianparser',
-    version='0.4.11',
+    version='0.4.12',
     description='Parser information from Cian website',
     url='https://github.com/lenarsaitov/cianparser',
     author='Lenar Saitov',

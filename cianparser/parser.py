@@ -108,6 +108,11 @@ class ParserOffers:
         except:
             soup = BeautifulSoup(html, 'html.parser')
 
+        if soup.text.find("Captcha") > 0:
+            print(f"\r{number_page} page: there is CAPTCHA... failed to parse page...")
+
+            return False, 0, True
+
         header = soup.select("div[data-name='HeaderDefault']")
         if len(header) == 0:
             return False, attempt_number + 1, True

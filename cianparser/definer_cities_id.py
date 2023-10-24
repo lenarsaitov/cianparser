@@ -15,12 +15,15 @@ ParseCityNames = collections.namedtuple(
 
 
 class Client:
-    def __init__(self):
+    def __init__(self, start_location_id=1, end_location_id=20):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
 
         self.cities = []
         self.cities_set = set()
+
+        self.start_location_id = start_location_id
+        self.end_location_id = end_location_id
 
     def define_city(self, html, location):
         soup = BeautifulSoup(html, 'html.parser')
@@ -43,7 +46,7 @@ class Client:
         return self.cities
 
     def define_all_cities(self):
-        for location in range(4550, 6000):
+        for location in range(self.start_location_id, self.end_location_id):
             path = f'https://www.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p=1&region={location}&type=4'
             response = requests.get(path)
             html = response.text
@@ -64,7 +67,7 @@ class Client:
                 city_id=city_couple[1],
             ))
 
-        path = "cities_eng.csv"
+        path = f"cities_{self.start_location_id}_{self.end_location_id}.csv"
         with open(path, "w") as f:
             writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
             for item in self.cities:
@@ -72,6 +75,6 @@ class Client:
 
 
 if __name__ == '__main__':
-    definer = Client()
+    definer = Client(start_location_id=6000, end_location_id=7000)
     definer.define_all_cities()
     definer.save_results()

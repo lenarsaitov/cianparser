@@ -42,6 +42,7 @@ class Client:
         if city not in self.cities_set:
             self.cities_set.add(city)
             self.cities.append((city, location))
+            self.save_results()
 
         return self.cities
 
@@ -77,4 +78,3 @@ class Client:
 if __name__ == '__main__':
     definer = Client(start_location_id=6000, end_location_id=7000)
     definer.define_all_cities()
-    definer.save_results()

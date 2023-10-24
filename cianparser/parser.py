@@ -148,7 +148,10 @@ class ParserOffers:
         return True, 0, True
 
     def parse_page_offer(self, html_offer):
-        soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+        try:
+            soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+        except:
+            soup_offer_page = BeautifulSoup(html_offer, 'html.parser')
 
         page_data = {
             "year_of_construction": -1,
@@ -251,7 +254,10 @@ class ParserOffers:
         return page_data
 
     def parse_page_offer_json(self, html_offer):
-        soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+        try:
+            soup_offer_page = BeautifulSoup(html_offer, 'lxml')
+        except:
+            soup_offer_page = BeautifulSoup(html_offer, 'html.parser')
 
         page_data = {
             "year_of_construction": -1,

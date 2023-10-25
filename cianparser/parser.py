@@ -108,7 +108,7 @@ class ParserOffers:
         except:
             soup = BeautifulSoup(html, 'html.parser')
 
-        if number_page == self.start_page:
+        if number_page == self.start_page and attempt_number == 0:
             print(f"The page from which the collection of information begins: \n {self.url}")
 
         if soup.text.find("Captcha") > 0:
@@ -131,7 +131,7 @@ class ParserOffers:
 
             return False, 0, True
 
-        if number_page == self.start_page:
+        if number_page == self.start_page and attempt_number == 0:
             print(f"Collecting information from pages with list of announcements", end="")
 
         print("")
@@ -396,6 +396,9 @@ class ParserOffers:
             location_data["residential_complex"] = ""
 
         for index, element in enumerate(elements):
+            if ("ЖК" in element.text) and ("«" in element.text) and ("»" in element.text):
+                location_data["residential_complex"] = element.text.split("«")[1].split("»")[0]
+
             if "р-н" in element.text:
                 address_elements = element.text.split(",")
                 if len(address_elements) < 2:
@@ -449,16 +452,30 @@ class ParserOffers:
                     if "," in location_data["underground"]:
                         location_data["underground"] = location_data["underground"].split(",")[0]
 
-                    if self.is_sale():
-                        address_elements = element.text.split(",")
-                        if "ЖК" in address_elements[-1]:
-                            location_data["residential_complex"] = address_elements[-1].strip()
+                    address_elements = element.text.split(",")
+
+                    if len(address_elements) < 2:
+                        continue
+
+                    if "ЖК" in address_elements[-1]:
+                        location_data["residential_complex"] = address_elements[-1].strip()
+
+                    if "ЖК" in address_elements[-2]:
+                        location_data["residential_complex"] = address_elements[-2].strip()
+
+                    if "улица" in address_elements[-1]:
+                        location_data["street"] = address_elements[-1].replace("улица", "").strip()
+                        return location_data
+
+                    if "улица" in address_elements[-2]:
+                        location_data["street"] = address_elements[-2].replace("улица", "").strip()
+                        return location_data
 
         return location_data
 
     def define_price_data(self, block):
         elements = block.select("div[data-name='LinkArea']")[0]. \
-            select("div[data-name='GeneralInfoSectionRowComponent']")
+            select("span[data-mark='MainPrice']")
 
         price_data = {
             "price_per_month": -1,
@@ -475,7 +492,7 @@ class ParserOffers:
 
                 return price_data
 
-            if "₽" in element.text:
+            if "₽" in element.text and "млн" not in element.text:
                 price_description = element.text
                 price_data["price"] = int("".join(price_description[:price_description.find("₽") - 1].split()))
 

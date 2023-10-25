@@ -424,13 +424,18 @@ class ParserOffers:
                         if "ЖК" in address_elements[-2]:
                             location_data["residential_complex"] = address_elements[-2].strip()
 
-                        if "улица" in address_elements[-1]:
-                            location_data["street"] = address_elements[-1].replace("улица", "").strip()
-                            return location_data
+                        for street_type in STREET_TYPES:
+                            if street_type in address_elements[-1]:
+                                location_data["street"] = address_elements[-1].strip()
+                                if street_type == "улица":
+                                    location_data["street"] = location_data["street"].replace("улица", "")
+                                return location_data
 
-                        if "улица" in address_elements[-2]:
-                            location_data["street"] = address_elements[-2].replace("улица", "").strip()
-                            return location_data
+                            if street_type in address_elements[-2]:
+                                location_data["street"] = address_elements[-2].strip()
+                                if street_type == "улица":
+                                    location_data["street"] = location_data["street"].replace("улица", "")
+                                return location_data
 
                         for after_district_address_element in address_elements[ind + 1:]:
                             if len(list(set(after_district_address_element.split(" ")).intersection(
@@ -463,13 +468,37 @@ class ParserOffers:
                     if "ЖК" in address_elements[-2]:
                         location_data["residential_complex"] = address_elements[-2].strip()
 
-                    if "улица" in address_elements[-1]:
-                        location_data["street"] = address_elements[-1].replace("улица", "").strip()
-                        return location_data
+                    for street_type in STREET_TYPES:
+                        if street_type in address_elements[-1]:
+                            location_data["street"] = address_elements[-1].strip()
+                            if street_type == "улица":
+                                location_data["street"] = location_data["street"].replace("улица", "")
+                            return location_data
 
-                    if "улица" in address_elements[-2]:
-                        location_data["street"] = address_elements[-2].replace("улица", "").strip()
-                        return location_data
+                        if street_type in address_elements[-2]:
+                            location_data["street"] = address_elements[-2].strip()
+                            if street_type == "улица":
+                                location_data["street"] = location_data["street"].replace("улица", "")
+                            return location_data
+
+                for street_type in STREET_TYPES:
+                    if ", " + street_type + " " in element.text:
+                        address_elements = element.text.split(",")
+
+                        if len(address_elements) < 2:
+                            continue
+
+                        if street_type in address_elements[-1]:
+                            location_data["street"] = address_elements[-1].strip()
+                            if street_type == "улица":
+                                location_data["street"] = location_data["street"].replace("улица", "")
+                            return location_data
+
+                        if street_type in address_elements[-2]:
+                            location_data["street"] = address_elements[-2].strip()
+                            if street_type == "улица":
+                                location_data["street"] = location_data["street"].replace("улица", "")
+                            return location_data
 
         return location_data
 

@@ -108,10 +108,13 @@ class ParserOffers:
         except:
             soup = BeautifulSoup(html, 'html.parser')
 
+        if number_page == self.start_page:
+            print(f"The page from which the collection of information begins: \n {self.url}")
+
         if soup.text.find("Captcha") > 0:
             print(f"\r{number_page} page: there is CAPTCHA... failed to parse page...")
 
-            return False, 0, True
+            return False, attempt_number + 1, True
 
         header = soup.select("div[data-name='HeaderDefault']")
         if len(header) == 0:
@@ -123,10 +126,12 @@ class ParserOffers:
             return False, attempt_number + 1, True
 
         if page_number_html[0].text == "Назад" and (number_page != 1 and number_page != 0):
+            print(f"\n\r {number_page - self.start_page + 1} | {number_page} page: cian is redirecting from "
+                  f"page {number_page} to page 1... there is maximum value of page, you should try to decrease number of page... ending...")
+
             return True, 0, True
 
         if number_page == self.start_page:
-            print(f"The page from which the collection of information begins: \n {self.url} \n")
             print(f"Collecting information from pages with list of announcements", end="")
 
         print("")
@@ -141,8 +146,7 @@ class ParserOffers:
             total_planed_announcements = len(offers)*count_of_pages
 
             print(f"\r {number_page - self.start_page + 1} | {number_page} page with list: [" + "=>" * (
-                        ind + 1) + "  " * (
-                          len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
+                        ind + 1) + "  " * (len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
                   f" | Count of all parsed: {self.parsed_announcements_count}."
                   f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / total_planed_announcements)} %."
                   f" Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub", end="\r",
@@ -676,7 +680,7 @@ class ParserOffers:
                 break
 
         print(f"\n\nThe collection of information from the pages with list of announcements is completed")
-        print(f"Total number of parced announcements: {self.parsed_announcements_count}. ", end="")
+        print(f"Total number of parsed announcements: {self.parsed_announcements_count}. ", end="")
 
         if self.is_sale():
             print(f"Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")

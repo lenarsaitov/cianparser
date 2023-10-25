@@ -112,24 +112,24 @@ class ParserOffers:
             print(f"The page from which the collection of information begins: \n {self.url}")
 
         if soup.text.find("Captcha") > 0:
-            print(f"\r{number_page} page: there is CAPTCHA... failed to parse page...")
+            print(f"\r{number_page} page: there is CAPTCHA... failed to parse page... ending...")
 
             return False, attempt_number + 1, True
 
         header = soup.select("div[data-name='HeaderDefault']")
         if len(header) == 0:
-            return False, attempt_number + 1, True
+            return False, attempt_number + 1, False
 
         offers = soup.select("article[data-name='CardComponent']")
         page_number_html = soup.select("button[data-name='PaginationButton']")
         if len(page_number_html) == 0:
-            return False, attempt_number + 1, True
+            return False, attempt_number + 1, False
 
         if page_number_html[0].text == "Назад" and (number_page != 1 and number_page != 0):
             print(f"\n\r {number_page - self.start_page + 1} | {number_page} page: cian is redirecting from "
                   f"page {number_page} to page 1... there is maximum value of page, you should try to decrease number of page... ending...")
 
-            return True, 0, True
+            return False, 0, True
 
         if number_page == self.start_page:
             print(f"Collecting information from pages with list of announcements", end="")
@@ -154,7 +154,7 @@ class ParserOffers:
 
         time.sleep(2)
 
-        return True, 0, True
+        return True, 0, False
 
     def parse_page_offer(self, html_offer):
         try:
@@ -658,26 +658,31 @@ class ParserOffers:
         if self.is_saving_csv:
             print(f"The absolute path to the file: \n{self.file_path} \n")
 
-        attempt_number_exception = 0
-        for number_page in range(self.start_page, self.end_page + 1):
-            try:
-                parsed, attempt_number = False, 0
-                while not parsed and attempt_number < 3:
-                    parsed, attempt_number, end = self.load_and_parse_page(number_page=number_page,
-                                                                      count_of_pages=self.end_page+1-self.start_page,
-                                                                      attempt_number=attempt_number)
-                    attempt_number_exception = 0
-                    if end:
-                        break
+        number_page = self.start_page - 1
+        while number_page < self.end_page:
+            number_page += 1
+            attempt_number_exception = 0
 
-            except Exception as e:
-                attempt_number_exception += 1
-                if attempt_number_exception < 3:
-                    continue
-                print(f"\n\nException: {e}")
-                print(f"The collection of information from the pages with ending parse on {number_page} page...\n")
-                print(f"Average price per day: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")
-                break
+            while attempt_number_exception < 3:
+                try:
+                    parsed, attempt_number, end_all_parsing = self.load_and_parse_page(number_page=number_page,
+                                                                           count_of_pages=self.end_page + 1 - self.start_page,
+                                                                           attempt_number=attempt_number_exception)
+                    if parsed:
+                        attempt_number_exception = 3
+
+                    if end_all_parsing:
+                        attempt_number_exception = 3
+                        number_page = self.end_page
+
+                except Exception as e:
+                    attempt_number_exception += 1
+                    if attempt_number_exception < 3:
+                        continue
+                    print(f"\n\nException: {e}")
+                    print(f"The collection of information from the pages with ending parse on {number_page} page...\n")
+                    print(f"Average price per day: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")
+                    break
 
         print(f"\n\nThe collection of information from the pages with list of announcements is completed")
         print(f"Total number of parsed announcements: {self.parsed_announcements_count}. ", end="")

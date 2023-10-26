@@ -17,9 +17,12 @@ from cianparser.helpers import *
 class ParserOffers:
     def __init__(self, deal_type: str, accommodation_type: str, city_name: str, location_id: str, rooms,
                  start_page: int, end_page: int, is_saving_csv=False, is_latin=False, is_express_mode=False,
-                 is_by_homeowner=False):
+                 is_by_homeowner=False, proxies=None):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
+        if proxies is not None:
+            self.session.proxies = proxies
+
         self.is_saving_csv = is_saving_csv
         self.is_latin = is_latin
         self.is_express_mode = is_express_mode

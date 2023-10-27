@@ -402,7 +402,7 @@ class ParserOffers:
             if ("ЖК" in element.text) and ("«" in element.text) and ("»" in element.text):
                 location_data["residential_complex"] = element.text.split("«")[1].split("»")[0]
 
-            if "р-н" in element.text:
+            if "р-н" in element.text and len(element.text) < 250:
                 address_elements = element.text.split(",")
                 if len(address_elements) < 2:
                     continue
@@ -455,7 +455,7 @@ class ParserOffers:
 
         if location_data["district"] == "":
             for index, element in enumerate(elements):
-                if ", м. " in element.text:
+                if ", м. " in element.text and len(element.text) < 250:
                     location_data["underground"] = element.text.split(", м. ")[1]
                     if "," in location_data["underground"]:
                         location_data["underground"] = location_data["underground"].split(",")[0]
@@ -485,22 +485,28 @@ class ParserOffers:
                             return location_data
 
                 for street_type in STREET_TYPES:
-                    if ", " + street_type + " " in element.text:
+                    if (", " + street_type + " " in element.text) or (" " + street_type + ", " in element.text):
                         address_elements = element.text.split(",")
 
-                        if len(address_elements) < 2:
+                        if len(address_elements) < 3:
                             continue
 
                         if street_type in address_elements[-1]:
                             location_data["street"] = address_elements[-1].strip()
                             if street_type == "улица":
                                 location_data["street"] = location_data["street"].replace("улица", "")
+
+                            location_data["district"] = address_elements[-2].strip()
+
                             return location_data
 
                         if street_type in address_elements[-2]:
                             location_data["street"] = address_elements[-2].strip()
                             if street_type == "улица":
                                 location_data["street"] = location_data["street"].replace("улица", "")
+
+                            location_data["district"] = address_elements[-3].strip()
+
                             return location_data
 
         return location_data

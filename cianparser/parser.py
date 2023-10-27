@@ -96,7 +96,6 @@ class ParserOffers:
         if self.is_by_homeowner:
             url += IS_ONLY_HOMEOWNER
 
-
         return url
 
     def load_page(self, number_page=1):
@@ -146,10 +145,11 @@ class ParserOffers:
             if not self.is_express_mode:
                 time.sleep(4)
 
-            total_planed_announcements = len(offers)*count_of_pages
+            total_planed_announcements = len(offers) * count_of_pages
 
             print(f"\r {number_page - self.start_page + 1} | {number_page} page with list: [" + "=>" * (
-                        ind + 1) + "  " * (len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
+                    ind + 1) + "  " * (
+                              len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
                   f" | Count of all parsed: {self.parsed_announcements_count}."
                   f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / total_planed_announcements)} %."
                   f" Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub", end="\r",
@@ -204,8 +204,8 @@ class ParserOffers:
         try:
             contact_data = soup_offer_page.select("div[data-name='OfferContactsAside']")[0].text
             if "+7" in contact_data:
-                page_data["phone"] = (contact_data[contact_data.find("+7"):contact_data.find("+7") + 16]).\
-                    replace(" ", "").\
+                page_data["phone"] = (contact_data[contact_data.find("+7"):contact_data.find("+7") + 16]). \
+                    replace(" ", ""). \
                     replace("-", "")
         except:
             pass
@@ -328,8 +328,8 @@ class ParserOffers:
                     page_data["floors_count"] = int(ints[1])
 
         if "+7" in html_offer:
-            page_data["phone"] = html_offer[html_offer.find("+7"): html_offer.find("+7") + 16].split('"')[0].\
-                replace(" ", "").\
+            page_data["phone"] = html_offer[html_offer.find("+7"): html_offer.find("+7") + 16].split('"')[0]. \
+                replace(" ", ""). \
                 replace("-", "")
 
         return page_data
@@ -393,6 +393,7 @@ class ParserOffers:
         location_data = dict()
         location_data["district"] = ""
         location_data["street"] = ""
+        location_data["house_number"] = ""
         location_data["underground"] = ""
 
         if self.is_sale():
@@ -414,6 +415,11 @@ class ParserOffers:
                     location_data["underground"] = element.text.split(", м. ")[1]
                     if "," in location_data["underground"]:
                         location_data["underground"] = location_data["underground"].split(",")[0]
+
+                if (any(chr.isdigit() for chr in address_elements[-1]) and "жк" not in address_elements[-1].lower() and
+                    not any(street_type in address_elements[-1].lower() for street_type in STREET_TYPES)) and len(
+                    address_elements[-1]) < 10:
+                    location_data["house_number"] = address_elements[-1].strip()
 
                 for ind, elem in enumerate(address_elements):
                     if "р-н" in elem:
@@ -438,9 +444,10 @@ class ParserOffers:
                                 location_data["street"] = address_elements[-2].strip()
                                 if street_type == "улица":
                                     location_data["street"] = location_data["street"].replace("улица", "")
+
                                 return location_data
 
-                        for after_district_address_element in address_elements[ind + 1:]:
+                        for k, after_district_address_element in enumerate(address_elements[ind + 1:]):
                             if len(list(set(after_district_address_element.split(" ")).intersection(
                                     NOT_STREET_ADDRESS_ELEMENTS))) != 0:
                                 continue
@@ -449,6 +456,7 @@ class ParserOffers:
                                 continue
 
                             location_data["street"] = after_district_address_element.strip()
+
                             return location_data
 
                 return location_data
@@ -471,6 +479,13 @@ class ParserOffers:
                     if "ЖК" in address_elements[-2]:
                         location_data["residential_complex"] = address_elements[-2].strip()
 
+                    if (any(chr.isdigit() for chr in address_elements[-1]) and "жк" not in address_elements[
+                        -1].lower() and
+                        not any(
+                            street_type in address_elements[-1].lower() for street_type in STREET_TYPES)) and len(
+                        address_elements[-1]) < 10:
+                        location_data["house_number"] = address_elements[-1].strip()
+
                     for street_type in STREET_TYPES:
                         if street_type in address_elements[-1]:
                             location_data["street"] = address_elements[-1].strip()
@@ -490,6 +505,13 @@ class ParserOffers:
 
                         if len(address_elements) < 3:
                             continue
+
+                        if (any(chr.isdigit() for chr in address_elements[-1]) and "жк" not in address_elements[
+                            -1].lower() and
+                            not any(
+                                street_type in address_elements[-1].lower() for street_type in STREET_TYPES)) and len(
+                            address_elements[-1]) < 10:
+                            location_data["house_number"] = address_elements[-1].strip()
 
                         if street_type in address_elements[-1]:
                             location_data["street"] = address_elements[-1].strip()
@@ -523,10 +545,12 @@ class ParserOffers:
         for element in elements:
             if "₽/мес" in element.text:
                 price_description = element.text
-                price_data["price_per_month"] = int("".join(price_description[:price_description.find("₽/мес") - 1].split()))
+                price_data["price_per_month"] = int(
+                    "".join(price_description[:price_description.find("₽/мес") - 1].split()))
 
                 if "%" in price_description:
-                    price_data["commissions"] = int(price_description[price_description.find("%") - 2:price_description.find("%")].replace(" ", ""))
+                    price_data["commissions"] = int(
+                        price_description[price_description.find("%") - 2:price_description.find("%")].replace(" ", ""))
 
                 return price_data
 
@@ -539,51 +563,40 @@ class ParserOffers:
         return price_data
 
     def define_specification_data(self, block):
+        specification_data = dict()
+        specification_data["floor"] = -1
+        specification_data["floors_count"] = -1
+        specification_data["rooms_count"] = -1
+        specification_data["total_meters"] = -1
+
         title = block.select("div[data-name='LinkArea']")[0].select("div[data-name='GeneralInfoSectionRowComponent']")[
             0].text
 
         common_properties = block.select("div[data-name='LinkArea']")[0]. \
             select("div[data-name='GeneralInfoSectionRowComponent']")[0].text
 
-        total_meters = None
         if common_properties.find("м²") is not None:
             total_meters = title[: common_properties.find("м²")].replace(",", ".")
             if len(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, total_meters)) != 0:
-                total_meters = float(re.findall(FLOATS_NUMBERS_REG_EXPRESSION, total_meters)[-1].replace(" ", "").replace("-", ""))
-            else:
-                total_meters = -1
+                specification_data["total_meters"] = float(
+                    re.findall(FLOATS_NUMBERS_REG_EXPRESSION, total_meters)[-1].replace(" ", "").replace("-", ""))
 
         if "этаж" in common_properties:
             floor_per = common_properties[common_properties.rfind("этаж") - 7: common_properties.rfind("этаж")]
+            floor_properties = floor_per.split("/")
 
-            floor_per = floor_per.split("/")
+            if len(floor_properties) == 2:
+                ints = re.findall(r'\d+', floor_properties[0])
+                if len(ints) != 0:
+                    specification_data["floor"] = int(ints[-1])
 
-            if len(floor_per) == 0:
-                floor, floors_count = -1, -1
-            else:
-                floor, floors_count = floor_per[0], floor_per[1]
+                ints = re.findall(r'\d+', floor_properties[1])
+                if len(ints) != 0:
+                    specification_data["floors_count"] = int(ints[-1])
 
-            ints = re.findall(r'\d+', floor)
-            if len(ints) == 0:
-                floor = -1
-            else:
-                floor = int(ints[-1])
+        specification_data["rooms_count"] = define_rooms_count(common_properties)
 
-            ints = re.findall(r'\d+', floors_count)
-            if len(ints) == 0:
-                floors_count = -1
-            else:
-                floors_count = int(ints[-1])
-        else:
-            floors_count = -1
-            floor = -1
-
-        return {
-            "floor": floor,
-            "floors_count": floors_count,
-            "rooms_count": define_rooms_count(common_properties),
-            "total_meters": total_meters,
-        }
+        return specification_data
 
     def parse_block(self, block):
         common_data = dict()
@@ -597,7 +610,8 @@ class ParserOffers:
         price_data = self.define_price_data(block=block)
         specification_data = self.define_specification_data(block=block)
 
-        if self.is_by_homeowner and (author_data["author_type"] != "unknown" and author_data["author_type"] != "homeowner"):
+        if self.is_by_homeowner and (
+                author_data["author_type"] != "unknown" and author_data["author_type"] != "homeowner"):
             return
 
         if self.is_latin:
@@ -641,11 +655,13 @@ class ParserOffers:
 
         specification_data["price_per_m2"] = float(0)
         if "price" in price_data:
-            self.average_price = (self.average_price*self.parsed_announcements_count + price_data["price"])/(self.parsed_announcements_count+1)
-            price_data["price_per_m2"] = int(float(price_data["price"])/specification_data["total_meters"])
+            self.average_price = (self.average_price * self.parsed_announcements_count + price_data["price"]) / (
+                        self.parsed_announcements_count + 1)
+            price_data["price_per_m2"] = int(float(price_data["price"]) / specification_data["total_meters"])
         elif "price_per_month" in price_data:
-            self.average_price = (self.average_price*self.parsed_announcements_count + price_data["price_per_month"])/(self.parsed_announcements_count+1)
-            price_data["price_per_m2"] = int(float(price_data["price_per_month"])/specification_data["total_meters"])
+            self.average_price = (self.average_price * self.parsed_announcements_count + price_data[
+                "price_per_month"]) / (self.parsed_announcements_count + 1)
+            price_data["price_per_m2"] = int(float(price_data["price_per_month"]) / specification_data["total_meters"])
 
         self.parsed_announcements_count += 1
 
@@ -653,7 +669,8 @@ class ParserOffers:
             return
 
         self.result_parsed.add(define_id_url(common_data["link"]))
-        self.result.append(self.union(author_data, common_data, specification_data, price_data, page_data, location_data))
+        self.result.append(
+            self.union(author_data, common_data, specification_data, price_data, page_data, location_data))
 
         if self.is_saving_csv:
             self.save_results()
@@ -705,7 +722,8 @@ class ParserOffers:
 
     def load_and_parse_page(self, number_page, count_of_pages, attempt_number):
         html = self.load_page(number_page=number_page)
-        return self.parse_page(html=html, number_page=number_page, count_of_pages=count_of_pages, attempt_number=attempt_number)
+        return self.parse_page(html=html, number_page=number_page, count_of_pages=count_of_pages,
+                               attempt_number=attempt_number)
 
     def run(self):
         print(f"\n{' ' * 30}Preparing to collect information from pages..")

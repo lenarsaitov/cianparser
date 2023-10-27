@@ -47,6 +47,7 @@ Collecting information from pages with list of announcements
    'district': 'Замоскворечье',
    'underground': 'Новокузнецкая',
    'street': 'Космодамианская набережная',
+   'house_number': 25,
    'floor': 5,
    'floors_count': 12,
    'total_meters': 85.0,
@@ -90,6 +91,7 @@ Total number of parced announcements: 56. Average price per month: 236 426 rub
 * __district__ - район
 * __underground__ - метро
 * __street__ - улица
+* __house_number__ - номер дома
 * __floor__ - этаж
 * __floors_count__ - общее количество этажей
 * __total_meters__ - общая площадь

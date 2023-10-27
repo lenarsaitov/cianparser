@@ -1,3 +1,8 @@
+import urllib.request
+import urllib.error
+from bs4 import BeautifulSoup
+
+
 def define_rooms_count(description):
     if "1-комн" in description or "Студия" in description:
         rooms_count = 1
@@ -23,3 +28,29 @@ def define_id_url(url: str):
         return url_path_elements[-2]
 
     return "-1"
+
+
+def is_available_proxy(url, pip):
+    try:
+        proxy_handler = urllib.request.ProxyHandler({'http': pip})
+        opener = urllib.request.build_opener(proxy_handler)
+        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+        urllib.request.install_opener(opener)
+        req = urllib.request.Request(url)
+        html = urllib.request.urlopen(req)
+
+        try:
+            soup = BeautifulSoup(html, 'lxml')
+        except:
+            soup = BeautifulSoup(html, 'html.parser')
+
+        if soup.text.find("Captcha") > 0:
+            return False, True
+
+        return True, False
+    except urllib.error.HTTPError as e:
+        print('Error code: ', e.code)
+        return not e.code, False
+    except Exception as detail:
+        print("Error:", detail)
+        return False, False

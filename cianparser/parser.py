@@ -9,6 +9,8 @@ import csv
 import pathlib
 from datetime import datetime
 import math
+import random
+import socket
 
 from cianparser.constants import *
 from cianparser.helpers import *
@@ -20,9 +22,12 @@ class ParserOffers:
                  is_by_homeowner=False, proxies=None):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
-        if proxies is not None:
-            self.session.proxies = proxies
 
+        if proxies is not None:
+            if len(proxies) == 0:
+                proxies = None
+
+        self.proxy_pool = proxies
         self.is_saving_csv = is_saving_csv
         self.is_latin = is_latin
         self.is_express_mode = is_express_mode
@@ -100,8 +105,41 @@ class ParserOffers:
 
     def load_page(self, number_page=1):
         self.url = self.build_url().format(number_page, self.location_id)
+
+        socket.setdefaulttimeout(10)
+        was_proxy = self.proxy_pool is not None
+        set_proxy = False
+        self.url = self.build_url().format(number_page, self.location_id)
+
+        if was_proxy:
+            print("The process of checking the proxies... Search an available one among them...")
+
+        ind = 0
+        while self.proxy_pool is not None and set_proxy is False:
+            ind += 1
+            proxy = random.choice(self.proxy_pool)
+
+            available, is_captcha = is_available_proxy(self.url, proxy)
+            if not available or is_captcha:
+                if is_captcha:
+                    print(f" {ind} | proxy {proxy}: there is captcha.. trying another")
+                else:
+                    print(f" {ind} | proxy {proxy}: unavailable.. trying another..")
+
+                self.proxy_pool.remove(proxy)
+                if len(self.proxy_pool) == 0:
+                    self.proxy_pool = None
+            else:
+                print(f" {ind} | proxy {proxy}: available.. stop searching")
+                self.session.proxies = {"http": proxy, "https": proxy}
+                set_proxy = True
+
+        if was_proxy and set_proxy is False:
+            return None
+
         res = self.session.get(url=self.url)
         res.raise_for_status()
+
         return res.text
 
     def parse_page(self, html: str, number_page: int, count_of_pages: int, attempt_number: int):
@@ -114,7 +152,13 @@ class ParserOffers:
             print(f"The page from which the collection of information begins: \n {self.url}")
 
         if soup.text.find("Captcha") > 0:
-            print(f"\r{number_page} page: there is CAPTCHA... failed to parse page... ending...")
+            print(f"\r{number_page} page: there is CAPTCHA... failed to parse page...")
+
+            if self.proxy_pool is not None:
+                proxy = random.choice(self.proxy_pool)
+                print(f"\r{number_page} page: new attempt with proxy {proxy}...")
+                self.session.proxies = {"http": proxy}
+                return False, attempt_number + 1, False
 
             return False, attempt_number + 1, True
 
@@ -722,6 +766,10 @@ class ParserOffers:
 
     def load_and_parse_page(self, number_page, count_of_pages, attempt_number):
         html = self.load_page(number_page=number_page)
+
+        if html is None:
+            return False, attempt_number + 1, True
+
         return self.parse_page(html=html, number_page=number_page, count_of_pages=count_of_pages,
                                attempt_number=attempt_number)
 

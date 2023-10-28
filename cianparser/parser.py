@@ -17,7 +17,7 @@ from cianparser.helpers import *
 class ParserOffers:
     def __init__(self, deal_type: str, accommodation_type: str, city_name: str, location_id: str, rooms,
                  start_page: int, end_page: int, is_saving_csv=False, is_latin=False, is_express_mode=False,
-                 is_by_homeowner=False, proxies=None):
+                 additional_settings=None, proxies=None):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
 
@@ -29,7 +29,7 @@ class ParserOffers:
         self.is_saving_csv = is_saving_csv
         self.is_latin = is_latin
         self.is_express_mode = is_express_mode
-        self.is_by_homeowner = is_by_homeowner
+        self.additional_settings = additional_settings
 
         self.result_parsed = set()
         self.result = []
@@ -96,8 +96,45 @@ class ParserOffers:
         if self.rent_type is not None:
             url += DURATION_TYPE_PARAMETER.format(self.rent_type)
 
-        if self.is_by_homeowner:
-            url += IS_ONLY_HOMEOWNER
+        if self.additional_settings is not None:
+            if "is_by_homeowner" in self.additional_settings.keys() and self.additional_settings["is_by_homeowner"]:
+                url += IS_ONLY_HOMEOWNER
+            if "have_balconies" in self.additional_settings.keys() and self.additional_settings["have_balconies"]:
+                url += HAVE_BALCONIES
+            if "have_loggia" in self.additional_settings.keys() and self.additional_settings["have_loggia"]:
+                url += HAVE_LOGGIA
+
+            if "min_house_year" in self.additional_settings.keys():
+                url += MIN_HOUSE_YEAR.format(self.additional_settings["min_house_year"])
+            if "max_house_year" in self.additional_settings.keys():
+                url += MAX_HOUSE_YEAR.format(self.additional_settings["max_house_year"])
+
+            if "min_price" in self.additional_settings.keys():
+                url += MIN_PRICE.format(self.additional_settings["min_price"])
+            if "max_price" in self.additional_settings.keys():
+                url += MAX_PRICE.format(self.additional_settings["max_price"])
+
+            if "min_floor" in self.additional_settings.keys():
+                url += MIN_FLOOR.format(self.additional_settings["min_floor"])
+            if "max_floor" in self.additional_settings.keys():
+                url += MAX_FLOOR.format(self.additional_settings["max_floor"])
+
+            if "min_total_floor" in self.additional_settings.keys():
+                url += MIN_TOTAL_FLOOR.format(self.additional_settings["min_total_floor"])
+            if "max_total_floor" in self.additional_settings.keys():
+                url += MAX_TOTAL_FLOOR.format(self.additional_settings["max_total_floor"])
+
+            if "sort_by" in self.additional_settings.keys():
+                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX:
+                    url += SORT_BY_PRICE_FROM_MIN_TO_MAX
+                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MAX_TO_MIN:
+                    url += SORT_BY_PRICE_FROM_MAX_TO_MIN
+                if self.additional_settings["sort_by"] == IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN:
+                    url += SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN
+                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER:
+                    url += SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER
+                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER:
+                    url += SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER
 
         return url
 
@@ -167,7 +204,7 @@ class ParserOffers:
         offers = soup.select("article[data-name='CardComponent']")
         page_number_html = soup.select("button[data-name='PaginationButton']")
         if len(page_number_html) == 0:
-            return False, attempt_number + 1, False
+            return False, attempt_number + 1, True
 
         if page_number_html[0].text == "Назад" and (number_page != 1 and number_page != 0):
             print(f"\n\r {number_page - self.start_page + 1} | {number_page} page: cian is redirecting from "
@@ -214,7 +251,8 @@ class ParserOffers:
         price_data = define_price_data(block=block)
         specification_data = define_specification_data(block=block)
 
-        if self.is_by_homeowner and (
+        if (self.additional_settings is not None and "is_by_homeowner" in self.additional_settings.keys() and
+            self.additional_settings["is_by_homeowner"]) and (
                 author_data["author_type"] != "unknown" and author_data["author_type"] != "homeowner"):
             return
 
@@ -338,17 +376,16 @@ class ParserOffers:
 
         number_page = self.start_page - 1
         while number_page < self.end_page:
+            page_parsed = False
             number_page += 1
             attempt_number_exception = 0
 
-            while attempt_number_exception < 3:
+            while attempt_number_exception < 3 and not page_parsed:
                 try:
-                    (parsed, attempt_number, end_all_parsing) = self.load_and_parse_page(
+                    (page_parsed, attempt_number, end_all_parsing) = self.load_and_parse_page(
                         number_page=number_page,
                         count_of_pages=self.end_page + 1 - self.start_page,
                         attempt_number=attempt_number_exception)
-                    if parsed:
-                        attempt_number_exception = 3
 
                     if end_all_parsing:
                         attempt_number_exception = 3

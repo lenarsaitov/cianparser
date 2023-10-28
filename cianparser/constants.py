@@ -9,6 +9,28 @@ ROOM = "&room{}=1"
 STUDIO = "&room9=1"
 WITHOUT_NEIGHBORS_OF_CITY = "&with_neighbors=0"
 IS_ONLY_HOMEOWNER = "&is_by_homeowner=1"
+HAVE_BALCONIES = "&min_balconies=1"
+HAVE_LOGGIA = "&loggia=1"
+MIN_HOUSE_YEAR = "&min_house_year={}"
+MAX_HOUSE_YEAR = "&min_house_year={}"
+MIN_PRICE = "&minprice={}"
+MAX_PRICE = "&maxprice={}"
+MIN_FLOOR = "&minfloor={}"
+MAX_FLOOR = "&maxfloor={}"
+MIN_TOTAL_FLOOR = "&minfloorn={}"
+MAX_TOTAL_FLOOR = "&maxfloorn={}"
+
+SORT_BY_PRICE_FROM_MIN_TO_MAX = "&sort=price_object_order"
+SORT_BY_PRICE_FROM_MAX_TO_MIN = "&sort=total_price_desc"
+SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN = "&sort=area_order"
+SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER = "&sort=creation_date_desc"
+SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER = "&sort=creation_date_asc"
+
+IS_SORT_BY_PRICE_FROM_MIN_TO_MAX = "price_from_min_to_max"
+IS_SORT_BY_PRICE_FROM_MAX_TO_MIN = "price_from_max_to_min"
+IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN = "total_meters_from_max_to_min"
+IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER = "creation_data_from_newer_to_older"
+IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER = "creation_data_from_older_to_newer"
 
 NOT_STREET_ADDRESS_ELEMENTS = {"ЖК", "м.", "мкр.", "Жилой комплекс", "Жилой Комплекс"}
 
@@ -135,7 +157,7 @@ OTHER_CITIES = [
     ['Балашиха', '174292'],
     ['Бокситогорск', '174373'],
     ['Бора', '174402'],
-    ['Видный', '174508'],
+    ['Видное', '174508'],
     ['Волоколамск', '174522'],
     ['Воскресенск', '174530'],
     ['Высоковск', '174541'],
@@ -144,16 +166,41 @@ OTHER_CITIES = [
     ['Домодедово', '174640'],
     ['Дрезна', '174644'],
     ['Егорьевск', '174659'],
-    ['Истра,174832'],
-    ['Кашира,174957'],
-    ['Ликино-Дулёво,175209'],
-    ['Лосино-Петровский,175219'],
-    ['Луховицы,175226'],
-    ['Люберцы,175231'],
-    ['Можайск,175349'],
-    ['Мытищи,175378'],
-    ['Набережные Челны,175380'],
-    ['Назрань,175389'],
+    ['Истра', '174832'],
+    ['Кашира', '174957'],
+    ['Клин', '175004'],
+    ['Кострома', '175050'],
+    ['Котельник', '175051'],
+    ['Красногорск', '175071'],
+    ['Краснозаводск', '175075'],
+    ['Кубинка', '175104'],
+    ['Ликино-Дулёво', '175209'],
+    ['Лосино-Петровский', '175219'],
+    ['Луховицы', '175226'],
+    ['Люберцы', '175231'],
+    ['Можайск', '175349'],
+    ['Мытищи', '175378'],
+    ['Набережные Челны', '175380'],
+    ['Назрань', '175389'],
+    ['Одинцово', '175578'],
+    ['Орёл', '175604'],
+    ['Павловский Посад', '175635'],
+    ['Пушкин', '175744'],
+    ['Раменское', '175758'],
+    ['Руза', '175785'],
+    ['Сергиевом Посад', '175864'],
+    ['Солнечногорск', '175903'],
+    ['Ступино', '175996'],
+    ['Талдом', '176052'],
+    ['Тверь', '176083'],
+    ['Уфа', '176245'],
+    ['Хотьково', '176281'],
+    ['Черноголовка', '176316'],
+    ['Чехов', '176321'],
+    ['Шатура', '176366'],
+    ['Щёлково', '176401'],
+    ['Электрогорск', '176405'],
+    ['Яхрома', '176463'],
 ]
 
 CITIES.extend(OTHER_CITIES)

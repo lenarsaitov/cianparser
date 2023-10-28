@@ -12,6 +12,10 @@ def list_cities():
     return CITIES
 
 
+def list_metro_stations():
+    return METRO_STATIONS
+
+
 def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, end_page=100, is_saving_csv=False,
           is_latin=False, is_express_mode=True, additional_settings=None, proxies=None):
     """

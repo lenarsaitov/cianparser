@@ -99,6 +99,9 @@ additional_settings = {
     "max_floor": 4,
     "min_total_floor": 5,
     "max_total_floor": 10,
+    "metro": "Московский",
+    "metro_station": "ВДНХ",
+    "metro_foot_minute": 45,
     "sort_by": "price_from_min_to_max",
 }
 ```
@@ -113,9 +116,14 @@ additional_settings = {
 * __max_floor__ - этаж до
 * __min_total_floor__ - этажей в доме от
 * __max_total_floor__ - этажей в доме до
+* __metro__ - название метрополитена
+* __metro_station__ - станция метро (при условии что задано metro)
+* __metro_foot_minute__ - сколько минут до метро (при условии что задано metro_station)
 * __sort_by__ - сортировка объявлений
 
-Возможные значения для поля __sort_by__:
+Возможные значения полей **metro** и **metro_station** можно посмотреть **_cianparser.list_metro_stations().keys()_** и  **_cianparser.list_metro_stations()[metro]_** соотвественно
+
+Поле __sort_by__ может иметь следующие возможные значения:
 - "_price_from_min_to_max_" - сортировка по цене (сначала дешевле)
 - "_price_from_max_to_min_" - сортировка по цене (сначала дороже)
 - "_total_meters_from_max_to_min_" - сортировка по общей площади (сначала больше)

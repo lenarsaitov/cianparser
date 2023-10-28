@@ -124,6 +124,18 @@ class ParserOffers:
             if "max_total_floor" in self.additional_settings.keys():
                 url += MAX_TOTAL_FLOOR.format(self.additional_settings["max_total_floor"])
 
+            if "metro" in self.additional_settings.keys():
+                if "metro_station" in self.additional_settings.keys():
+                    is_available_metro = False
+                    if self.additional_settings["metro"] in METRO_STATIONS.keys():
+                        for metro_station, metro_id in METRO_STATIONS[self.additional_settings["metro"]]:
+                            if self.additional_settings["metro_station"] == metro_station:
+                                url += METRO_ID.format(metro_id)
+                                is_available_metro = True
+
+                    if "metro_foot_minute" in self.additional_settings.keys() and is_available_metro:
+                        url += METRO_FOOT_MINUTE.format(self.additional_settings["metro_foot_minute"])
+
             if "sort_by" in self.additional_settings.keys():
                 if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX:
                     url += SORT_BY_PRICE_FROM_MIN_TO_MAX

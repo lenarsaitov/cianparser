@@ -1,3 +1,4 @@
+import time
 import requests
 from bs4 import BeautifulSoup
 import pymorphy2
@@ -61,11 +62,12 @@ class Client:
         return self.cities
 
     def define_all_cities(self):
-        for location_id in range(self.start_location_id, self.end_location_id):
+        for location_id in range(self.start_location_id, self.end_location_id+1):
             path = f'https://www.cian.ru/cat.php?deal_type=rent&engine_version=2&offer_type=flat&p=1&region={location_id}&type=4'
             response = requests.get(path)
             html = response.text
             self.define_city(html, location_id)
+            time.sleep(2)
 
         self.cities = sorted(self.cities, key=lambda x: x[0])
 

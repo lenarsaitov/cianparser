@@ -6,7 +6,7 @@ with open("README.md", encoding="utf8") as file:
 
 setup(
     name='cianparser',
-    version='0.4.27',
+    version='0.4.28',
     description='Parser information from Cian website',
     url='https://github.com/lenarsaitov/cianparser',
     author='Lenar Saitov',

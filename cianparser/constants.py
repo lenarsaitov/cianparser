@@ -20,6 +20,8 @@ MAX_FLOOR = "&maxfloor={}"
 MIN_TOTAL_FLOOR = "&minfloorn={}"
 MAX_TOTAL_FLOOR = "&maxfloorn={}"
 
+HOUSE_MATERIAL_TYPE = "&house_material%5B0%5D={}"
+
 METRO_FOOT_MINUTE = "&foot_min={}"
 METRO_ID = "&metro%5B0%5D={}"
 

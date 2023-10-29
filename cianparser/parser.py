@@ -124,6 +124,9 @@ class ParserOffers:
             if "max_total_floor" in self.additional_settings.keys():
                 url += MAX_TOTAL_FLOOR.format(self.additional_settings["max_total_floor"])
 
+            if "house_material_type" in self.additional_settings.keys():
+                url += HOUSE_MATERIAL_TYPE.format(self.additional_settings["house_material_type"])
+
             if "metro" in self.additional_settings.keys():
                 if "metro_station" in self.additional_settings.keys():
                     is_available_metro = False

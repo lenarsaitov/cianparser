@@ -99,6 +99,7 @@ additional_settings = {
     "max_floor": 4,
     "min_total_floor": 5,
     "max_total_floor": 10,
+    "house_material_type": 1,
     "metro": "Московский",
     "metro_station": "ВДНХ",
     "metro_foot_minute": 45,
@@ -116,10 +117,21 @@ additional_settings = {
 * __max_floor__ - этаж до
 * __min_total_floor__ - этажей в доме от
 * __max_total_floor__ - этажей в доме до
+* __house_material_type__ - тип дома
 * __metro__ - название метрополитена
 * __metro_station__ - станция метро (при условии что задано metro)
 * __metro_foot_minute__ - сколько минут до метро (при условии что задано metro_station)
 * __sort_by__ - сортировка объявлений
+
+Для **house_material_type** возможны следующие из значений
+- _1_ - киричный
+- _2_ - монолитный
+- _3_ - панельный
+- _4_ - блочный
+- _5_ - деревянный
+- _6_ - сталинский
+- _7_ - щитовой
+- _8_ - кирпично-монолитный
 
 Возможные значения полей **metro** и **metro_station** можно посмотреть **_cianparser.list_metro_stations().keys()_** и  **_cianparser.list_metro_stations()[metro]_** соотвественно
 

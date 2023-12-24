@@ -178,6 +178,10 @@ def parse_page_offer_json(html_offer):
 
     page_data = {
         "year_of_construction": -1,
+        "object_type": -1,
+        "house_material_type": -1,
+        "heating_type": -1,
+        "finish_type": -1,
         "living_meters": -1,
         "kitchen_meters": -1,
         "floor": -1,
@@ -188,8 +192,20 @@ def parse_page_offer_json(html_offer):
     spans = soup_offer_page.select("span")
 
     for index, span in enumerate(spans):
-        if "Год постройки" in span:
+        if "Год постройки" in span and len(spans[index + 1].text) < 5:
             page_data["year_of_construction"] = spans[index + 1].text
+
+        if "Тип жилья" == span.text:
+            page_data["object_type"] = spans[index + 1].text
+
+        if "Тип дома" == span.text:
+            page_data["house_material_type"] = spans[index + 1].text
+
+        if "Отопление" == span.text:
+            page_data["heating_type"] = spans[index + 1].text
+
+        if "Отделка" == span.text:
+            page_data["finish_type"] = spans[index + 1].text
 
     if page_data["year_of_construction"] == -1:
         p_tags = soup_offer_page.select("p")

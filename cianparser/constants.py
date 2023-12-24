@@ -44,7 +44,7 @@ STREET_TYPES = {"улица", "аллея", "бульвар", "линия", "н�
 
 SPECIFIC_FIELDS_FOR_RENT_LONG = {"price_per_month", "commissions"}
 SPECIFIC_FIELDS_FOR_RENT_SHORT = {"price_per_day"}
-SPECIFIC_FIELDS_FOR_SALE = {"price", "residential_complex"}
+SPECIFIC_FIELDS_FOR_SALE = {"price", "residential_complex", "object_type", "finish_type"}
 
 CITIES = [
     ['Москва', '1'],
@@ -118,7 +118,7 @@ CITIES = [
     ['Псков', '4946'],
     ['Пущино', '4949'],
     ['Реутов', '4958'],
-    ['Ростов-На-Дону', '4959'],
+    ['Ростов-на-Дону', '4959'],
     ['Рошаль', '4960'],
     ['Рязань', '4963'],
     ['Салехард', '4965'],

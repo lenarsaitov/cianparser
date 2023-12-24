@@ -120,7 +120,7 @@ additional_settings = {
 * __house_material_type__ - тип дома
 * __metro__ - название метрополитена
 * __metro_station__ - станция метро (доступно при условии, что задано metro)
-* __metro_foot_minute__ - сколько минут до метро (доступно при условии, что задано metro_station)
+* __metro_foot_minute__ - сколько минут до метро пешком (доступно при заданном параметре metro_station)
 * __sort_by__ - сортировка объявлений
 
 Для **house_material_type** возможны следующие из значений

@@ -36,9 +36,10 @@ class Client:
 
         address = offers[1].text
 
-        for offer in offers:
-            if ", м." in offer.text:
-                address = offer.text
+        if ", м." not in address:
+            for offer in offers:
+                if ", м." in offer.text:
+                    address = offer.text
 
         if address.find(", м.") == 0:
             print("_" + "  " + "***" + "somethins wrong")

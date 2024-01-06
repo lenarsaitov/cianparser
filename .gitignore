@@ -2,3 +2,4 @@
 /build/
 /dist/
 /cianparser.egg-info/
+__pycache__/

@@ -145,6 +145,12 @@ class ParserOffers:
             if "flat_share" in self.additional_settings.keys():
                 url += FLAT_SHARE.format(self.additional_settings["flat_share"])
 
+            if "only_flat" in self.additional_settings.keys():
+                url += ONLY_FLAT.format(self.additional_settings["only_flat"])
+
+            if "apartment" in self.additional_settings.keys():
+                url += APARTMENT.format(self.additional_settings["apartment"])
+
             if "sort_by" in self.additional_settings.keys():
                 if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX:
                     url += SORT_BY_PRICE_FROM_MIN_TO_MAX

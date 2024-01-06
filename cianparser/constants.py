@@ -26,7 +26,10 @@ METRO_FOOT_MINUTE = "&only_foot=2&foot_min={}"
 METRO_ID = "&metro%5B0%5D={}"
 
 METRO_FOOT_MINUTE_SPECIAL = "&foot_min={}"
+
 FLAT_SHARE = "&flat_share={}"
+ONLY_FLAT = "&only_flat={}"
+APARTMENT = '&apartment={}'
 
 SORT_BY_PRICE_FROM_MIN_TO_MAX = "&sort=price_object_order"
 SORT_BY_PRICE_FROM_MAX_TO_MIN = "&sort=total_price_desc"

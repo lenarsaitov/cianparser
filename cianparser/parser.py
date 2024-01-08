@@ -288,7 +288,7 @@ class ParserOffers:
                 pass
 
             try:
-                common_data["author"] = transliterate.translit(common_data["author"], reversed=True)
+                author_data["author"] = transliterate.translit(author_data["author"], reversed=True)
             except:
                 pass
 
@@ -378,7 +378,7 @@ class ParserOffers:
         self.correlate_fields_to_deal_type()
         keys = self.result[0].keys()
 
-        with open(self.file_path, 'w', newline='') as output_file:
+        with open(self.file_path, 'w', newline='', encoding='utf-8') as output_file:
             dict_writer = csv.DictWriter(output_file, keys, delimiter=';')
             dict_writer.writeheader()
             dict_writer.writerows(self.result)

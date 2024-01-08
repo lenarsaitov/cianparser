@@ -139,6 +139,18 @@ class ParserOffers:
                     if "metro_foot_minute" in self.additional_settings.keys() and is_available_metro:
                         url += METRO_FOOT_MINUTE.format(self.additional_settings["metro_foot_minute"])
 
+            if "metro_foot_minute_special" in self.additional_settings.keys():
+                url += METRO_FOOT_MINUTE_SPECIAL.format(self.additional_settings["metro_foot_minute_special"])
+
+            if "flat_share" in self.additional_settings.keys():
+                url += FLAT_SHARE.format(self.additional_settings["flat_share"])
+
+            if "only_flat" in self.additional_settings.keys():
+                url += ONLY_FLAT.format(self.additional_settings["only_flat"])
+
+            if "apartment" in self.additional_settings.keys():
+                url += APARTMENT.format(self.additional_settings["apartment"])
+
             if "sort_by" in self.additional_settings.keys():
                 if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX:
                     url += SORT_BY_PRICE_FROM_MIN_TO_MAX

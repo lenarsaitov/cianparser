@@ -99,8 +99,8 @@ class ParserOffers:
         if self.additional_settings is not None:
             if "is_by_homeowner" in self.additional_settings.keys() and self.additional_settings["is_by_homeowner"]:
                 url += IS_ONLY_HOMEOWNER
-            if "have_balconies" in self.additional_settings.keys() and self.additional_settings["have_balconies"]:
-                url += HAVE_BALCONIES
+            if "min_balconies" in self.additional_settings.keys():
+                url += MIN_BALCONIES.format(self.additional_settings["min_balconies"])
             if "have_loggia" in self.additional_settings.keys() and self.additional_settings["have_loggia"]:
                 url += HAVE_LOGGIA
 
@@ -129,27 +129,24 @@ class ParserOffers:
 
             if "metro" in self.additional_settings.keys():
                 if "metro_station" in self.additional_settings.keys():
-                    is_available_metro = False
                     if self.additional_settings["metro"] in METRO_STATIONS.keys():
                         for metro_station, metro_id in METRO_STATIONS[self.additional_settings["metro"]]:
                             if self.additional_settings["metro_station"] == metro_station:
                                 url += METRO_ID.format(metro_id)
-                                is_available_metro = True
 
-                    if "metro_foot_minute" in self.additional_settings.keys() and is_available_metro:
-                        url += METRO_FOOT_MINUTE.format(self.additional_settings["metro_foot_minute"])
-
-            if "metro_foot_minute_special" in self.additional_settings.keys():
-                url += METRO_FOOT_MINUTE_SPECIAL.format(self.additional_settings["metro_foot_minute_special"])
+            if "metro_foot_minute" in self.additional_settings.keys():
+                url += METRO_FOOT_MINUTE.format(self.additional_settings["metro_foot_minute"])
 
             if "flat_share" in self.additional_settings.keys():
                 url += FLAT_SHARE.format(self.additional_settings["flat_share"])
 
             if "only_flat" in self.additional_settings.keys():
-                url += ONLY_FLAT.format(self.additional_settings["only_flat"])
+                if self.additional_settings["only_flat"]:
+                    url += ONLY_FLAT.format(1)
 
-            if "apartment" in self.additional_settings.keys():
-                url += APARTMENT.format(self.additional_settings["apartment"])
+            if "only_apartment" in self.additional_settings.keys():
+                if self.additional_settings["only_apartment"]:
+                    url += APARTMENT.format(1)
 
             if "sort_by" in self.additional_settings.keys():
                 if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX:

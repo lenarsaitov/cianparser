@@ -91,7 +91,7 @@ additional_settings = {
     "is_by_homeowner": True,
     "min_price": 1000000,
     "max_price": 10000000,
-    "have_balconies": True,
+    "min_balconies": 1,
     "have_loggia": True,
     "min_house_year": 1990,
     "max_house_year": 2023,
@@ -103,29 +103,31 @@ additional_settings = {
     "metro": "Московский",
     "metro_station": "ВДНХ",
     "metro_foot_minute": 45,
+    "flat_share": 2,
+    "only_flat": True,
+    "only_apartment": True,
     "sort_by": "price_from_min_to_max",
 }
 ```
 * __is_by_homeowner__ - объявления, созданных только собственниками
-* __min_price__ - цена от
-* __max_price__ - цена до
-* __have_balconies__ - наличие балкона
-* __have_loggia__ - наличия лоджи
+* __min_price__ - цена от (в рублях)
+* __max_price__ - цена до (в рублях)
+* __min_balconies__ - минимальное количество балконов
+* __have_loggia__ - наличие лоджи
 * __min_house_year__ - год постройки дома от
 * __max_house_year__ - год постройки дома до
 * __min_floor__ - этаж от
 * __max_floor__ - этаж до
 * __min_total_floor__ - этажей в доме от
 * __max_total_floor__ - этажей в доме до
-* __house_material_type__ - тип дома
-* __metro__ - название метрополитена
+* __house_material_type__ - тип дома (_см ниже возможные значения_)
+* __metro__ - название метрополитена (_см ниже возможные значения_)
 * __metro_station__ - станция метро (доступно при условии, что задано metro)
-* __metro_foot_minute__ - сколько минут до метро пешком (доступно при заданном параметре metro_station)
-* __metro_foot_minute_special__ - сколько минут до метро пешком (без указания конкретной станции)
-* __flat_share__ - с долями или без (2 - без долей, 1 - только доли)
-* __only_flat__ = 1 - без апартаментов
-* __apartment__ = 1 - только апартаменты
-* __sort_by__ - сортировка объявлений
+* __metro_foot_minute__ - сколько минут до метро пешком
+* __flat_share__ - с долями или без (1 - только доли, 2 - без долей)
+* __only_flat__ - без апартаментов
+* __only_apartment__ - только апартаменты
+* __sort_by__ - сортировка объявлений (_см ниже возможные значения_)
 
 Для **house_material_type** возможны следующие из значений
 - _1_ - киричный

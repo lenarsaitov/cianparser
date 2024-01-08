@@ -9,7 +9,7 @@ ROOM = "&room{}=1"
 STUDIO = "&room9=1"
 WITHOUT_NEIGHBORS_OF_CITY = "&with_neighbors=0"
 IS_ONLY_HOMEOWNER = "&is_by_homeowner=1"
-HAVE_BALCONIES = "&min_balconies=1"
+MIN_BALCONIES = "&min_balconies={}"
 HAVE_LOGGIA = "&loggia=1"
 MIN_HOUSE_YEAR = "&min_house_year={}"
 MAX_HOUSE_YEAR = "&min_house_year={}"
@@ -24,8 +24,6 @@ HOUSE_MATERIAL_TYPE = "&house_material%5B0%5D={}"
 
 METRO_FOOT_MINUTE = "&only_foot=2&foot_min={}"
 METRO_ID = "&metro%5B0%5D={}"
-
-METRO_FOOT_MINUTE_SPECIAL = "&foot_min={}"
 
 FLAT_SHARE = "&flat_share={}"
 ONLY_FLAT = "&only_flat={}"
@@ -567,6 +565,7 @@ METRO_STATIONS = {
         ['Апрелевка', '494'],
         ['Победа', '495'],
         ['Крёкшино', '496'],
+        ['Санино', '497'],
         ['Кокошкино', '498'],
         ['Толстопальцево', '499'],
         ['Лесной Городок', '500'],
@@ -596,7 +595,7 @@ METRO_STATIONS = {
         ['Физтех', '533'],
         ['Аэропорт Внуково', '535'],
         ['Пыхтино', '536'],
-        ['Марьина Роща,' '537'],
+        ['Марьина Роща', '537'],
     ],
     "Казанский": [
         ['Северный Вокзал', '314'],

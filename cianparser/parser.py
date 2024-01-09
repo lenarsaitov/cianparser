@@ -42,8 +42,7 @@ class ParserOffers:
 
         now_time = datetime.now().strftime("%d_%b_%Y_%H_%M_%S_%f")
         file_name = f'cian_parsing_result_{deal_type}_{self.start_page}_{self.end_page}_{transliterate.translit(self.city_name.lower(), reversed=True)}_{now_time}.csv'
-        current_dir_path = pathlib.Path.cwd()
-        self.file_path = pathlib.Path(current_dir_path, file_name.replace("'", ""))
+        self.file_path = pathlib.Path(pathlib.Path.cwd(), file_name.replace("'", ""))
 
         self.rent_type = None
         if deal_type == "rent_long":
@@ -77,88 +76,88 @@ class ParserOffers:
             for count_of_room in self.rooms:
                 if type(count_of_room) is int:
                     if 0 < count_of_room < 6:
-                        rooms_path += ROOM.format(count_of_room)
+                        rooms_path += ROOM_PATH.format(count_of_room)
                 elif type(count_of_room) is str:
                     if count_of_room == "studio":
-                        rooms_path += STUDIO
+                        rooms_path += STUDIO_PATH
         elif type(self.rooms) is int:
             if 0 < self.rooms < 6:
-                rooms_path += ROOM.format(self.rooms)
+                rooms_path += ROOM_PATH.format(self.rooms)
         elif type(self.rooms) is str:
             if self.rooms == "studio":
-                rooms_path += STUDIO
+                rooms_path += STUDIO_PATH
             elif self.rooms == "all":
                 rooms_path = ""
 
-        url = BASE_LINK + ACCOMMODATION_TYPE_PARAMETER.format(self.accommodation_type) + \
-              DEAL_TYPE.format(self.deal_type) + rooms_path + WITHOUT_NEIGHBORS_OF_CITY
+        url = BASE_URL + ACCOMMODATION_TYPE_PARAMETER_PATH.format(self.accommodation_type) + \
+            DEAL_TYPE_PATH.format(self.deal_type) + rooms_path + WITHOUT_NEIGHBORS_OF_CITY_PATH
 
         if self.rent_type is not None:
-            url += DURATION_TYPE_PARAMETER.format(self.rent_type)
+            url += DURATION_TYPE_PARAMETER_PATH.format(self.rent_type)
 
         if self.additional_settings is not None:
             if "is_by_homeowner" in self.additional_settings.keys() and self.additional_settings["is_by_homeowner"]:
-                url += IS_ONLY_HOMEOWNER
+                url += IS_ONLY_HOMEOWNER_PATH
             if "min_balconies" in self.additional_settings.keys():
-                url += MIN_BALCONIES.format(self.additional_settings["min_balconies"])
+                url += MIN_BALCONIES_PATH.format(self.additional_settings["min_balconies"])
             if "have_loggia" in self.additional_settings.keys() and self.additional_settings["have_loggia"]:
-                url += HAVE_LOGGIA
+                url += HAVE_LOGGIA_PATH
 
             if "min_house_year" in self.additional_settings.keys():
-                url += MIN_HOUSE_YEAR.format(self.additional_settings["min_house_year"])
+                url += MIN_HOUSE_YEAR_PATH.format(self.additional_settings["min_house_year"])
             if "max_house_year" in self.additional_settings.keys():
-                url += MAX_HOUSE_YEAR.format(self.additional_settings["max_house_year"])
+                url += MAX_HOUSE_YEAR_PATH.format(self.additional_settings["max_house_year"])
 
             if "min_price" in self.additional_settings.keys():
-                url += MIN_PRICE.format(self.additional_settings["min_price"])
+                url += MIN_PRICE_PATH.format(self.additional_settings["min_price"])
             if "max_price" in self.additional_settings.keys():
-                url += MAX_PRICE.format(self.additional_settings["max_price"])
+                url += MAX_PRICE_PATH.format(self.additional_settings["max_price"])
 
             if "min_floor" in self.additional_settings.keys():
-                url += MIN_FLOOR.format(self.additional_settings["min_floor"])
+                url += MIN_FLOOR_PATH.format(self.additional_settings["min_floor"])
             if "max_floor" in self.additional_settings.keys():
-                url += MAX_FLOOR.format(self.additional_settings["max_floor"])
+                url += MAX_FLOOR_PATH.format(self.additional_settings["max_floor"])
 
             if "min_total_floor" in self.additional_settings.keys():
-                url += MIN_TOTAL_FLOOR.format(self.additional_settings["min_total_floor"])
+                url += MIN_TOTAL_FLOOR_PATH.format(self.additional_settings["min_total_floor"])
             if "max_total_floor" in self.additional_settings.keys():
-                url += MAX_TOTAL_FLOOR.format(self.additional_settings["max_total_floor"])
+                url += MAX_TOTAL_FLOOR_PATH.format(self.additional_settings["max_total_floor"])
 
             if "house_material_type" in self.additional_settings.keys():
-                url += HOUSE_MATERIAL_TYPE.format(self.additional_settings["house_material_type"])
+                url += HOUSE_MATERIAL_TYPE_PATH.format(self.additional_settings["house_material_type"])
 
             if "metro" in self.additional_settings.keys():
                 if "metro_station" in self.additional_settings.keys():
                     if self.additional_settings["metro"] in METRO_STATIONS.keys():
                         for metro_station, metro_id in METRO_STATIONS[self.additional_settings["metro"]]:
                             if self.additional_settings["metro_station"] == metro_station:
-                                url += METRO_ID.format(metro_id)
+                                url += METRO_ID_PATH.format(metro_id)
 
             if "metro_foot_minute" in self.additional_settings.keys():
-                url += METRO_FOOT_MINUTE.format(self.additional_settings["metro_foot_minute"])
+                url += METRO_FOOT_MINUTE_PATH.format(self.additional_settings["metro_foot_minute"])
 
             if "flat_share" in self.additional_settings.keys():
-                url += FLAT_SHARE.format(self.additional_settings["flat_share"])
+                url += FLAT_SHARE_PATH.format(self.additional_settings["flat_share"])
 
             if "only_flat" in self.additional_settings.keys():
                 if self.additional_settings["only_flat"]:
-                    url += ONLY_FLAT.format(1)
+                    url += ONLY_FLAT_PATH.format(1)
 
             if "only_apartment" in self.additional_settings.keys():
                 if self.additional_settings["only_apartment"]:
-                    url += APARTMENT.format(1)
+                    url += APARTMENT_PATH.format(1)
 
             if "sort_by" in self.additional_settings.keys():
-                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX:
-                    url += SORT_BY_PRICE_FROM_MIN_TO_MAX
-                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MAX_TO_MIN:
-                    url += SORT_BY_PRICE_FROM_MAX_TO_MIN
-                if self.additional_settings["sort_by"] == IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN:
-                    url += SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN
-                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER:
-                    url += SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER
-                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER:
-                    url += SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER
+                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH:
+                    url += SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH
+                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH:
+                    url += SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH
+                if self.additional_settings["sort_by"] == IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN_PATH:
+                    url += SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN_PATH
+                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER_PATH:
+                    url += SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER_PATH
+                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH:
+                    url += SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH
 
         return url
 

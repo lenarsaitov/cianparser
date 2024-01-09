@@ -1,45 +1,51 @@
-BASE_LINK = "https://cian.ru/cat.php?engine_version=2&p={}&region={}"
-ACCOMMODATION_TYPE_PARAMETER = "&offer_type={}"
-DURATION_TYPE_PARAMETER = "&type={}"
-DEAL_TYPE = "&deal_type={}"
+DEAL_TYPES = {"rent_long", "rent_short", "sale"}
+DEAL_TYPES_NOT_IMPLEMENTED_YET = {"rent_short"}
+
+ACCOMMODATION_TYPES = {"flat", "room", "house", "house-part", "townhouse", "newobject"}
+ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET = {"room", "house", "house-part", "townhouse"}
 
 FLOATS_NUMBERS_REG_EXPRESSION = r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 
-ROOM = "&room{}=1"
-STUDIO = "&room9=1"
-WITHOUT_NEIGHBORS_OF_CITY = "&with_neighbors=0"
-IS_ONLY_HOMEOWNER = "&is_by_homeowner=1"
-MIN_BALCONIES = "&min_balconies={}"
-HAVE_LOGGIA = "&loggia=1"
-MIN_HOUSE_YEAR = "&min_house_year={}"
-MAX_HOUSE_YEAR = "&max_house_year={}"
-MIN_PRICE = "&minprice={}"
-MAX_PRICE = "&maxprice={}"
-MIN_FLOOR = "&minfloor={}"
-MAX_FLOOR = "&maxfloor={}"
-MIN_TOTAL_FLOOR = "&minfloorn={}"
-MAX_TOTAL_FLOOR = "&maxfloorn={}"
+BASE_URL = "https://cian.ru/cat.php?engine_version=2&p={}&region={}"
+ACCOMMODATION_TYPE_PARAMETER_PATH = "&offer_type={}"
+DURATION_TYPE_PARAMETER_PATH = "&type={}"
+DEAL_TYPE_PATH = "&deal_type={}"
 
-HOUSE_MATERIAL_TYPE = "&house_material%5B0%5D={}"
+ROOM_PATH = "&room{}=1"
+STUDIO_PATH = "&room9=1"
+WITHOUT_NEIGHBORS_OF_CITY_PATH = "&with_neighbors=0"
+IS_ONLY_HOMEOWNER_PATH = "&is_by_homeowner=1"
+MIN_BALCONIES_PATH = "&min_balconies={}"
+HAVE_LOGGIA_PATH = "&loggia=1"
+MIN_HOUSE_YEAR_PATH = "&min_house_year={}"
+MAX_HOUSE_YEAR_PATH = "&max_house_year={}"
+MIN_PRICE_PATH = "&minprice={}"
+MAX_PRICE_PATH = "&maxprice={}"
+MIN_FLOOR_PATH = "&minfloor={}"
+MAX_FLOOR_PATH = "&maxfloor={}"
+MIN_TOTAL_FLOOR_PATH = "&minfloorn={}"
+MAX_TOTAL_FLOOR_PATH = "&maxfloorn={}"
 
-METRO_FOOT_MINUTE = "&only_foot=2&foot_min={}"
-METRO_ID = "&metro%5B0%5D={}"
+HOUSE_MATERIAL_TYPE_PATH = "&house_material%5B0%5D={}"
 
-FLAT_SHARE = "&flat_share={}"
-ONLY_FLAT = "&only_flat={}"
-APARTMENT = '&apartment={}'
+METRO_FOOT_MINUTE_PATH = "&only_foot=2&foot_min={}"
+METRO_ID_PATH = "&metro%5B0%5D={}"
 
-SORT_BY_PRICE_FROM_MIN_TO_MAX = "&sort=price_object_order"
-SORT_BY_PRICE_FROM_MAX_TO_MIN = "&sort=total_price_desc"
-SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN = "&sort=area_order"
-SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER = "&sort=creation_date_desc"
-SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER = "&sort=creation_date_asc"
+FLAT_SHARE_PATH = "&flat_share={}"
+ONLY_FLAT_PATH = "&only_flat={}"
+APARTMENT_PATH = '&apartment={}'
 
-IS_SORT_BY_PRICE_FROM_MIN_TO_MAX = "price_from_min_to_max"
-IS_SORT_BY_PRICE_FROM_MAX_TO_MIN = "price_from_max_to_min"
-IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN = "total_meters_from_max_to_min"
-IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER = "creation_data_from_newer_to_older"
-IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER = "creation_data_from_older_to_newer"
+SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH = "&sort=price_object_order"
+SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH = "&sort=total_price_desc"
+SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN_PATH = "&sort=area_order"
+SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER_PATH = "&sort=creation_date_desc"
+SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH = "&sort=creation_date_asc"
+
+IS_SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH = "price_from_min_to_max"
+IS_SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH = "price_from_max_to_min"
+IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN_PATH = "total_meters_from_max_to_min"
+IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER_PATH = "creation_data_from_newer_to_older"
+IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH = "creation_data_from_older_to_newer"
 
 NOT_STREET_ADDRESS_ELEMENTS = {"ЖК", "м.", "мкр.", "Жилой комплекс", "Жилой Комплекс"}
 

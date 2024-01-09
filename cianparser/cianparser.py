@@ -1,12 +1,6 @@
 from cianparser.constants import *
 from cianparser.parser import ParserOffers
 
-offer_types = {"rent_long", "rent_short", "sale"}
-deal_types_not_implemented_yet = {"rent_short"}
-
-accommodation_types = {"flat", "room", "house", "house-part", "townhouse"}
-accommodation_types_not_implemented_yet = {"room", "house", "house-part", "townhouse"}
-
 
 def list_cities():
     return CITIES
@@ -37,13 +31,17 @@ def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, en
     :param proxies: proxies for executing requests, default None
     """
 
-    if deal_type not in offer_types:
+    if deal_type not in DEAL_TYPES:
         raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
                          f'Try entering one of these values: "rent_long", "rent_short", "sale".')
 
-    if accommodation_type not in accommodation_types:
+    if accommodation_type not in ACCOMMODATION_TYPES:
         raise ValueError(f'You entered accommodation={accommodation_type}, which is not valid value. '
-                         f'Try entering one of these values: "flat", "room", "house", "house-part", "townhouse".')
+                         f'Try entering one of these values: "flat".')
+
+    if deal_type in DEAL_TYPES_NOT_IMPLEMENTED_YET or accommodation_type in ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET:
+        print("Sorry. This functionality has not yet been implemented, but it is planned...")
+        return []
 
     if type(rooms) is tuple:
         for count_of_room in rooms:
@@ -71,39 +69,31 @@ def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, en
                         f'It is correct int, str and tuple types. Example 1, (1,3, "studio"), "studio, "all".')
 
     location_id = None
+    for city_info in CITIES:
+        if city_info[0] == location:
+            location_id = city_info[1]
 
-    finded = False
-    for city in CITIES:
-        if city[0] == location:
-            finded = True
-            location_id = city[1]
-
-    if not finded or location_id is None:
-        raise ValueError(f'You entered {location}, which is not exists in base.'
-                         f' See all correct values of location in cianparser.list_cities()')
-
-    if deal_type in deal_types_not_implemented_yet or accommodation_type in accommodation_types_not_implemented_yet:
-        print("Sorry. This functionality has not yet been implemented, but it is planned...")
+    if location_id is None:
+        print(f'You entered {location}, which is not exists in base.'
+              f' See all available values of location in cianparser.list_cities()')
         return []
-    else:
-        parser = ParserOffers(
-            deal_type=deal_type,
-            accommodation_type=accommodation_type,
-            city_name=location,
-            location_id=location_id,
-            rooms=rooms,
-            start_page=start_page,
-            end_page=end_page,
-            is_saving_csv=is_saving_csv,
-            is_latin=is_latin,
-            is_express_mode=is_express_mode,
-            additional_settings=additional_settings,
-            proxies=proxies,
-        )
 
-        parser.run()
-        print("")
+    parser = ParserOffers(
+        deal_type=deal_type,
+        accommodation_type=accommodation_type,
+        city_name=location,
+        location_id=location_id,
+        rooms=rooms,
+        start_page=start_page,
+        end_page=end_page,
+        is_saving_csv=is_saving_csv,
+        is_latin=is_latin,
+        is_express_mode=is_express_mode,
+        additional_settings=additional_settings,
+        proxies=proxies,
+    )
 
-        return parser.get_results()
+    parser.run()
+    print("")
 
-
+    return parser.get_results()

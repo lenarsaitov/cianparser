@@ -12,11 +12,12 @@ import socket
 
 from cianparser.constants import *
 from cianparser.helpers import *
+from cianparser.url import *
 
 
 class ParserOffers:
     def __init__(self, deal_type: str, accommodation_type: str, city_name: str, location_id: str, rooms,
-                 start_page: int, end_page: int, is_saving_csv=False, is_latin=False, is_express_mode=False,
+                 start_page: int, end_page: int, is_saving_csv=False, is_express_mode=False,
                  additional_settings=None, proxies=None):
         self.session = cloudscraper.create_scraper()
         self.session.headers = {'Accept-Language': 'en'}
@@ -27,7 +28,6 @@ class ParserOffers:
 
         self.proxy_pool = proxies
         self.is_saving_csv = is_saving_csv
-        self.is_latin = is_latin
         self.is_express_mode = is_express_mode
         self.additional_settings = additional_settings
 
@@ -59,7 +59,7 @@ class ParserOffers:
         self.average_price = 0
         self.parsed_announcements_count = 0
 
-        self.url = None
+        self.list_url = None
 
     def is_sale(self):
         return self.deal_type == "sale"
@@ -70,104 +70,25 @@ class ParserOffers:
     def is_rent_short(self):
         return self.deal_type == "rent" and self.rent_type == 2
 
-    def build_url(self):
-        rooms_path = ""
-        if type(self.rooms) is tuple:
-            for count_of_room in self.rooms:
-                if type(count_of_room) is int:
-                    if 0 < count_of_room < 6:
-                        rooms_path += ROOM_PATH.format(count_of_room)
-                elif type(count_of_room) is str:
-                    if count_of_room == "studio":
-                        rooms_path += STUDIO_PATH
-        elif type(self.rooms) is int:
-            if 0 < self.rooms < 6:
-                rooms_path += ROOM_PATH.format(self.rooms)
-        elif type(self.rooms) is str:
-            if self.rooms == "studio":
-                rooms_path += STUDIO_PATH
-            elif self.rooms == "all":
-                rooms_path = ""
-
-        url = BASE_URL + ACCOMMODATION_TYPE_PARAMETER_PATH.format(self.accommodation_type) + \
-            DEAL_TYPE_PATH.format(self.deal_type) + rooms_path + WITHOUT_NEIGHBORS_OF_CITY_PATH
+    def build_list_url(self, page_number, location_id):        
+        url_builder = URLBuilder(page_number, location_id)
+        url_builder.add_room(self.rooms)
+        url_builder.add_deal_type(self.deal_type)
+        url_builder.add_accommodation_type(self.accommodation_type)
 
         if self.rent_type is not None:
-            url += DURATION_TYPE_PARAMETER_PATH.format(self.rent_type)
+            url_builder.add_rent_type(self.rent_type)
 
         if self.additional_settings is not None:
-            if "is_by_homeowner" in self.additional_settings.keys() and self.additional_settings["is_by_homeowner"]:
-                url += IS_ONLY_HOMEOWNER_PATH
-            if "min_balconies" in self.additional_settings.keys():
-                url += MIN_BALCONIES_PATH.format(self.additional_settings["min_balconies"])
-            if "have_loggia" in self.additional_settings.keys() and self.additional_settings["have_loggia"]:
-                url += HAVE_LOGGIA_PATH
+            url_builder.add_additional_settings(self.additional_settings)
 
-            if "min_house_year" in self.additional_settings.keys():
-                url += MIN_HOUSE_YEAR_PATH.format(self.additional_settings["min_house_year"])
-            if "max_house_year" in self.additional_settings.keys():
-                url += MAX_HOUSE_YEAR_PATH.format(self.additional_settings["max_house_year"])
+        return url_builder.get_url()
 
-            if "min_price" in self.additional_settings.keys():
-                url += MIN_PRICE_PATH.format(self.additional_settings["min_price"])
-            if "max_price" in self.additional_settings.keys():
-                url += MAX_PRICE_PATH.format(self.additional_settings["max_price"])
-
-            if "min_floor" in self.additional_settings.keys():
-                url += MIN_FLOOR_PATH.format(self.additional_settings["min_floor"])
-            if "max_floor" in self.additional_settings.keys():
-                url += MAX_FLOOR_PATH.format(self.additional_settings["max_floor"])
-
-            if "min_total_floor" in self.additional_settings.keys():
-                url += MIN_TOTAL_FLOOR_PATH.format(self.additional_settings["min_total_floor"])
-            if "max_total_floor" in self.additional_settings.keys():
-                url += MAX_TOTAL_FLOOR_PATH.format(self.additional_settings["max_total_floor"])
-
-            if "house_material_type" in self.additional_settings.keys():
-                url += HOUSE_MATERIAL_TYPE_PATH.format(self.additional_settings["house_material_type"])
-
-            if "metro" in self.additional_settings.keys():
-                if "metro_station" in self.additional_settings.keys():
-                    if self.additional_settings["metro"] in METRO_STATIONS.keys():
-                        for metro_station, metro_id in METRO_STATIONS[self.additional_settings["metro"]]:
-                            if self.additional_settings["metro_station"] == metro_station:
-                                url += METRO_ID_PATH.format(metro_id)
-
-            if "metro_foot_minute" in self.additional_settings.keys():
-                url += METRO_FOOT_MINUTE_PATH.format(self.additional_settings["metro_foot_minute"])
-
-            if "flat_share" in self.additional_settings.keys():
-                url += FLAT_SHARE_PATH.format(self.additional_settings["flat_share"])
-
-            if "only_flat" in self.additional_settings.keys():
-                if self.additional_settings["only_flat"]:
-                    url += ONLY_FLAT_PATH.format(1)
-
-            if "only_apartment" in self.additional_settings.keys():
-                if self.additional_settings["only_apartment"]:
-                    url += APARTMENT_PATH.format(1)
-
-            if "sort_by" in self.additional_settings.keys():
-                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH:
-                    url += SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH
-                if self.additional_settings["sort_by"] == IS_SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH:
-                    url += SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH
-                if self.additional_settings["sort_by"] == IS_SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN_PATH:
-                    url += SORT_BY_TOTAL_METERS_FROM_MAX_TO_MIN_PATH
-                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER_PATH:
-                    url += SORT_BY_CREATION_DATA_FROM_NEWER_TO_OLDER_PATH
-                if self.additional_settings["sort_by"] == IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH:
-                    url += SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH
-
-        return url
-
-    def load_page(self, number_page=1):
-        self.url = self.build_url().format(number_page, self.location_id)
-
+    def load_page(self, page_number=1):
         socket.setdefaulttimeout(10)
         was_proxy = self.proxy_pool is not None
         set_proxy = False
-        self.url = self.build_url().format(number_page, self.location_id)
+        self.list_url = self.build_list_url(page_number, self.location_id)
 
         if was_proxy:
             print("The process of checking the proxies... Search an available one among them...")
@@ -177,7 +98,7 @@ class ParserOffers:
             ind += 1
             proxy = random.choice(self.proxy_pool)
 
-            available, is_captcha = is_available_proxy(self.url, proxy)
+            available, is_captcha = is_available_proxy(self.list_url, proxy)
             if not available or is_captcha:
                 if is_captcha:
                     print(f" {ind} | proxy {proxy}: there is captcha.. trying another")
@@ -195,26 +116,26 @@ class ParserOffers:
         if was_proxy and set_proxy is False:
             return None
 
-        res = self.session.get(url=self.url)
+        res = self.session.get(url=self.list_url)
         res.raise_for_status()
 
         return res.text
 
-    def parse_page(self, html: str, number_page: int, count_of_pages: int, attempt_number: int):
+    def parse_list(self, html: str, page_number: int, count_of_pages: int, attempt_number: int):
         try:
             soup = BeautifulSoup(html, 'lxml')
         except:
             soup = BeautifulSoup(html, 'html.parser')
 
-        if number_page == self.start_page and attempt_number == 0:
-            print(f"The page from which the collection of information begins: \n {self.url}")
+        if page_number == self.start_page and attempt_number == 0:
+            print(f"The page from which the collection of information begins: \n {self.list_url}")
 
         if soup.text.find("Captcha") > 0:
-            print(f"\r{number_page} page: there is CAPTCHA... failed to parse page...")
+            print(f"\r{page_number} page: there is CAPTCHA... failed to parse page...")
 
             if self.proxy_pool is not None:
                 proxy = random.choice(self.proxy_pool)
-                print(f"\r{number_page} page: new attempt with proxy {proxy}...")
+                print(f"\r{page_number} page: new attempt with proxy {proxy}...")
                 self.session.proxies = {"http": proxy}
                 return False, attempt_number + 1, False
 
@@ -224,37 +145,24 @@ class ParserOffers:
         if len(header) == 0:
             return False, attempt_number + 1, False
 
-        offers = soup.select("article[data-name='CardComponent']")
-        page_number_html = soup.select("button[data-name='PaginationButton']")
-        if len(page_number_html) == 0:
-            return False, attempt_number + 1, True
-
-        if page_number_html[0].text == "Назад" and (number_page != 1 and number_page != 0):
-            print(f"\n\r {number_page - self.start_page + 1} | {number_page} page: cian is redirecting from "
-                  f"page {number_page} to page 1... there is maximum value of page, you should try to decrease number "
-                  f"of page... ending...")
-
-            return False, 0, True
-
-        if number_page == self.start_page and attempt_number == 0:
+        if page_number == self.start_page and attempt_number == 0:
             print(f"Collecting information from pages with list of announcements", end="")
 
+        offers = soup.select("article[data-name='CardComponent']")
         print("")
-        print(f"\r {number_page} page: {len(offers)} offers", end="\r", flush=True)
+        print(f"\r {page_number} page: {len(offers)} offers", end="\r", flush=True)
 
         for ind, block in enumerate(offers):
-            self.parse_block(block=block)
+            self.parse_offer(block=block)
 
             if not self.is_express_mode:
                 time.sleep(4)
 
-            total_planed_announcements = len(offers) * count_of_pages
-
-            print(f"\r {number_page - self.start_page + 1} | {number_page} page with list: [" + "=>" * (
+            print(f"\r {page_number - self.start_page + 1} | {page_number} page with list: [" + "=>" * (
                     ind + 1) + "  " * (
                           len(offers) - ind - 1) + "]" + f" {math.ceil((ind + 1) * 100 / len(offers))}" + "%" +
                   f" | Count of all parsed: {self.parsed_announcements_count}."
-                  f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / total_planed_announcements)} %."
+                  f" Progress ratio: {math.ceil(self.parsed_announcements_count * 100 / len(offers) * count_of_pages)} %."
                   f" Average price: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub", end="\r",
                   flush=True)
 
@@ -262,7 +170,7 @@ class ParserOffers:
 
         return True, 0, False
 
-    def parse_block(self, block):
+    def parse_offer(self, block):
         common_data = dict()
         common_data["link"] = block.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
         common_data["city"] = self.city_name
@@ -278,34 +186,6 @@ class ParserOffers:
             self.additional_settings["is_by_homeowner"]) and (
                 author_data["author_type"] != "unknown" and author_data["author_type"] != "homeowner"):
             return
-
-        if self.is_latin:
-            try:
-                location_data["district"] = transliterate.translit(location_data["district"], reversed=True)
-                location_data["street"] = transliterate.translit(location_data["street"], reversed=True)
-            except:
-                pass
-
-            try:
-                author_data["author"] = transliterate.translit(author_data["author"], reversed=True)
-            except:
-                pass
-
-            try:
-                common_data["city"] = transliterate.translit(common_data["city"], reversed=True)
-            except:
-                pass
-
-            try:
-                location_data["underground"] = transliterate.translit(location_data["underground"], reversed=True)
-            except:
-                pass
-
-            try:
-                location_data["residential_complex"] = transliterate.translit(location_data["residential_complex"],
-                                                                              reversed=True)
-            except:
-                pass
 
         page_data = dict()
         if not self.is_express_mode:
@@ -382,14 +262,13 @@ class ParserOffers:
             dict_writer.writeheader()
             dict_writer.writerows(self.result)
 
-    def load_and_parse_page(self, number_page, count_of_pages, attempt_number):
-        html = self.load_page(number_page=number_page)
+    def load_and_parse_page(self, page_number, count_of_pages, attempt_number):
+        html = self.load_page(page_number=page_number)
 
         if html is None:
             return False, attempt_number + 1, True
 
-        return self.parse_page(html=html, number_page=number_page, count_of_pages=count_of_pages,
-                               attempt_number=attempt_number)
+        return self.parse_list(html=html, page_number=page_number, count_of_pages=count_of_pages, attempt_number=attempt_number)
 
     def run(self):
         print(f"\n{' ' * 30}Preparing to collect information from pages..")
@@ -397,29 +276,29 @@ class ParserOffers:
         if self.is_saving_csv:
             print(f"The absolute path to the file: \n{self.file_path} \n")
 
-        number_page = self.start_page - 1
-        while number_page < self.end_page:
+        page_number = self.start_page - 1
+        while page_number < self.end_page:
             page_parsed = False
-            number_page += 1
+            page_number += 1
             attempt_number_exception = 0
 
             while attempt_number_exception < 3 and not page_parsed:
                 try:
                     (page_parsed, attempt_number, end_all_parsing) = self.load_and_parse_page(
-                        number_page=number_page,
+                        page_number=page_number,
                         count_of_pages=self.end_page + 1 - self.start_page,
                         attempt_number=attempt_number_exception)
 
                     if end_all_parsing:
                         attempt_number_exception = 3
-                        number_page = self.end_page
+                        page_number = self.end_page
 
                 except Exception as e:
                     attempt_number_exception += 1
                     if attempt_number_exception < 3:
                         continue
                     print(f"\n\nException: {e}")
-                    print(f"The collection of information from the pages with ending parse on {number_page} page...\n")
+                    print(f"The collection of information from the pages with ending parse on {page_number} page...\n")
                     print(f"Average price per day: {'{:,}'.format(int(self.average_price)).replace(',', ' ')} rub")
                     break
 

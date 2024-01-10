@@ -6,14 +6,13 @@ ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET = {"room", "house", "house-part", "townh
 
 FLOATS_NUMBERS_REG_EXPRESSION = r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 
-BASE_URL = "https://cian.ru/cat.php?engine_version=2&p={}&region={}"
-ACCOMMODATION_TYPE_PARAMETER_PATH = "&offer_type={}"
-DURATION_TYPE_PARAMETER_PATH = "&type={}"
+BASE_URL = "https://cian.ru/cat.php?engine_version=2&p={}&region={}&with_neighbors=0"
+ACCOMMODATION_TYPE_PATH = "&offer_type={}"
+RENT_TYPE_PATH = "&type={}"
 DEAL_TYPE_PATH = "&deal_type={}"
 
 ROOM_PATH = "&room{}=1"
 STUDIO_PATH = "&room9=1"
-WITHOUT_NEIGHBORS_OF_CITY_PATH = "&with_neighbors=0"
 IS_ONLY_HOMEOWNER_PATH = "&is_by_homeowner=1"
 MIN_BALCONIES_PATH = "&min_balconies={}"
 HAVE_LOGGIA_PATH = "&loggia=1"

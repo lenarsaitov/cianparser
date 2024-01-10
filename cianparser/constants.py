@@ -6,6 +6,8 @@ ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET = {"room", "house", "house-part", "townh
 
 FLOATS_NUMBERS_REG_EXPRESSION = r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 
+FILE_NAME_BASE = 'cian_parsing_result_{}_{}_{}_{}_{}.csv'
+
 BASE_URL = "https://cian.ru/cat.php?engine_version=2&p={}&region={}&with_neighbors=0"
 ACCOMMODATION_TYPE_PATH = "&offer_type={}"
 RENT_TYPE_PATH = "&type={}"

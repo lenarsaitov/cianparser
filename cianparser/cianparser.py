@@ -88,7 +88,6 @@ def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, en
         is_saving_csv=is_saving_csv,
         is_express_mode=is_express_mode,
         additional_settings=additional_settings,
-        proxies=proxies,
     )
 
     parser.run()

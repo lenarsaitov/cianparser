@@ -1,7 +1,6 @@
 import re
 import itertools
-from bs4 import BeautifulSoup
-from cianparser.constants import *
+from cianparser.constants import STREET_TYPES, NOT_STREET_ADDRESS_ELEMENTS, FLOATS_NUMBERS_REG_EXPRESSION
 
 
 def union_dicts(*dicts):

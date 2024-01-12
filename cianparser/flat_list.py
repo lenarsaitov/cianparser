@@ -6,7 +6,8 @@ import pathlib
 from datetime import datetime
 import transliterate
 
-from cianparser.helpers import *
+from cianparser.constants import FILE_NAME_BASE, SPECIFIC_FIELDS_FOR_RENT_LONG, SPECIFIC_FIELDS_FOR_RENT_SHORT, SPECIFIC_FIELDS_FOR_SALE
+from cianparser.helpers import union_dicts, define_author, define_location_data, define_specification_data, define_flat_url_id, define_price_data
 from cianparser.flat import FlatPageParser
 
 

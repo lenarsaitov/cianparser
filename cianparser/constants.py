@@ -1,8 +1,7 @@
-DEAL_TYPES = {"rent_long", "rent_short", "sale"}
-DEAL_TYPES_NOT_IMPLEMENTED_YET = {"rent_short"}
+DEAL_TYPES = {"rent_long", "sale"}
+# DEAL_TYPES_NOT_IMPLEMENTED_YET = {"rent_short"}
 
-ACCOMMODATION_TYPES = {"flat", "room", "house", "house-part", "townhouse", "newobject"}
-ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET = {"room", "house", "house-part", "townhouse"}
+# ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET = {"room", "house", "house-part", "townhouse"}
 
 FLOATS_NUMBERS_REG_EXPRESSION = r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 

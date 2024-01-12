@@ -7,7 +7,8 @@ from datetime import datetime
 import transliterate
 import urllib.parse
 
-from cianparser.helpers import *
+from cianparser.constants import FILE_NAME_BASE
+from cianparser.helpers import union_dicts
 from cianparser.newobject import NewObjectPageParser
 
 

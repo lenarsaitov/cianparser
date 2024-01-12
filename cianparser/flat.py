@@ -1,4 +1,5 @@
-from cianparser.helpers import *
+import bs4
+import re
 
 
 class FlatPageParser:
@@ -10,7 +11,7 @@ class FlatPageParser:
         res = self.session.get(self.url)
         res.raise_for_status()
         self.offer_page_html = res.text
-        self.offer_page_soup = BeautifulSoup(self.offer_page_html, 'html.parser')
+        self.offer_page_soup = bs4.BeautifulSoup(self.offer_page_html, 'html.parser')
 
     def __parse_flat_offer_page_json__(self):
         page_data = {

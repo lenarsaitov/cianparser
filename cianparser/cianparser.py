@@ -1,6 +1,6 @@
 import cloudscraper
 
-from cianparser.constants import *
+from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES
 from cianparser.url_builder import URLBuilder
 from cianparser.flat_list import FlatListPageParser
 from cianparser.newobject_list import NewObjectListParser
@@ -143,7 +143,7 @@ def __validation_init__(location):
 def __validation_get_flats__(deal_type, rooms):
     if deal_type not in DEAL_TYPES:
         raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
-                         f'Try entering one of these values: "rent_long", "rent_short", "sale".')
+                         f'Try entering one of these values: "rent_long", "sale".')
 
     if type(rooms) is tuple:
         for count_of_room in rooms:

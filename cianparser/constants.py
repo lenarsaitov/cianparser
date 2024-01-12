@@ -38,7 +38,7 @@ METRO_ID_PATH = "&metro%5B0%5D={}"
 
 FLAT_SHARE_PATH = "&flat_share={}"
 ONLY_FLAT_PATH = "&only_flat={}"
-APARTMENT_PATH = '&apartment={}'
+APARTMENT_PATH = "&apartment={}"
 
 SORT_BY_PRICE_FROM_MIN_TO_MAX_PATH = "&sort=price_object_order"
 SORT_BY_PRICE_FROM_MAX_TO_MIN_PATH = "&sort=total_price_desc"

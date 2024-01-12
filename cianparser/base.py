@@ -16,7 +16,6 @@ class Base:
 
         self.accommodation_type = accommodation_type
         self.is_saving_csv = is_saving_csv
-        self.city_name = city_name.strip().replace("'", "").replace(" ", "_")
         self.start_page = start_page
         self.end_page = end_page
 
@@ -29,7 +28,7 @@ class Base:
                 session=self.session,
                 deal_type=self.deal_type,
                 rent_period_type=self.rent_period_type,
-                city_name=self.city_name,
+                city_name=city_name,
                 start_page=start_page,
                 end_page=end_page,
                 is_saving_csv=is_saving_csv,
@@ -39,7 +38,7 @@ class Base:
         elif self.accommodation_type == "newobject":
             self.newobject_parser = DealNewObjectParser(
                 session=self.session,
-                city_name=self.city_name,
+                city_name=city_name,
                 start_page=start_page,
                 end_page=end_page,
                 is_saving_csv=is_saving_csv,
@@ -48,14 +47,12 @@ class Base:
 
     def define_deal_type(self, deal_type):
         self.rent_period_type = None
-        if deal_type == "rent_long":
-            self.rent_period_type, self.deal_type = 4, "rent"
-
-        elif deal_type == "rent_short":
-            self.rent_period_type, self.deal_type = 2, "rent"
-
         if deal_type == "sale":
             self.deal_type = "sale"
+        elif deal_type == "rent_long":
+            self.rent_period_type, self.deal_type = 4, "rent"
+        elif deal_type == "rent_short":
+            self.rent_period_type, self.deal_type = 2, "rent"
 
     def build_url_list(self, location_id, rooms, deal_type, accommodation_type, rent_period_type, additional_settings):
         url_builder = URLBuilder(self.accommodation_type == "newobject")
@@ -71,17 +68,6 @@ class Base:
             url_builder.add_additional_settings(additional_settings)
 
         return url_builder.get_url()
-
-    def load_list_page(self, page_number):
-        list_url = self.url_list_format.format(page_number)
-
-        if page_number == self.start_page:
-            print(f"The page from which the collection of information begins: \n {list_url}")
-
-        res = self.session.get(url=list_url)
-        res.raise_for_status()
-
-        return res.text
 
     def get_results(self):
         if self.accommodation_type == "flat":
@@ -115,6 +101,17 @@ class Base:
         else:
             return ""
 
+    def load_list_page(self, page_number):
+        url_list = self.url_list_format.format(page_number)
+
+        if page_number == self.start_page:
+            print(f"The page from which the collection of information begins: \n {url_list}")
+
+        res = self.session.get(url=url_list)
+        res.raise_for_status()
+
+        return res.text
+
     def parse_list_offers_page(self, html, page_number, count_of_pages, attempt_number):
         if self.accommodation_type == "flat":
             return self.flat_parser.parse_list_offers_page(html, page_number, count_of_pages, attempt_number)
@@ -137,17 +134,14 @@ class Base:
 
             while attempt_number_exception < 3 and not page_parsed:
                 # try:
-                    html = self.load_list_page(page_number=page_number)
-
                     (page_parsed, attempt_number, end_all_parsing) = self.parse_list_offers_page(
-                        html=html,
+                        html=self.load_list_page(page_number=page_number),
                         page_number=page_number,
                         count_of_pages=self.end_page + 1 - self.start_page,
                         attempt_number=attempt_number_exception)
 
                     if end_all_parsing:
-                        attempt_number_exception = 3
-                        page_number = self.end_page
+                        attempt_number_exception, page_number = 3, self.end_page
 
                 # except Exception as e:
                 #     attempt_number_exception += 1

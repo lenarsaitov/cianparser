@@ -1,35 +1,7 @@
 import re
 import itertools
-import urllib.request
-import urllib.error
 from bs4 import BeautifulSoup
 from cianparser.constants import *
-
-
-def is_available_proxy(url, pip):
-    try:
-        proxy_handler = urllib.request.ProxyHandler({'http': pip})
-        opener = urllib.request.build_opener(proxy_handler)
-        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-        urllib.request.install_opener(opener)
-        req = urllib.request.Request(url)
-        html = urllib.request.urlopen(req)
-
-        try:
-            soup = BeautifulSoup(html, 'lxml')
-        except:
-            soup = BeautifulSoup(html, 'html.parser')
-
-        if soup.text.find("Captcha") > 0:
-            return False, True
-
-        return True, False
-    except urllib.error.HTTPError as e:
-        print('Error code: ', e.code)
-        return not e.code, False
-    except Exception as detail:
-        print("Error:", detail)
-        return False, False
 
 
 def union_dicts(*dicts):
@@ -53,7 +25,7 @@ def define_rooms_count(description):
     return rooms_count
 
 
-def define_id_url(url: str):
+def define_url_id(url: str):
     url_path_elements = url.split("/")
     if len(url_path_elements[-1]) > 3:
         return url_path_elements[-1]
@@ -64,10 +36,7 @@ def define_id_url(url: str):
 
 
 def parse_flat_offer_page(html_offer):
-    try:
-        soup_offer_page = BeautifulSoup(html_offer, 'lxml')
-    except:
-        soup_offer_page = BeautifulSoup(html_offer, 'html.parser')
+    soup_offer_page = BeautifulSoup(html_offer, 'lxml')
 
     page_data = {
         "year_of_construction": -1,

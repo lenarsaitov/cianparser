@@ -74,14 +74,14 @@ class DealFlatParser:
             print(f"Collecting information from pages with list of offers", end="")
 
         for ind, offer in enumerate(offers):
-            self.parse_offer_page(offer=offer)
+            self.parse_offer(offer=offer)
             self.print_parse_progress(page_number=page_number, count_of_pages=count_of_pages, offers=offers, ind=ind)
 
         time.sleep(2)
 
         return True, 0, False
 
-    def parse_offer_page(self, offer):
+    def parse_offer(self, offer):
         common_data = dict()
         common_data["link"] = offer.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
         common_data["city"] = self.city_name
@@ -117,10 +117,10 @@ class DealFlatParser:
 
         self.count_parsed_offers += 1
 
-        if define_id_url(common_data["link"]) in self.result_set:
+        if define_url_id(common_data["link"]) in self.result_set:
             return
 
-        self.result_set.add(define_id_url(common_data["link"]))
+        self.result_set.add(define_url_id(common_data["link"]))
         self.result.append(union_dicts(author_data, common_data, specification_data, price_data, page_data, location_data))
 
         if self.is_saving_csv:

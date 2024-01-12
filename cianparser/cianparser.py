@@ -10,8 +10,57 @@ def list_metro_stations():
     return METRO_STATIONS
 
 
+def __validation_input__(deal_type, accommodation_type, location, rooms):
+    if deal_type not in DEAL_TYPES:
+        raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
+                         f'Try entering one of these values: "rent_long", "rent_short", "sale".')
+
+    if accommodation_type not in ACCOMMODATION_TYPES:
+        raise ValueError(f'You entered accommodation={accommodation_type}, which is not valid value. '
+                         f'Try entering one of these values: "flat".')
+
+    if deal_type in DEAL_TYPES_NOT_IMPLEMENTED_YET or accommodation_type in ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET:
+        raise ValueError(f"Sorry. This functionality has not yet been implemented, but it is planned..."
+                         f" {deal_type} or {accommodation_type}")
+
+    if type(rooms) is tuple:
+        for count_of_room in rooms:
+            if type(count_of_room) is int:
+                if count_of_room < 1 or count_of_room > 5:
+                    raise ValueError(f'You entered {count_of_room} in {rooms}, which is not valid value. '
+                                     f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
+            elif type(count_of_room) is str:
+                if count_of_room != "studio":
+                    raise ValueError(f'You entered {count_of_room} in {rooms}, which is not valid value. '
+                                     f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
+            else:
+                raise ValueError(f'In tuple "rooms" not valid type of element. '
+                                f'It is correct int and str types. Example (1,3,5, "studio").')
+    elif type(rooms) is int:
+        if rooms < 1 or rooms > 5:
+            raise ValueError(f'You entered rooms={rooms}, which is not valid value. '
+                             f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
+    elif type(rooms) is str:
+        if rooms != "studio" and rooms != "all":
+            raise ValueError(f'You entered rooms={rooms}, which is not valid value. '
+                             f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
+    else:
+        raise ValueError(f'In argument "rooms" not valid type of element. '
+                        f'It is correct int, str and tuple types. Example 1, (1,3, "studio"), "studio, "all".')
+
+    location_id = None
+    for city_info in CITIES:
+        if city_info[0] == location:
+            location_id = city_info[1]
+
+    if location_id is None:
+        ValueError(f'You entered {location}, which is not exists in base.'
+              f' See all available values of location in cianparser.list_cities()')
+
+    return location_id
+
 def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, end_page=100, is_saving_csv=False,
-          is_express_mode=True, additional_settings=None, proxies=None):
+          is_express_mode=True, additional_settings=None):
     """
     Parse information from cian website
     Examples:
@@ -27,55 +76,9 @@ def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, en
     :param is_saving_csv: is it necessary to save data in csv, default False
     :param is_express_mode:  is it necessary to speed up data collection (but without some fields), default True
     :param additional_settings:  additional settings such as is_by_homeowner, min_price, max price and others, default None
-    :param proxies: proxies for executing requests, default None
     """
 
-    if deal_type not in DEAL_TYPES:
-        raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
-                         f'Try entering one of these values: "rent_long", "rent_short", "sale".')
-
-    if accommodation_type not in ACCOMMODATION_TYPES:
-        raise ValueError(f'You entered accommodation={accommodation_type}, which is not valid value. '
-                         f'Try entering one of these values: "flat".')
-
-    if deal_type in DEAL_TYPES_NOT_IMPLEMENTED_YET or accommodation_type in ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET:
-        print("Sorry. This functionality has not yet been implemented, but it is planned...")
-        return []
-
-    if type(rooms) is tuple:
-        for count_of_room in rooms:
-            if type(count_of_room) is int:
-                if count_of_room < 1 or count_of_room > 5:
-                    raise ValueError(f'You entered {count_of_room} in {rooms}, which is not valid value. '
-                                     f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
-            elif type(count_of_room) is str:
-                if count_of_room != "studio":
-                    raise ValueError(f'You entered {count_of_room} in {rooms}, which is not valid value. '
-                                     f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
-            else:
-                raise TypeError(f'In tuple "rooms" not valid type of element. '
-                                f'It is correct int and str types. Example (1,3,5, "studio").')
-    elif type(rooms) is int:
-        if rooms < 1 or rooms > 5:
-            raise ValueError(f'You entered rooms={rooms}, which is not valid value. '
-                             f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
-    elif type(rooms) is str:
-        if rooms != "studio" and rooms != "all":
-            raise ValueError(f'You entered rooms={rooms}, which is not valid value. '
-                             f'Try entering one of these values: 1, 2, 3, 4, 5, "studio", "all".')
-    else:
-        raise TypeError(f'In argument "rooms" not valid type of element. '
-                        f'It is correct int, str and tuple types. Example 1, (1,3, "studio"), "studio, "all".')
-
-    location_id = None
-    for city_info in CITIES:
-        if city_info[0] == location:
-            location_id = city_info[1]
-
-    if location_id is None:
-        print(f'You entered {location}, which is not exists in base.'
-              f' See all available values of location in cianparser.list_cities()')
-        return []
+    location_id = __validation_input__(deal_type, accommodation_type, location, rooms)
 
     parser = Base(
         deal_type=deal_type,

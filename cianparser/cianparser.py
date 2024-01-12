@@ -1,5 +1,5 @@
 from cianparser.constants import *
-from cianparser.parser import ParserOffers
+from cianparser.base import Base
 
 
 def list_cities():
@@ -77,7 +77,7 @@ def parse(deal_type, accommodation_type, location, rooms="all", start_page=1, en
               f' See all available values of location in cianparser.list_cities()')
         return []
 
-    parser = ParserOffers(
+    parser = Base(
         deal_type=deal_type,
         accommodation_type=accommodation_type,
         city_name=location,

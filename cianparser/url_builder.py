@@ -2,18 +2,28 @@ from cianparser.constants import *
 
 
 class URLBuilder:
-    def __init__(self, page_number, location_id):
-        self.url = BASE_URL.format(page_number, location_id)
+    def __init__(self, is_newobject):
+        self.url = BASE_URL
+        self.add_newobject_postfix() if is_newobject else self.add_default_postfix()
+
+    def add_default_postfix(self):
+        self.url += DEFAULT_POSTFIX_PATH
+
+    def add_newobject_postfix(self):
+        self.url += NEWOBJECT_POSTFIX_PATH
 
     def get_url(self):
         return self.url
 
     def add_accommodation_type(self, accommodation_type):
-        self.url += ACCOMMODATION_TYPE_PATH.format(accommodation_type)
+        self.url += OFFER_TYPE_PATH.format(accommodation_type)
         
     def add_deal_type(self, deal_type):
         self.url += DEAL_TYPE_PATH.format(deal_type)
-        
+
+    def add_location(self, location_id):
+        self.url += REGION_PATH.format(location_id)
+
     def add_room(self, rooms):
         rooms_path = ""
         if type(rooms) is tuple:
@@ -35,8 +45,8 @@ class URLBuilder:
 
         self.url += rooms_path
 
-    def add_rent_type(self, rent_type):
-        self.url += RENT_TYPE_PATH.format(rent_type)
+    def add_rent_period_type(self, rent_period_type):
+        self.url += RENT_PERIOD_TYPE_PATH.format(rent_period_type)
 
     def add_additional_settings(self, additional_settings):
         if "is_by_homeowner" in additional_settings.keys() and additional_settings["is_by_homeowner"]:

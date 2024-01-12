@@ -63,7 +63,7 @@ def define_id_url(url: str):
     return "-1"
 
 
-def parse_page_offer(html_offer):
+def parse_flat_offer_page(html_offer):
     try:
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
     except:
@@ -170,7 +170,7 @@ def parse_page_offer(html_offer):
     return page_data
 
 
-def parse_page_offer_json(html_offer):
+def parse_flat_offer_page_json(html_offer):
     try:
         soup_offer_page = BeautifulSoup(html_offer, 'lxml')
     except:

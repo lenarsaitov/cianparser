@@ -9,7 +9,7 @@ import cloudscraper
 ParseCityNames = collections.namedtuple(
     'ParseResults',
     {
-        'city_name',
+        'location_name',
         'city_id',
     }
 )
@@ -74,13 +74,13 @@ class Client:
     def save_results(self):
         cities_result = []
         cities_result.append(ParseCityNames(
-            city_name='city_name',
+            location_name='location_name',
             city_id='city_id',
         ))
 
         for city_couple in self.cities:
             cities_result.append(ParseCityNames(
-                city_name=city_couple[0],
+                location_name=city_couple[0],
                 city_id=city_couple[1],
             ))
 

@@ -5,6 +5,7 @@ class URLBuilder:
     def __init__(self, is_newobject):
         self.url = BASE_URL
         self.add_newobject_postfix() if is_newobject else self.add_default_postfix()
+        self.url += DEFAULT_PATH
 
     def add_default_postfix(self):
         self.url += DEFAULT_POSTFIX_PATH

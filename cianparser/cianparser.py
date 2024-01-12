@@ -2,8 +2,8 @@ import cloudscraper
 
 from cianparser.constants import *
 from cianparser.url_builder import URLBuilder
-from cianparser.deal_flat import DealFlatParser
-from cianparser.deal_newobject import DealNewObjectParser
+from cianparser.flat_list import FlatListPageParser
+from cianparser.newobject_list import NewObjectListParser
 
 
 def list_locations():
@@ -74,7 +74,7 @@ class CianParser:
             #     break
 
         print(f"\n\nThe collection of information from the pages with list of offers is completed")
-        print(f"Total number of parsed offers: {self.__parser__.count_parsed_offers}. ", end="")
+        print(f"Total number of parsed offers: {self.__parser__.count_parsed_offers}. ", end="\n")
 
     def get_flats(self, deal_type: str, rooms, with_saving_csv=False, with_extra_data=False, additional_settings=None):
         """
@@ -93,7 +93,7 @@ class CianParser:
 
         __validation_get_flats__(deal_type, rooms)
         deal_type, rent_period_type = __define_deal_type__(deal_type)
-        self.__parser__ = DealFlatParser(
+        self.__parser__ = FlatListPageParser(
             session=self.__session__,
             deal_type=deal_type,
             rent_period_type=rent_period_type,
@@ -117,7 +117,7 @@ class CianParser:
         :param with_saving_csv: is it necessary to save data in csv, default False
         """
 
-        self.__parser__ = DealNewObjectParser(
+        self.__parser__ = NewObjectListParser(
             session=self.__session__,
             location_name=self.__location_name__,
             with_saving_csv=with_saving_csv,

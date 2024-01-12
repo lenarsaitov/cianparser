@@ -7,9 +7,10 @@ from datetime import datetime
 import transliterate
 
 from cianparser.helpers import *
+from cianparser.flat import FlatPageParser
 
 
-class DealFlatParser:
+class FlatListPageParser:
     def __init__(self,
                  session,
                  deal_type: str, rent_period_type, location_name: str,
@@ -56,7 +57,7 @@ class DealFlatParser:
               end="\r", flush=True)
 
     def parse_list_offers_page(self, html, page_number: int, count_of_pages: int, attempt_number: int):
-        list_soup = bs4.BeautifulSoup(html, 'lxml')
+        list_soup = bs4.BeautifulSoup(html, 'html.parser')
 
         if list_soup.text.find("Captcha") > 0:
             print(f"\r{page_number} page: there is CAPTCHA... failed to parse page...")
@@ -83,7 +84,7 @@ class DealFlatParser:
 
     def parse_offer(self, offer):
         common_data = dict()
-        common_data["link"] = offer.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
+        common_data["url"] = offer.select("div[data-name='LinkArea']")[0].select("a")[0].get('href')
         common_data["location"] = self.location_name
         common_data["deal_type"] = self.deal_type
         common_data["accommodation_type"] = self.accommodation_type
@@ -93,41 +94,21 @@ class DealFlatParser:
         price_data = define_price_data(block=offer)
         specification_data = define_specification_data(block=offer)
 
-        if (self.additional_settings is not None and "is_by_homeowner" in self.additional_settings.keys() and
-            self.additional_settings["is_by_homeowner"]) and (author_data["author_type"] != "unknown" and author_data["author_type"] != "homeowner"):
+        if define_flat_url_id(common_data["url"]) in self.result_set:
             return
 
         page_data = dict()
         if self.with_extra_data:
-            res = self.session.get(url=common_data["link"])
-            res.raise_for_status()
-            html_offer_page = res.text
-
-            page_data = parse_flat_offer_page(html_offer=html_offer_page)
-            if page_data["year_of_construction"] == -1 and page_data["kitchen_meters"] == -1 and page_data["floors_count"] == -1:
-                page_data = parse_flat_offer_page_json(html_offer=html_offer_page)
-
-        specification_data["price_per_m2"] = float(0)
-        if "price" in price_data:
-            self.average_price = (self.average_price * self.count_parsed_offers + price_data["price"]) / (self.count_parsed_offers + 1)
-            price_data["price_per_m2"] = int(float(price_data["price"]) / specification_data["total_meters"])
-        elif "price_per_month" in price_data:
-            self.average_price = (self.average_price * self.count_parsed_offers + price_data["price_per_month"]) / (self.count_parsed_offers + 1)
-            price_data["price_per_m2"] = int(float(price_data["price_per_month"]) / specification_data["total_meters"])
+            flat_parser = FlatPageParser(session=self.session, url=common_data["url"])
+            page_data = flat_parser.parse_page()
+            time.sleep(4)
 
         self.count_parsed_offers += 1
-
-        if define_url_id(common_data["link"]) in self.result_set:
-            return
-
-        self.result_set.add(define_url_id(common_data["link"]))
+        self.result_set.add(define_flat_url_id(common_data["url"]))
         self.result.append(union_dicts(author_data, common_data, specification_data, price_data, page_data, location_data))
 
         if self.with_saving_csv:
             self.save_results()
-
-        if self.with_extra_data:
-            time.sleep(4)
 
     def save_results(self):
         self.remove_unnecessary_fields()

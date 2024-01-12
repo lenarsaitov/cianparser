@@ -31,11 +31,11 @@ Collecting information from pages with list of offers
  2 | 2 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of all parsed: 56. Progress ratio: 100 %. Average price: 54 040 102 rub
 
 The collection of information from the pages with list of offers is completed
-Total number of parsed offers: 56. Average price: 54 040 102 rub
+Total number of parsed offers: 56.
 {
     "author": "MR Group",
     "author_type": "developer",
-    "link": "https://www.cian.ru/sale/flat/292125772/",
+    "url": "https://www.cian.ru/sale/flat/292125772/",
     "location": "Москва",
     "deal_type": "sale",
     "accommodation_type": "flat",
@@ -43,7 +43,6 @@ Total number of parsed offers: 56. Average price: 54 040 102 rub
     "floors_count": 37,
     "rooms_count": 1,
     "total_meters": 39.6,
-    "price_per_m2": 722826,
     "price": 28623910,
     "district": "Беговой",
     "street": "Ленинградский проспект",
@@ -64,9 +63,55 @@ Total number of parsed offers: 56. Average price: 54 040 102 rub
 * __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени (см. ниже в __Примечании__), по умолчанию _False_
 * __additional_settings__ - дополнительные настройки поиска (см. ниже в __Дополнительные настройки поиска__), по умолчанию _None_
 
+Пример использования данного метода представлен выше
+
 В проекте предусмотрен функционал корректного завершения в случае окончания страниц. По данному моменту, следует изучить раздел __Ограничения__
 
 _**В настоящее время функционал доступен только по продажам (sale) и долгосрочном арендам (rent_long).**_
+
+### Метод get_newobjects (даннные по новостройкам)
+Данный метод принимает следующий аргументы:
+* __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
+
+Пример:
+```python
+import cianparser
+
+moscow_parser = cianparser.CianParser(location="Москва")
+data = moscow_parser.get_newobjects(with_saving_csv=True)
+
+print(data[0])
+```
+```
+                              Preparing to collect information from pages..
+The absolute path to the file: 
+/Users/macbook/some_project/cianparser/cian_parsing_result_newobject_sale_1_1_moskva_13_Jan_2024_01_27_32_734734.csv 
+
+The page from which the collection of information begins: 
+ https://cian.ru/newobjects/list/?engine_version=2&p=1&with_neighbors=0&region=1&deal_type=sale&offer_type=newobject
+
+Collecting information from pages with list of offers
+ 1 | 1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of all parsed: 25. Progress ratio: 100 %.
+
+The collection of information from the pages with list of offers is completed
+Total number of parsed offers: 25.
+{
+    "name": "ЖК «SYMPHONY 34 (Симфони 34)»",
+    "location": "Москва",
+    "accommodation_type": "newobject",
+    "url": "https://zhk-symphony-34-i.cian.ru",
+    "full_location_address": "Москва, САО, Савеловский, 2-я Хуторская ул., 34",
+    "year_of_construction": "2025",
+    "house_material_type": "Монолитный",
+    "finish_type": "Предчистовая, чистовая",
+    "ceiling_height": "3,0 м",
+    "class": "Премиум",
+    "parking_type": "Подземная, гостевая",
+    "floors_from": 36,
+    "floors_to": 54,
+    "builder": "Застройщик MR Group"
+}
+```
 
 ### Дополнительные настройки поиска
 Пример:
@@ -152,12 +197,11 @@ additional_settings = {
 * __house_material_type__ - тип дома (киричный/монолитный/панельный итд)
 * __heating_type__ - тип отопления
 * __price_per_month__ - стоимость в месяц
-* __price_per_m2__ - стоимость на квадратный метр
 * __commissions__ - комиссия, взымаемая при заселении
 * __author__ - автор объявления
 * __author_type__ - тип автора 
 * __phone__ - номер телефона в объявлении
-* __link__ - ссылка на объявление
+* __url__ - ссылка на объявление
 
 Возможные значения поля __author_type__:
 - __real_estate_agent__ - агентство недвижимости
@@ -178,23 +222,46 @@ additional_settings = {
 * __object_type__ -  тип жилья (вторичка/новостройка)
 * __finish_type__ - отделка
 
+### Признаки, получаемые в ходе сбора данных по новостройкам
+* __name__ - наименование ЖК
+* __url__ - ссылка на страницу
+* __full_location_address__ - полный адрес расположения ЖК
+* __year_of_construction__ - год сдачи
+* __house_material_type__ - тип дома (_см выше возможные значения_)
+* __finish_type__ - отделка
+* __ceiling_height__ - высота потолка
+* __class__ - класс жилья
+* __parking_type__ - тип парковки
+* __floors_from__ - этажность (от)
+* __floors_to__ - этажность (до)
+* __builder__ - застройщик
+
 ### Сохранение данных
 Имеется возможность сохранения собираемых данных в режиме реального времени. Для этого необходимо подставить в аргументе 
 __with_saving_csv__ значение ___True___.
 
-Пример получаемого файла (при вызове метода __get_flats__ с __with_extra_data__ = __True__):
+#### Пример получаемого файла при вызове метода __get_flats__ с __with_extra_data__ = __True__:
 
 ```bash
 cian_parsing_result_flat_sale_1_1_moskva_12_Jan_2024_22_29_48_117413.csv
 ```
-
-| author | author_type | link | location | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_m2 | price | year_of_construction | object_type | house_material_type | heating_type | finish_type | living_meters | kitchen_meters | phone | district | street | house_number | underground | residential_complex
+| author | author_type | url | location | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_m2 | price | year_of_construction | object_type | house_material_type | heating_type | finish_type | living_meters | kitchen_meters | phone | district | street | house_number | underground | residential_complex
 | ------ | ------ | ------ | ------ | ------ | ------ | ----------- | ---- | ---- | --------- | ------------------ | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---
 | White and Broughton | real_estate_agent | https://www.cian.ru/sale/flat/290499455/ | Москва | sale | flat | 3 | 40 | 1 | 45.5 | 709890 | 32300000 | 2021 | Вторичка | Монолитный | Центральное | -1 | 19.0 | 6.0 | +79646331510 | Хорошевский | Ленинградский проспект | 37/4 | Динамо | Прайм Парк
 | ФСК | developer | https://www.cian.ru/sale/flat/288376323/ | Москва | sale | flat | 24 | 47 | 2 | 46.0 | 528900 | 24329400 | 2024 | Новостройка | Монолитно-кирпичный | -1 | Без отделки, предчистовая, чистовая | 18.0 | 15.0 | +74951387154 | Обручевский |  Академика Волгина | 2С1 | Калужская | Архитектор
 | White and Broughton | real_estate_agent | https://www.cian.ru/sale/flat/292416804/ | Москва | sale | flat | 2 | 41 | 2 | 60.0 | 783333 | 47000000 | 2021 | Вторичка | -1 | Центральное | -1 | 43.0 | 5.0 | +79646331510 | Хорошевский | Ленинградский проспект | 37/5 | Динамо | Прайм Парк
-| ANT Development | developer | https://www.cian.ru/sale/flat/291563636/ | Москва | sale | flat | 28 | 34 | 2 | 51.2 | 954271 | 48858726 | 2023 | Новостройка Апартаменты | Монолитно-кирпичный | -1 | Чистовая | 30.0 | -1 | +74951374803 | Дорогомилово | Поклонная  | 9 | Парк Победы | Поклонная 9
-| Life Style | real_estate_agent | https://www.cian.ru/sale/flat/294212104/ | Москва | sale | flat | 34 | 78 | 2 | 76.1 | 788436 | 60000000 | 2020 | Вторичка | Монолитный | Нет информации | -1 | -1 | -1 | +79660513769 | Пресненский | 1-й Красногвардейский проезд | 22с2 | Тестовская | NEVA TOWERS
+
+#### Пример получаемого файла при вызове метода __get_newobjects__:
+
+```bash
+cian_parsing_result_newobject_sale_1_1_moskva_13_Jan_2024_01_27_32_734734.csv
+```
+| name | location | accommodation_type | url | full_location_address | year_of_construction | house_material_type | finish_type | ceiling_height | class | parking_type | floors_from | floors_to | builder
+ | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---
+| ЖК «SYMPHONY 34 (Симфони 34)» | Москва | newobject | https://zhk-symphony-34-i.cian.ru | Москва, САО, Савеловский, 2-я Хуторская ул., 34 | 2025 | Монолитный | Предчистовая, чистовая | 3,0 м | Премиум | Подземная, гостевая | 36 | 54 | Застройщик MR Group
+| ЖК «Коллекция клубных особняков Ильинка 3/8» | Москва | newobject | https://zhk-kollekciya-klubnyh-osobnyakov-ilinka-38-i.cian.ru | Москва, ЦАО, Тверской, ул. Ильинка | 2024 | Монолитно-кирпичный, монолитный | Без отделки | от 3,35 м до 6,0 м | Премиум | Подземная, гостевая | 3 | 5 | Застройщик Sminex-Интеко
+| ЖК «Victory Park Residences (Виктори Парк Резиденсез)» | Москва | newobject | https://zhk-victory-park-residences-i.cian.ru | Москва, ЗАО, Дорогомилово, ул. Братьев Фонченко | 2024 | Монолитный | Чистовая | — | Премиум | Подземная | 10 | 11 | Застройщик ANT Development
+
 
 ### Cloudflare, CloudScraper
 Для обхода блокировки в проекте задействован **CloudScraper** (библиотека **cloudscraper**), который позволяет успешно обходить защиту **Cloudflare**.

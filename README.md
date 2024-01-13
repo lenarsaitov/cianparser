@@ -80,7 +80,7 @@ Total number of parsed offers: 56.
 import cianparser
 
 moscow_parser = cianparser.CianParser(location="Москва")
-data = moscow_parser.get_suburban(deal_type="sale", with_saving_csv=True, additional_settings={"start_page":1, "end_page":1})
+data = moscow_parser.get_suburban(object_type="townhouse", deal_type="sale", with_saving_csv=True, additional_settings={"start_page":1, "end_page":1})
 ```
 
 ### Метод get_newobjects (сбор даннных по новостройкам)

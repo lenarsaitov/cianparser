@@ -49,6 +49,9 @@ class URLBuilder:
     def add_rent_period_type(self, rent_period_type):
         self.url += RENT_PERIOD_TYPE_PATH.format(rent_period_type)
 
+    def add_object_type(self, object_type):
+        self.url += OBJECT_TYPE_PATH.format(OBJECT_TYPES[object_type])
+
     def add_additional_settings(self, additional_settings):
         if "is_by_homeowner" in additional_settings.keys() and additional_settings["is_by_homeowner"]:
             self.url += IS_ONLY_HOMEOWNER_PATH

@@ -39,6 +39,7 @@ class SuburbanListPageParser(BaseListPageParser):
         common_data["location"] = self.location_name
         common_data["deal_type"] = self.deal_type
         common_data["accommodation_type"] = self.accommodation_type
+        common_data["object_type"] = self.object_type
 
         author_data = define_author(block=offer)
         location_data = parse_location_data(block=offer)

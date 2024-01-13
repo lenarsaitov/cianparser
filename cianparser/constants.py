@@ -1,4 +1,6 @@
 DEAL_TYPES = {"rent_long", "sale"}
+OBJECT_TYPES = {"house": "1", "house-part": "2", "land-plot": "3", "townhouse": "4"}
+
 # DEAL_TYPES_NOT_IMPLEMENTED_YET = {"rent_short"}
 
 # ACCOMMODATION_TYPES_NOT_IMPLEMENTED_YET = {"room", "house", "house-part", "townhouse"}
@@ -15,6 +17,7 @@ REGION_PATH = "&region={}"
 OFFER_TYPE_PATH = "&offer_type={}"
 RENT_PERIOD_TYPE_PATH = "&type={}"
 DEAL_TYPE_PATH = "&deal_type={}"
+OBJECT_TYPE_PATH = "&object_type%5B0%5D={}"
 
 ROOM_PATH = "&room{}=1"
 STUDIO_PATH = "&room9=1"
@@ -53,7 +56,8 @@ IS_SORT_BY_CREATION_DATA_FROM_OLDER_TO_NEWER_PATH = "creation_data_from_older_to
 
 NOT_STREET_ADDRESS_ELEMENTS = {"ЖК", "м.", "мкр.", "Жилой комплекс", "Жилой Комплекс"}
 
-STREET_TYPES = {"ул.", "улица", "аллея", "бульвар", "линия", "набережная", "тракт", "тупик", "шоссе", "переулок", "проспект", "проезд", "раздъезд", "мост", "авеню"}
+STREET_TYPES = {"ул.", "улица", "аллея", "бульвар", "линия", "набережная", "тракт", "тупик", "шоссе", "переулок",
+                "проспект", "проезд", "раздъезд", "мост", "авеню"}
 
 SPECIFIC_FIELDS_FOR_RENT_LONG = {"price_per_month", "commissions"}
 SPECIFIC_FIELDS_FOR_RENT_SHORT = {"price_per_day"}

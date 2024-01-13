@@ -1,6 +1,6 @@
 import cloudscraper
 
-from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES
+from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES, OBJECT_TYPES
 from cianparser.url_builder import URLBuilder
 from cianparser.flat_list import FlatListPageParser
 from cianparser.suburban_list import SuburbanListPageParser
@@ -120,21 +120,22 @@ class CianParser:
                                additional_settings=additional_settings))
         return self.__parser__.result
 
-    def get_suburban(self, deal_type: str, with_saving_csv=False, with_extra_data=False, additional_settings=None):
+    def get_suburban(self, object_type: str, deal_type: str, with_saving_csv=False, with_extra_data=False, additional_settings=None):
         """
         Parse information of suburbans from cian website
         Examples:
             >>> moscow_parser = cianparser.CianParser(location="Москва")
-            >>> data = moscow_parser.get_suburbans(deal_type="rent_long")
-            >>> data = moscow_parser.get_suburbans(deal_type="rent_short", with_saving_csv=True)
-            >>> data = moscow_parser.get_suburbans(deal_type="sale", additional_settings={"start_page": 1, "end_page": 1, "sort_by":"price_from_min_to_max"})
+            >>> data = moscow_parser.get_suburbans(object_type="house",deal_type="rent_long")
+            >>> data = moscow_parser.get_suburbans(object_type="house",deal_type="rent_short", with_saving_csv=True)
+            >>> data = moscow_parser.get_suburbans(object_type="townhouse",deal_type="sale", additional_settings={"start_page": 1, "end_page": 1, "sort_by":"price_from_min_to_max"})
+        :param object_type: type of object, e.g. "house", "house-part", "land-plot", "townhouse"
         :param deal_type: type of deal, e.g. "rent_long", "rent_short", "sale"
         :param with_saving_csv: is it necessary to save data in csv, default False
         :param with_extra_data:  is it necessary to collect additional data (but with increasing time duration), default False
         :param additional_settings:  additional settings such as min_price, sort_by and others, default None
         """
 
-        __validation_get_suburban__(deal_type)
+        __validation_get_suburban__(deal_type=deal_type, object_type=object_type)
         deal_type, rent_period_type = __define_deal_type__(deal_type)
         self.__parser__ = SuburbanListPageParser(
             session=self.__session__,
@@ -147,7 +148,7 @@ class CianParser:
         )
         self.__run__(
             __build_url_list__(location_id=self.__location_id__, deal_type=deal_type, accommodation_type="suburban",
-                               rooms=None, rent_period_type=rent_period_type,
+                               rooms=None, rent_period_type=rent_period_type, object_type=object_type,
                                additional_settings=additional_settings))
         return self.__parser__.result
 
@@ -214,14 +215,18 @@ def __validation_get_flats__(deal_type, rooms):
                          f'It is correct int, str and tuple types. Example 1, (1,3, "studio"), "studio, "all".')
 
 
-def __validation_get_suburban__(deal_type):
+def __validation_get_suburban__(deal_type, object_type):
     if deal_type not in DEAL_TYPES:
         raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
                          f'Try entering one of these values: "rent_long", "sale".')
 
+    if object_type not in OBJECT_TYPES.keys():
+        raise ValueError(f'You entered object_type={object_type}, which is not valid value. '
+                         f'Try entering one of these values: "house", "house-part", "land-plot", "townhouse".')
+
 
 def __build_url_list__(location_id, deal_type, accommodation_type, rooms=None, rent_period_type=None,
-                       additional_settings=None):
+                       object_type=None, additional_settings=None):
     url_builder = URLBuilder(accommodation_type == "newobject")
     url_builder.add_location(location_id)
     url_builder.add_deal_type(deal_type)
@@ -232,6 +237,9 @@ def __build_url_list__(location_id, deal_type, accommodation_type, rooms=None, r
 
     if rent_period_type is not None:
         url_builder.add_rent_period_type(rent_period_type)
+
+    if object_type is not None:
+        url_builder.add_object_type(object_type)
 
     if additional_settings is not None:
         url_builder.add_additional_settings(additional_settings)

@@ -12,7 +12,7 @@ class BaseListPageParser:
                  session,
                  deal_type: str, rent_period_type, location_name: str,
                  with_saving_csv=False, with_extra_data=False,
-                 additional_settings=None):
+                 object_type=None, additional_settings=None):
         self.accommodation_type = "suburban"
         self.session = session
         self.deal_type = deal_type
@@ -21,6 +21,7 @@ class BaseListPageParser:
         self.with_saving_csv = with_saving_csv
         self.with_extra_data = with_extra_data
         self.additional_settings = additional_settings
+        self.object_type = object_type
 
         self.result = []
         self.result_set = set()

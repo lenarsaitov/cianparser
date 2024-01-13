@@ -51,8 +51,8 @@ Total number of parsed offers: 56.
     "residential_complex": "Slava"
 }
 ```
-### Инициализация CianParser
-Параметры, используемые при инициализации парсера:
+### Инициализация
+Параметры, используемые при инициализации парсера через функциою CianParser:
 * __location__ - локация объявления, к примеру, _Санкт-Петербург_ (для просмотра доступных мест используйте _cianparser.list_locations())_
 * __proxies__ - прокси (см раздел __Cloudflare, CloudScraper, Proxy__), по умолчанию _None_
 

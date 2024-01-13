@@ -3,6 +3,7 @@ import cloudscraper
 from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES
 from cianparser.url_builder import URLBuilder
 from cianparser.flat_list import FlatListPageParser
+from cianparser.suburban_list import SuburbanListPageParser
 from cianparser.newobject_list import NewObjectListParser
 
 
@@ -108,6 +109,37 @@ class CianParser:
                                additional_settings=additional_settings))
         return self.__parser__.result
 
+    def get_suburban(self, deal_type: str, with_saving_csv=False, with_extra_data=False, additional_settings=None):
+        """
+        Parse information of suburbans from cian website
+        Examples:
+            >>> moscow_parser = cianparser.CianParser(location="Москва")
+            >>> data = moscow_parser.get_suburbans(deal_type="rent_long")
+            >>> data = moscow_parser.get_suburbans(deal_type="rent_short", with_saving_csv=True)
+            >>> data = moscow_parser.get_suburbans(deal_type="sale", additional_settings={"start_page": 1, "end_page": 1, "sort_by":"price_from_min_to_max"})
+        :param deal_type: type of deal, e.g. "rent_long", "rent_short", "sale"
+        :param with_saving_csv: is it necessary to save data in csv, default False
+        :param with_extra_data:  is it necessary to collect additional data (but with increasing time duration), default False
+        :param additional_settings:  additional settings such as min_price, sort_by and others, default None
+        """
+
+        __validation_get_suburban__(deal_type)
+        deal_type, rent_period_type = __define_deal_type__(deal_type)
+        self.__parser__ = SuburbanListPageParser(
+            session=self.__session__,
+            deal_type=deal_type,
+            rent_period_type=rent_period_type,
+            location_name=self.__location_name__,
+            with_saving_csv=with_saving_csv,
+            with_extra_data=with_extra_data,
+            additional_settings=additional_settings,
+        )
+        self.__run__(
+            __build_url_list__(location_id=self.__location_id__, deal_type=deal_type, accommodation_type="suburban",
+                               rooms=None, rent_period_type=rent_period_type,
+                               additional_settings=additional_settings))
+        return self.__parser__.result
+
     def get_newobjects(self, with_saving_csv=False):
         """
         Parse information of newobjects from cian website
@@ -169,6 +201,12 @@ def __validation_get_flats__(deal_type, rooms):
     else:
         raise ValueError(f'In argument "rooms" not valid type of element. '
                          f'It is correct int, str and tuple types. Example 1, (1,3, "studio"), "studio, "all".')
+
+
+def __validation_get_suburban__(deal_type):
+    if deal_type not in DEAL_TYPES:
+        raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
+                         f'Try entering one of these values: "rent_long", "sale".')
 
 
 def __build_url_list__(location_id, deal_type, accommodation_type, rooms=None, rent_period_type=None,

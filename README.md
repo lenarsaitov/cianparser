@@ -57,7 +57,7 @@ Total number of parsed offers: 56.
 
 ### Метод get_flats
 Данный метод принимает следующий аргументы:
-* __deal_type__ - тип объявления, к примеру, долгосрочная, краткосрочная аренда, продажа _("rent_long", "rent_short", "sale")_
+* __deal_type__ - тип объявления, к примеру, долгосрочная, краткосрочная аренда, продажа _("rent_long", "sale")_
 * __rooms__ - количество комнат, к примеру, _1, (1,3, "studio"), "studio, "all"_; по умолчанию любое _("all")_
 * __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
 * __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени (см. ниже в __Примечании__), по умолчанию _False_
@@ -67,9 +67,22 @@ Total number of parsed offers: 56.
 
 В проекте предусмотрен функционал корректного завершения в случае окончания страниц. По данному моменту, следует изучить раздел __Ограничения__
 
-_**В настоящее время функционал доступен только по продажам (sale) и долгосрочном арендам (rent_long).**_
+### Метод get_suburban (сбор объявлений домов/участков/танхаусав итп)
+Данный метод принимает следующий аргументы:
+* __deal_type__ - тип объявления, к примеру, долгосрочная, краткосрочная аренда, продажа _("rent_long", "sale")_
+* __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
+* __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени, по умолчанию _False_
+* __additional_settings__ - дополнительные настройки поиска (см. ниже в __Дополнительные настройки поиска__), по умолчанию _None_
 
-### Метод get_newobjects (даннные по новостройкам)
+Пример:
+```python
+import cianparser
+
+moscow_parser = cianparser.CianParser(location="Москва")
+data = moscow_parser.get_suburban(deal_type="sale", with_saving_csv=True, additional_settings={"start_page":1, "end_page":1})
+```
+
+### Метод get_newobjects (сбор даннных по новостройкам)
 Данный метод принимает следующий аргументы:
 * __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
 
@@ -79,38 +92,6 @@ import cianparser
 
 moscow_parser = cianparser.CianParser(location="Москва")
 data = moscow_parser.get_newobjects(with_saving_csv=True)
-
-print(data[0])
-```
-```
-                              Preparing to collect information from pages..
-The absolute path to the file: 
-/Users/macbook/some_project/cianparser/cian_parsing_result_newobject_sale_1_1_moskva_13_Jan_2024_01_27_32_734734.csv 
-
-The page from which the collection of information begins: 
- https://cian.ru/newobjects/list/?engine_version=2&p=1&with_neighbors=0&region=1&deal_type=sale&offer_type=newobject
-
-Collecting information from pages with list of offers
- 1 | 1 page with list: [=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>=>] 100% | Count of all parsed: 25. Progress ratio: 100 %.
-
-The collection of information from the pages with list of offers is completed
-Total number of parsed offers: 25.
-{
-    "name": "ЖК «SYMPHONY 34 (Симфони 34)»",
-    "location": "Москва",
-    "accommodation_type": "newobject",
-    "url": "https://zhk-symphony-34-i.cian.ru",
-    "full_location_address": "Москва, САО, Савеловский, 2-я Хуторская ул., 34",
-    "year_of_construction": "2025",
-    "house_material_type": "Монолитный",
-    "finish_type": "Предчистовая, чистовая",
-    "ceiling_height": "3,0 м",
-    "class": "Премиум",
-    "parking_type": "Подземная, гостевая",
-    "floors_from": 36,
-    "floors_to": 54,
-    "builder": "Застройщик MR Group"
-}
 ```
 
 ### Дополнительные настройки поиска
@@ -250,6 +231,17 @@ cian_parsing_result_flat_sale_1_1_moskva_12_Jan_2024_22_29_48_117413.csv
 | White and Broughton | real_estate_agent | https://www.cian.ru/sale/flat/290499455/ | Москва | sale | flat | 3 | 40 | 1 | 45.5 | 709890 | 32300000 | 2021 | Вторичка | Монолитный | Центральное | -1 | 19.0 | 6.0 | +79646331510 | Хорошевский | Ленинградский проспект | 37/4 | Динамо | Прайм Парк
 | ФСК | developer | https://www.cian.ru/sale/flat/288376323/ | Москва | sale | flat | 24 | 47 | 2 | 46.0 | 528900 | 24329400 | 2024 | Новостройка | Монолитно-кирпичный | -1 | Без отделки, предчистовая, чистовая | 18.0 | 15.0 | +74951387154 | Обручевский |  Академика Волгина | 2С1 | Калужская | Архитектор
 | White and Broughton | real_estate_agent | https://www.cian.ru/sale/flat/292416804/ | Москва | sale | flat | 2 | 41 | 2 | 60.0 | 783333 | 47000000 | 2021 | Вторичка | -1 | Центральное | -1 | 43.0 | 5.0 | +79646331510 | Хорошевский | Ленинградский проспект | 37/5 | Динамо | Прайм Парк
+
+#### Пример получаемого файла при вызове метода __get_suburban__ с __with_extra_data__ = __True__:
+
+```bash
+cian_parsing_result_suburban_sale_15_15_moskva_13_Jan_2024_04_30_47_963046.csv
+```
+| author | author_type | url | location | deal_type | accommodation_type | price | year_of_construction | house_material_type | land_plot | land_plot_status | heating_type | gas_type | water_supply_type | sewage_system | bathroom | living_meters | floors_count | phone | district | underground | street | house_number
+ | -----  | -----  | -----  | -----  | -----  | -----  | -----  | -----  | -----  | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---
+| New Moscow House | real_estate_agent | https://www.cian.ru/sale/suburban/296304861/ | Москва | sale | suburban | 93000000 | 2020 | Кирпичный | 13 сот. | -1 | -1 | Есть | Есть | Есть | В доме | -1 | 2 | +79096865868 | Первомайское поселение |  | улица Центральная | 21
+| LaRichesse | real_estate_agent | https://www.cian.ru/sale/suburban/290335502/ | Москва | sale | suburban | 95000000 | -1 | Пенобетонный блок | 12 сот. | Индивидуальное жилищное строительство | Центральное | -1 | -1 | -1 | -1 | 502,8 м² | 2 | +79652502027 | Воскресенское поселение |  | улица Каменка | 44Ас1
+| Динара Ваганова | realtor | https://www.cian.ru/sale/suburban/293424451/ | Москва | sale | suburban | 21990000 | -1 | -1 | -1 | Индивидуальное жилищное строительство | -1 | Нет | -1 | Нет | -1 | -1 | -1 | +79672093870 | Первомайское поселение | м. Крёкшино |  |
 
 #### Пример получаемого файла при вызове метода __get_newobjects__:
 

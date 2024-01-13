@@ -24,7 +24,7 @@ def define_rooms_count(description):
     return rooms_count
 
 
-def define_flat_url_id(url: str):
+def define_deal_url_id(url: str):
     url_path_elements = url.split("/")
     if len(url_path_elements[-1]) > 3:
         return url_path_elements[-1]
@@ -87,9 +87,39 @@ def define_author(block):
     return author_data
 
 
+def parse_location_data(block):
+    general_info_sections = block.select_one("div[data-name='LinkArea']").select("div[data-name='GeneralInfoSectionRowComponent']")
+
+    location_data = dict()
+    location_data["district"] = ""
+    location_data["underground"] = ""
+    location_data["street"] = ""
+    location_data["house_number"] = ""
+
+    for section in general_info_sections:
+        geo_labels = section.select("a[data-name='GeoLabel']")
+
+        # if len(geo_labels) > 1:
+            # print("\n\n", location_data["street"] == "",geo_labels[-2].text, "|||", geo_labels[-1].text)
+
+        for index, label in enumerate(geo_labels):
+            if "м. " in label.text:
+                location_data["underground"] = label.text
+
+            if "р-н" in label.text or "поселение" in label.text:
+                location_data["district"] = label.text
+
+            if any(street_type in label.text.lower() for street_type in STREET_TYPES):
+                location_data["street"] = label.text
+
+                if len(geo_labels) > index + 1 and any(chr.isdigit() for chr in geo_labels[index + 1].text):
+                    location_data["house_number"] = geo_labels[index + 1].text
+
+    return location_data
+
+
 def define_location_data(block, is_sale):
-    elements = block.select("div[data-name='LinkArea']")[0]. \
-        select("div[data-name='GeneralInfoSectionRowComponent']")
+    elements = block.select_one("div[data-name='LinkArea']").select("div[data-name='GeneralInfoSectionRowComponent']")
 
     location_data = dict()
     location_data["district"] = ""

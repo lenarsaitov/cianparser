@@ -1,12 +1,12 @@
 import bs4
 import time
 
-from cianparser.helpers import union_dicts, define_author, define_location_data, define_specification_data, define_deal_url_id, define_price_data
-from cianparser.flat import FlatPageParser
+from cianparser.helpers import union_dicts, define_author, parse_location_data, define_price_data, define_deal_url_id
+from cianparser.suburban import SuburbanPageParser
 from cianparser.base import BaseListPageParser
 
 
-class FlatListPageParser(BaseListPageParser):
+class SuburbanListPageParser(BaseListPageParser):
     def parse_list_offers_page(self, html, page_number: int, count_of_pages: int, attempt_number: int):
         list_soup = bs4.BeautifulSoup(html, 'html.parser')
 
@@ -41,22 +41,23 @@ class FlatListPageParser(BaseListPageParser):
         common_data["accommodation_type"] = self.accommodation_type
 
         author_data = define_author(block=offer)
-        location_data = define_location_data(block=offer, is_sale=self.is_sale())
+        location_data = parse_location_data(block=offer)
         price_data = define_price_data(block=offer)
-        specification_data = define_specification_data(block=offer)
 
         if define_deal_url_id(common_data["url"]) in self.result_set:
             return
 
         page_data = dict()
         if self.with_extra_data:
-            flat_parser = FlatPageParser(session=self.session, url=common_data["url"])
-            page_data = flat_parser.parse_page()
+            suburban_parser = SuburbanPageParser(session=self.session, url=common_data["url"])
+            page_data = suburban_parser.parse_page()
             time.sleep(4)
 
         self.count_parsed_offers += 1
         self.result_set.add(define_deal_url_id(common_data["url"]))
-        self.result.append(union_dicts(author_data, common_data, specification_data, price_data, page_data, location_data))
+        self.result.append(union_dicts(author_data, common_data, price_data, page_data, location_data))
 
         if self.with_saving_csv:
             self.save_results()
+
+

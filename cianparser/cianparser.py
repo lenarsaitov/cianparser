@@ -5,6 +5,7 @@ from cianparser.url_builder import URLBuilder
 from cianparser.flat_list import FlatListPageParser
 from cianparser.suburban_list import SuburbanListPageParser
 from cianparser.newobject_list import NewObjectListParser
+from cianparser.proxy_pool import ProxyPool
 
 
 def list_locations():
@@ -16,12 +17,13 @@ def list_metro_stations():
 
 
 class CianParser:
-    def __init__(self, location: str):
+    def __init__(self, location: str, proxies=None):
         """
         Initialize the Cian website parser
         Examples:
             >>> moscow_parser = cianparser.CianParser(location="Москва")
         :param str location: location. e.g. "Москва", for see all correct values use cianparser.list_locations()
+        :param proxies: proxies for executing requests (https scheme), default None
         """
 
         location_id = __validation_init__(location)
@@ -29,11 +31,20 @@ class CianParser:
         self.__parser__ = None
         self.__session__ = cloudscraper.create_scraper()
         self.__session__.headers = {'Accept-Language': 'en'}
+        self.__proxy_pool__ = ProxyPool(proxies=proxies)
         self.__location_name__ = location
         self.__location_id__ = location_id
 
+    def __set_proxy__(self, url_list):
+        if self.__proxy_pool__.is_empty():
+            return
+        available_proxy = self.__proxy_pool__.get_available_proxy(url_list)
+        if available_proxy is not None:
+            self.__session__.proxies = {"https": available_proxy}
+
     def __load_list_page__(self, url_list_format, page_number):
         url_list = url_list_format.format(page_number)
+        self.__set_proxy__(url_list)
 
         if page_number == self.__parser__.start_page:
             print(f"The page from which the collection of information begins: \n {url_list}")

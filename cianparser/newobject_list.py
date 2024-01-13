@@ -25,7 +25,7 @@ class NewObjectListParser:
         self.average_price = 0
         self.count_parsed_offers = 0
         self.start_page = 1
-        self.end_page = 1
+        self.end_page = 50
         self.file_path = self.build_file_path()
 
     def build_file_path(self):

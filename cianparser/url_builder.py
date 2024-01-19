@@ -49,10 +49,13 @@ class URLBuilder:
     def add_rent_period_type(self, rent_period_type):
         self.url += RENT_PERIOD_TYPE_PATH.format(rent_period_type)
 
-    def add_object_type(self, object_type):
-        self.url += OBJECT_TYPE_PATH.format(OBJECT_TYPES[object_type])
+    def add_object_suburban_type(self, object_type):
+        self.url += OBJECT_TYPE_PATH.format(OBJECT_SUBURBAN_TYPES[object_type])
 
     def add_additional_settings(self, additional_settings):
+        if "object_type" in additional_settings.keys():
+            self.url += OBJECT_TYPE_PATH.format(OBJECT_TYPES[additional_settings["object_type"]])
+
         if "is_by_homeowner" in additional_settings.keys() and additional_settings["is_by_homeowner"]:
             self.url += IS_ONLY_HOMEOWNER_PATH
         if "min_balconies" in additional_settings.keys():

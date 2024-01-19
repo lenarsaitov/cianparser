@@ -1,6 +1,6 @@
 import cloudscraper
 
-from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES, OBJECT_TYPES
+from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES, OBJECT_SUBURBAN_TYPES
 from cianparser.url_builder import URLBuilder
 from cianparser.flat_list import FlatListPageParser
 from cianparser.suburban_list import SuburbanListPageParser
@@ -61,29 +61,27 @@ class CianParser:
             print(f"The absolute path to the file: \n{self.__parser__.file_path} \n")
 
         page_number = self.__parser__.start_page - 1
-        while page_number < self.__parser__.end_page:
+        end_all_parsing = False
+        while page_number < self.__parser__.end_page and not end_all_parsing:
             page_parsed = False
             page_number += 1
             attempt_number_exception = 0
 
             while attempt_number_exception < 3 and not page_parsed:
-                # try:
-                (page_parsed, attempt_number, end_all_parsing) = self.__parser__.parse_list_offers_page(
-                    html=self.__load_list_page__(url_list_format=url_list_format, page_number=page_number),
-                    page_number=page_number,
-                    count_of_pages=self.__parser__.end_page + 1 - self.__parser__.start_page,
-                    attempt_number=attempt_number_exception)
+                try:
+                    (page_parsed, attempt_number, end_all_parsing) = self.__parser__.parse_list_offers_page(
+                        html=self.__load_list_page__(url_list_format=url_list_format, page_number=page_number),
+                        page_number=page_number,
+                        count_of_pages=self.__parser__.end_page + 1 - self.__parser__.start_page,
+                        attempt_number=attempt_number_exception)
 
-                if end_all_parsing:
-                    attempt_number_exception, page_number = 3, self.__parser__.end_page
-
-            # except Exception as e:
-            #     attempt_number_exception += 1
-            #     if attempt_number_exception < 3:
-            #         continue
-            #     print(f"\n\nException: {e}")
-            #     print(f"The collection of information from the pages with ending parse on {page_number} page...\n")
-            #     break
+                except Exception as e:
+                    attempt_number_exception += 1
+                    if attempt_number_exception < 3:
+                        continue
+                    print(f"\n\nException: {e}")
+                    print(f"The collection of information from the pages with ending parse on {page_number} page...\n")
+                    break
 
         print(f"\n\nThe collection of information from the pages with list of offers is completed")
         print(f"Total number of parsed offers: {self.__parser__.count_parsed_offers}. ", end="\n")
@@ -220,7 +218,7 @@ def __validation_get_suburban__(deal_type, object_type):
         raise ValueError(f'You entered deal_type={deal_type}, which is not valid value. '
                          f'Try entering one of these values: "rent_long", "sale".')
 
-    if object_type not in OBJECT_TYPES.keys():
+    if object_type not in OBJECT_SUBURBAN_TYPES.keys():
         raise ValueError(f'You entered object_type={object_type}, which is not valid value. '
                          f'Try entering one of these values: "house", "house-part", "land-plot", "townhouse".')
 
@@ -239,7 +237,7 @@ def __build_url_list__(location_id, deal_type, accommodation_type, rooms=None, r
         url_builder.add_rent_period_type(rent_period_type)
 
     if object_type is not None:
-        url_builder.add_object_type(object_type)
+        url_builder.add_object_suburban_type(object_type)
 
     if additional_settings is not None:
         url_builder.add_additional_settings(additional_settings)

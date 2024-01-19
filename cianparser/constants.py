@@ -1,5 +1,6 @@
 DEAL_TYPES = {"rent_long", "sale"}
-OBJECT_TYPES = {"house": "1", "house-part": "2", "land-plot": "3", "townhouse": "4"}
+OBJECT_SUBURBAN_TYPES = {"house": "1", "house-part": "2", "land-plot": "3", "townhouse": "4"}
+OBJECT_TYPES = {"secondary": "1", "new": "2"}
 
 # DEAL_TYPES_NOT_IMPLEMENTED_YET = {"rent_short"}
 

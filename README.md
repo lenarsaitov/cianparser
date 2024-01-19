@@ -13,7 +13,7 @@ pip install cianparser
 import cianparser
 
 moscow_parser = cianparser.CianParser(location="Москва")
-data = moscow_parser.get_flats(deal_type="sale", rooms=(1, 2), with_saving_csv=True, additional_settings={"start_page":1, "end_page":1})
+data = moscow_parser.get_flats(deal_type="sale", rooms=(1, 2), with_saving_csv=True, additional_settings={"start_page":1, "end_page":2})
 
 print(data[0])
 ```
@@ -58,7 +58,7 @@ Total number of parsed offers: 56.
 
 ### Метод get_flats
 Данный метод принимает следующий аргументы:
-* __deal_type__ - тип объявления, к примеру, долгосрочная, краткосрочная аренда, продажа _("rent_long", "sale")_
+* __deal_type__ - тип объявления, к примеру, долгосрочная аренда, продажа _("rent_long", "sale")_
 * __rooms__ - количество комнат, к примеру, _1, (1,3, "studio"), "studio, "all"_; по умолчанию любое _("all")_
 * __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
 * __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени (см. ниже в __Примечании__), по умолчанию _False_
@@ -70,7 +70,8 @@ Total number of parsed offers: 56.
 
 ### Метод get_suburban (сбор объявлений домов/участков/танхаусав итп)
 Данный метод принимает следующий аргументы:
-* __deal_type__ - тип объявления, к примеру, долгосрочная, краткосрочная аренда, продажа _("rent_long", "sale")_
+* __object_type__ - тип здания, к примеру, дом/дача, часть дома, участок, танхаус _("house", "house-part", "land-plot", "townhouse")_
+* __deal_type__ - тип объявления, к примеру, долгосрочная аренда, продажа _("rent_long", "sale")_
 * __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
 * __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени, по умолчанию _False_
 * __additional_settings__ - дополнительные настройки поиска (см. ниже в __Дополнительные настройки поиска__), по умолчанию _None_
@@ -122,6 +123,7 @@ additional_settings = {
     "sort_by": "price_from_min_to_max",
 }
 ```
+* __object_type__ -  тип жилья ("new" - вторичка, "secondary" - новостройка)
 * __start_page__ - страница, с которого начинается сбор данных
 * __end_page__ - страница, с которого заканчивается сбор данных
 * __is_by_homeowner__ - объявления, созданных только собственниками
@@ -155,7 +157,7 @@ additional_settings = {
 - _8_ - кирпично-монолитный
 
 #### Возможные значения полей **metro** и **metro_station**
-Можно посмотреть используя **_cianparser.list_metro_stations()_**
+Соответствуют ключам и значениям словаря, получаемого вызовом функции **_cianparser.list_metro_stations()_**
 
 #### Возможные значения поля **sort_by**
 - "_price_from_min_to_max_" - сортировка по цене (сначала дешевле)

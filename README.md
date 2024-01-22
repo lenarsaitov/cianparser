@@ -69,7 +69,7 @@ Total number of parsed offers: 56.
 import cianparser
 
 moscow_parser = cianparser.CianParser(location="Москва")
-data = moscow_parser.get_flats(deal_type="sale", rooms=(1, 2), additional_settings={"start_page":1, "end_page":2})
+data = moscow_parser.get_flats(deal_type="rent_long", rooms=(1, 2), additional_settings={"start_page":1, "end_page":1})
 ```
 
 В проекте предусмотрен функционал корректного завершения в случае окончания страниц. По данному моменту, следует изучить раздел __Ограничения__

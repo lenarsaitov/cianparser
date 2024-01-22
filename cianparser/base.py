@@ -1,10 +1,7 @@
 import math
 import csv
-import pathlib
-from datetime import datetime
-import transliterate
 
-from cianparser.constants import FILE_NAME_BASE, SPECIFIC_FIELDS_FOR_RENT_LONG, SPECIFIC_FIELDS_FOR_RENT_SHORT, SPECIFIC_FIELDS_FOR_SALE
+from cianparser.constants import SPECIFIC_FIELDS_FOR_RENT_LONG, SPECIFIC_FIELDS_FOR_RENT_SHORT, SPECIFIC_FIELDS_FOR_SALE
 
 
 class BaseListPageParser:
@@ -41,9 +38,13 @@ class BaseListPageParser:
         return self.deal_type == "rent" and self.rent_period_type == 2
 
     def build_file_path(self):
-        now_time = datetime.now().strftime("%d_%b_%Y_%H_%M_%S_%f")
-        file_name = FILE_NAME_BASE.format(self.accommodation_type, self.deal_type, self.start_page, self.end_page, transliterate.translit(self.location_name.lower(), reversed=True), now_time)
-        return pathlib.Path(pathlib.Path.cwd(), file_name.replace("'", ""))
+        pass
+
+    def define_average_price(self, price_data):
+        if "price" in price_data:
+            self.average_price = (self.average_price * self.count_parsed_offers + price_data["price"]) / self.count_parsed_offers
+        elif "price_per_month" in price_data:
+            self.average_price = (self.average_price * self.count_parsed_offers + price_data["price_per_month"]) / self.count_parsed_offers
 
     def print_parse_progress(self, page_number, count_of_pages, offers, ind):
         total_planed_offers = len(offers) * count_of_pages

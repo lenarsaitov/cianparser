@@ -1,12 +1,21 @@
 import bs4
 import time
+import pathlib
+from datetime import datetime
+from transliterate import translit
 
+from cianparser.constants import FILE_NAME_SUBURBAN_FORMAT
 from cianparser.helpers import union_dicts, define_author, parse_location_data, define_price_data, define_deal_url_id
 from cianparser.suburban import SuburbanPageParser
 from cianparser.base import BaseListPageParser
 
 
 class SuburbanListPageParser(BaseListPageParser):
+    def build_file_path(self):
+        now_time = datetime.now().strftime("%d_%b_%Y_%H_%M_%S_%f")
+        file_name = FILE_NAME_SUBURBAN_FORMAT.format(self.accommodation_type, self.object_type, self.deal_type, self.start_page, self.end_page, translit(self.location_name.lower(), reversed=True), now_time)
+        return pathlib.Path(pathlib.Path.cwd(), file_name.replace("'", ""))
+
     def parse_list_offers_page(self, html, page_number: int, count_of_pages: int, attempt_number: int):
         list_soup = bs4.BeautifulSoup(html, 'html.parser')
 
@@ -39,7 +48,7 @@ class SuburbanListPageParser(BaseListPageParser):
         common_data["location"] = self.location_name
         common_data["deal_type"] = self.deal_type
         common_data["accommodation_type"] = self.accommodation_type
-        common_data["object_type"] = self.object_type
+        common_data["suburban_type"] = self.object_type
 
         author_data = define_author(block=offer)
         location_data = parse_location_data(block=offer)
@@ -55,6 +64,7 @@ class SuburbanListPageParser(BaseListPageParser):
             time.sleep(4)
 
         self.count_parsed_offers += 1
+        self.define_average_price(price_data=price_data)
         self.result_set.add(define_deal_url_id(common_data["url"]))
         self.result.append(union_dicts(author_data, common_data, price_data, page_data, location_data))
 

@@ -4,10 +4,10 @@ import math
 import csv
 import pathlib
 from datetime import datetime
-import transliterate
+from transliterate import translit
 import urllib.parse
 
-from cianparser.constants import FILE_NAME_BASE
+from cianparser.constants import FILE_NAME_NEWOBJECT_FORMAT
 from cianparser.helpers import union_dicts
 from cianparser.newobject import NewObjectPageParser
 
@@ -30,7 +30,7 @@ class NewObjectListParser:
 
     def build_file_path(self):
         now_time = datetime.now().strftime("%d_%b_%Y_%H_%M_%S_%f")
-        file_name = FILE_NAME_BASE.format(self.accommodation_type, self.deal_type, self.start_page, self.end_page, transliterate.translit(self.location_name.lower(), reversed=True), now_time)
+        file_name = FILE_NAME_NEWOBJECT_FORMAT.format(self.accommodation_type, translit(self.location_name.lower(), reversed=True), now_time)
         return pathlib.Path(pathlib.Path.cwd(), file_name.replace("'", ""))
 
     def print_parse_progress(self, page_number, count_of_pages, offers, ind):

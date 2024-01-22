@@ -8,7 +8,9 @@ OBJECT_TYPES = {"secondary": "1", "new": "2"}
 
 FLOATS_NUMBERS_REG_EXPRESSION = r"[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 
-FILE_NAME_BASE = 'cian_parsing_result_{}_{}_{}_{}_{}_{}.csv'
+FILE_NAME_FLAT_FORMAT = 'cian_{}_{}_{}_{}_{}_{}.csv'
+FILE_NAME_SUBURBAN_FORMAT = 'cian_{}_{}_{}_{}_{}_{}_{}.csv'
+FILE_NAME_NEWOBJECT_FORMAT = 'cian_{}_{}_{}.csv'
 
 BASE_URL = "https://cian.ru"
 DEFAULT_POSTFIX_PATH = "/cat.php?"

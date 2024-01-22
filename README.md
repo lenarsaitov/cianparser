@@ -21,7 +21,7 @@ print(data[0])
 ```
                               Preparing to collect information from pages..
 The absolute path to the file: 
- /Users/macbook/some_project/cianparser/cian_parsing_result_flat_sale_1_2_moskva_12_Jan_2024_21_48_43_100892.csv 
+ /Users/macbook/some_project/cianparser/cian_flat_sale_1_2_moskva_12_Jan_2024_21_48_43_100892.csv 
 
 The page from which the collection of information begins: 
  https://cian.ru/cat.php?engine_version=2&p=1&with_neighbors=0&region=1&deal_type=sale&offer_type=flat&room1=1&room2=1
@@ -53,7 +53,7 @@ Total number of parsed offers: 56.
 ```
 ### Инициализация
 Параметры, используемые при инициализации парсера через функциою CianParser:
-* __location__ - локация объявления, к примеру, _Санкт-Петербург_ (для просмотра доступных мест используйте _cianparser.list_locations())_
+* __location__ - локация объявления, к примеру, _Москва_ (для просмотра доступных мест используйте _cianparser.list_locations())_
 * __proxies__ - прокси (см раздел __Cloudflare, CloudScraper, Proxy__), по умолчанию _None_
 
 ### Метод get_flats
@@ -64,13 +64,19 @@ Total number of parsed offers: 56.
 * __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени (см. ниже в __Примечании__), по умолчанию _False_
 * __additional_settings__ - дополнительные настройки поиска (см. ниже в __Дополнительные настройки поиска__), по умолчанию _None_
 
-Пример использования данного метода представлен выше
+Пример:
+```python
+import cianparser
+
+moscow_parser = cianparser.CianParser(location="Москва")
+data = moscow_parser.get_flats(deal_type="sale", rooms=(1, 2), additional_settings={"start_page":1, "end_page":2})
+```
 
 В проекте предусмотрен функционал корректного завершения в случае окончания страниц. По данному моменту, следует изучить раздел __Ограничения__
 
 ### Метод get_suburban (сбор объявлений домов/участков/танхаусав итп)
 Данный метод принимает следующий аргументы:
-* __object_type__ - тип здания, к примеру, дом/дача, часть дома, участок, танхаус _("house", "house-part", "land-plot", "townhouse")_
+* __suburban_type__ - тип здания, к примеру, дом/дача, часть дома, участок, танхаус _("house", "house-part", "land-plot", "townhouse")_
 * __deal_type__ - тип объявления, к примеру, долгосрочная аренда, продажа _("rent_long", "sale")_
 * __with_saving_csv__ - необходимо ли сохранение собираемых данных (в реальном времени в процессе сбора данных) или нет, по умолчанию _False_
 * __with_extra_data__ - необходимо ли сбор дополнительных данных, но с кратным продолжительности по времени, по умолчанию _False_
@@ -81,7 +87,7 @@ Total number of parsed offers: 56.
 import cianparser
 
 moscow_parser = cianparser.CianParser(location="Москва")
-data = moscow_parser.get_suburban(object_type="townhouse", deal_type="sale", with_saving_csv=True, additional_settings={"start_page":1, "end_page":1})
+data = moscow_parser.get_suburban(suburban_type="townhouse", deal_type="sale", additional_settings={"start_page":1, "end_page":1})
 ```
 
 ### Метод get_newobjects (сбор даннных по новостройкам)
@@ -93,7 +99,7 @@ data = moscow_parser.get_suburban(object_type="townhouse", deal_type="sale", wit
 import cianparser
 
 moscow_parser = cianparser.CianParser(location="Москва")
-data = moscow_parser.get_newobjects(with_saving_csv=True)
+data = moscow_parser.get_newobjects()
 ```
 
 ### Дополнительные настройки поиска
@@ -227,7 +233,7 @@ __with_saving_csv__ значение ___True___.
 #### Пример получаемого файла при вызове метода __get_flats__ с __with_extra_data__ = __True__:
 
 ```bash
-cian_parsing_result_flat_sale_1_1_moskva_12_Jan_2024_22_29_48_117413.csv
+cian_flat_sale_1_1_moskva_12_Jan_2024_22_29_48_117413.csv
 ```
 | author | author_type | url | location | deal_type | accommodation_type | floor | floors_count | rooms_count | total_meters | price_per_m2 | price | year_of_construction | object_type | house_material_type | heating_type | finish_type | living_meters | kitchen_meters | phone | district | street | house_number | underground | residential_complex
 | ------ | ------ | ------ | ------ | ------ | ------ | ----------- | ---- | ---- | --------- | ------------------ | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---
@@ -238,7 +244,7 @@ cian_parsing_result_flat_sale_1_1_moskva_12_Jan_2024_22_29_48_117413.csv
 #### Пример получаемого файла при вызове метода __get_suburban__ с __with_extra_data__ = __True__:
 
 ```bash
-cian_parsing_result_suburban_sale_15_15_moskva_13_Jan_2024_04_30_47_963046.csv
+cian_suburban_townhouse_sale_15_15_moskva_13_Jan_2024_04_30_47_963046.csv
 ```
 | author | author_type | url | location | deal_type | accommodation_type | price | year_of_construction | house_material_type | land_plot | land_plot_status | heating_type | gas_type | water_supply_type | sewage_system | bathroom | living_meters | floors_count | phone | district | underground | street | house_number
  | -----  | -----  | -----  | -----  | -----  | -----  | -----  | -----  | -----  | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---
@@ -249,7 +255,7 @@ cian_parsing_result_suburban_sale_15_15_moskva_13_Jan_2024_04_30_47_963046.csv
 #### Пример получаемого файла при вызове метода __get_newobjects__:
 
 ```bash
-cian_parsing_result_newobject_sale_1_1_moskva_13_Jan_2024_01_27_32_734734.csv
+cian_newobject_13_Jan_2024_01_27_32_734734.csv
 ```
 | name | location | accommodation_type | url | full_location_address | year_of_construction | house_material_type | finish_type | ceiling_height | class | parking_type | floors_from | floors_to | builder
  | ----- | ------------ | ----------- | ------------ | --------------- | ----------- | ----------- | -------------------- | --- | --- | --- | --- | --- | ---

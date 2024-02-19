@@ -1,11 +1,12 @@
 import cloudscraper
+import time
 
 from cianparser.constants import CITIES, METRO_STATIONS, DEAL_TYPES, OBJECT_SUBURBAN_TYPES
 from cianparser.url_builder import URLBuilder
-from cianparser.flat_list import FlatListPageParser
-from cianparser.suburban_list import SuburbanListPageParser
-from cianparser.newobject_list import NewObjectListParser
 from cianparser.proxy_pool import ProxyPool
+from cianparser.flat.list import FlatListPageParser
+from cianparser.suburban.list import SuburbanListPageParser
+from cianparser.newobject.list import NewObjectListParser
 
 
 def list_locations():
@@ -42,14 +43,16 @@ class CianParser:
         if available_proxy is not None:
             self.__session__.proxies = {"https": available_proxy}
 
-    def __load_list_page__(self, url_list_format, page_number):
+    def __load_list_page__(self, url_list_format, page_number, attempt_number_exception):
         url_list = url_list_format.format(page_number)
         self.__set_proxy__(url_list)
 
-        if page_number == self.__parser__.start_page:
+        if page_number == self.__parser__.start_page and attempt_number_exception == 0:
             print(f"The page from which the collection of information begins: \n {url_list}")
 
         res = self.__session__.get(url=url_list)
+        if res.status_code == 429:
+            time.sleep(10)
         res.raise_for_status()
 
         return res.text
@@ -70,7 +73,7 @@ class CianParser:
             while attempt_number_exception < 3 and not page_parsed:
                 try:
                     (page_parsed, attempt_number, end_all_parsing) = self.__parser__.parse_list_offers_page(
-                        html=self.__load_list_page__(url_list_format=url_list_format, page_number=page_number),
+                        html=self.__load_list_page__(url_list_format=url_list_format, page_number=page_number, attempt_number_exception=attempt_number_exception),
                         page_number=page_number,
                         count_of_pages=self.__parser__.end_page + 1 - self.__parser__.start_page,
                         attempt_number=attempt_number_exception)
@@ -105,6 +108,7 @@ class CianParser:
         deal_type, rent_period_type = __define_deal_type__(deal_type)
         self.__parser__ = FlatListPageParser(
             session=self.__session__,
+            accommodation_type="flat",
             deal_type=deal_type,
             rent_period_type=rent_period_type,
             location_name=self.__location_name__,
@@ -137,6 +141,7 @@ class CianParser:
         deal_type, rent_period_type = __define_deal_type__(deal_type)
         self.__parser__ = SuburbanListPageParser(
             session=self.__session__,
+            accommodation_type="suburban",
             deal_type=deal_type,
             rent_period_type=rent_period_type,
             location_name=self.__location_name__,

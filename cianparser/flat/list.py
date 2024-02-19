@@ -6,8 +6,8 @@ from transliterate import translit
 
 from cianparser.constants import FILE_NAME_FLAT_FORMAT
 from cianparser.helpers import union_dicts, define_author, define_location_data, define_specification_data, define_deal_url_id, define_price_data
-from cianparser.flat import FlatPageParser
-from cianparser.base import BaseListPageParser
+from cianparser.flat.page import FlatPageParser
+from cianparser.base_list import BaseListPageParser
 
 
 class FlatListPageParser(BaseListPageParser):

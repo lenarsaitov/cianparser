@@ -7,10 +7,10 @@ from cianparser.constants import SPECIFIC_FIELDS_FOR_RENT_LONG, SPECIFIC_FIELDS_
 class BaseListPageParser:
     def __init__(self,
                  session,
-                 deal_type: str, rent_period_type, location_name: str,
+                 accommodation_type: str, deal_type: str, rent_period_type, location_name: str,
                  with_saving_csv=False, with_extra_data=False,
                  object_type=None, additional_settings=None):
-        self.accommodation_type = "suburban"
+        self.accommodation_type = accommodation_type
         self.session = session
         self.deal_type = deal_type
         self.rent_period_type = rent_period_type

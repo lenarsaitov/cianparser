@@ -9,7 +9,7 @@ import urllib.parse
 
 from cianparser.constants import FILE_NAME_NEWOBJECT_FORMAT
 from cianparser.helpers import union_dicts
-from cianparser.newobject import NewObjectPageParser
+from cianparser.newobject.page import NewObjectPageParser
 
 
 class NewObjectListParser:

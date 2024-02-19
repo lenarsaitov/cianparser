@@ -6,8 +6,8 @@ from transliterate import translit
 
 from cianparser.constants import FILE_NAME_SUBURBAN_FORMAT
 from cianparser.helpers import union_dicts, define_author, parse_location_data, define_price_data, define_deal_url_id
-from cianparser.suburban import SuburbanPageParser
-from cianparser.base import BaseListPageParser
+from cianparser.suburban.page import SuburbanPageParser
+from cianparser.base_list import BaseListPageParser
 
 
 class SuburbanListPageParser(BaseListPageParser):

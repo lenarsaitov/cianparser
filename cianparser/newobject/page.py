@@ -1,5 +1,6 @@
 import bs4
 import re
+import time
 
 
 class NewObjectPageParser:
@@ -9,6 +10,8 @@ class NewObjectPageParser:
 
     def __load_page__(self):
         res = self.session.get(self.url)
+        if res.status_code == 429:
+            time.sleep(10)
         res.raise_for_status()
         self.offer_page_html = res.text
         self.offer_page_soup = bs4.BeautifulSoup(self.offer_page_html, 'html.parser')

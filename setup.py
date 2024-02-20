@@ -6,13 +6,13 @@ with open("README.md", encoding="utf8") as file:
 
 setup(
     name='cianparser',
-    version='1.0.3',
+    version='1.0.4',
     description='Parser information from Cian website',
     url='https://github.com/lenarsaitov/cianparser',
     author='Lenar Saitov',
     author_email='lenarsaitov1@yandex.ru',
     license='MIT',
-    packages=['cianparser'],
+    packages=['cianparser', 'cianparser.flat', 'cianparser.newobject', 'cianparser.suburban'],
     long_description=read_me_description,
     long_description_content_type="text/markdown",
     classifiers=[
